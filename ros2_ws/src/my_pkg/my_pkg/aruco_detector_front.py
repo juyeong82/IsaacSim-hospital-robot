@@ -147,7 +147,7 @@ class ArucoDetector(Node):
                     # 물체 집기용 좌표 오프셋 적용
                     robot_x = p_robot_pose.position.x + 0.04
                     robot_y = p_robot_pose.position.y 
-                    robot_z = p_robot_pose.position.z + 0.04
+                    robot_z = p_robot_pose.position.z + 0.03
                     
                     # Pose 채우기
                     info.pose.position.x = robot_x

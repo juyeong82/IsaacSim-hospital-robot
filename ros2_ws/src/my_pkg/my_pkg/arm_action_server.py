@@ -2,155 +2,236 @@ import rclpy
 from rclpy.action import ActionServer
 from rclpy.node import Node
 from rclpy.callback_groups import ReentrantCallbackGroup
+from rclpy.executors import MultiThreadedExecutor # [핵심] 멀티스레드
+
 from geometry_msgs.msg import PoseStamped
 from std_msgs.msg import String, Float64MultiArray
-import time
-import numpy as np
+from moma_interfaces.msg import MarkerArray
 
-# 커스텀 액션 임포트
+from tf2_ros import Buffer, TransformListener
+import time
+import math
+import copy
+
 from moma_interfaces.action import MoveManipulator
 
 class ArmActionServer(Node):
     def __init__(self):
         super().__init__('arm_action_server')
         
-        # ---------------------------------------------------------
-        # 1. Publishers (Isaac Sim 통신용)
-        # ---------------------------------------------------------
-        # RMPFlow 좌표 제어용
-        self.pose_pub = self.create_publisher(PoseStamped, '/rmp_target_pose', 10)
-        # 관절 직접 제어용 (새로 추가됨)
-        self.joint_pub = self.create_publisher(Float64MultiArray, '/joint_command', 10)
-        # 그리퍼 제어용
-        self.gripper_pub = self.create_publisher(String, '/gripper_command', 10)
+        # 콜백 그룹 설정 (병렬 처리를 위해 Reentrant 사용)
+        self.callback_group = ReentrantCallbackGroup()
 
-        # ---------------------------------------------------------
-        # 2. Action Server 설정
-        # ---------------------------------------------------------
+        # Publishers
+        self.pose_pub = self.create_publisher(PoseStamped, '/rmp_target_pose', 10, callback_group=self.callback_group)
+        self.joint_pub = self.create_publisher(Float64MultiArray, '/joint_command', 10, callback_group=self.callback_group)
+        self.gripper_pub = self.create_publisher(String, '/gripper_command', 10, callback_group=self.callback_group)
+        
+        # Subscriber (Vision)
+        self.visible_markers = [] 
+        self.create_subscription(MarkerArray, '/vision/left_markers', self.vision_callback, 10, callback_group=self.callback_group)
+
+        # TF Listener
+        self.tf_buffer = Buffer()
+        self.tf_listener = TransformListener(self.tf_buffer, self)
+
+        # Action Server
         self._action_server = ActionServer(
             self,
             MoveManipulator,
             'move_manipulator',
             self.execute_callback,
-            callback_group=ReentrantCallbackGroup()
+            callback_group=self.callback_group # [핵심] 액션도 병렬 처리 그룹에 포함
         )
         
-        # ---------------------------------------------------------
-        # 3. 기본 설정값
-        # ---------------------------------------------------------
-        # Home Pose (Joint Angles in Radians)
-        # 요청했던 [0, 0, 90, -90, -90, 90] 도 -> 라디안 변환
         self.home_joints = [0.0, -1.5708, 1.5708, -1.5708, -1.5708, -1.5708]
+        
+        self.verify_pose = PoseStamped()
+        self.verify_pose.header.frame_id = "base_link"
+        self.verify_pose.pose.position.x = -0.4
+        self.verify_pose.pose.position.y = 0.8
+        self.verify_pose.pose.position.z = 1.2
+        self.verify_pose.pose.orientation.w = 0.707
+        self.verify_pose.pose.orientation.y = 0.707
 
-        self.get_logger().info('✅ Arm Action Server Ready (Hybrid Control)')
+        self.get_logger().info('✅ Arm Action Server Ready (Multi-Threaded)')
+
+    def vision_callback(self, msg):
+        self.visible_markers = [m.id for m in msg.markers]
+
+    def get_current_tip_pose(self):
+        try:
+            # 타임아웃 0.0 -> 즉시 리턴 (block 방지)
+            t = self.tf_buffer.lookup_transform('base_link', 'suction_cup', rclpy.time.Time())
+            return t.transform.translation
+        except Exception as e:
+            return None
+
+    def wait_until_reached(self, target_pose, timeout=15.0, tolerance=0.04):
+        start_time = time.time()
+        tx = target_pose.pose.position.x
+        ty = target_pose.pose.position.y
+        tz = target_pose.pose.position.z
+
+        self.get_logger().info(f"   ⏳ [Move Start] Goal: ({tx:.2f}, {ty:.2f}, {tz:.2f})")
+        last_log_time = time.time()
+
+        while time.time() - start_time < timeout:
+            current = self.get_current_tip_pose()
+            
+            # TF 못 받아오면 대기
+            if current is None:
+                if time.time() - last_log_time > 1.0:
+                    self.get_logger().warn("      ⚠️ Waiting for TF update...")
+                    last_log_time = time.time()
+                time.sleep(0.1)
+                continue
+            
+            dx = tx - current.x
+            dy = ty - current.y
+            dz = tz - current.z
+            dist = math.sqrt(dx*dx + dy*dy + dz*dz)
+
+            # [요청하신 변수 디버깅 로그] 1초마다 출력
+            if time.time() - last_log_time > 1.0:
+                self.get_logger().info(f"      📉 [Diff] Target({tx:.2f}, {ty:.2f}, {tz:.2f}) - Cur({current.x:.2f}, {current.y:.2f}, {current.z:.2f})")
+                self.get_logger().info(f"         -> Error: {dist:.3f}m")
+                last_log_time = time.time()
+
+            if dist < tolerance:
+                self.get_logger().info(f"   ✅ Reached! Final Error: {dist:.3f}m")
+                return True
+            
+            time.sleep(0.05) # 루프 주기 단축
+        
+        self.get_logger().warn(f"   ⚠️ Timeout! Stuck at {dist:.3f}m")
+        return False
+
+    def verify_grasp_success(self, timeout=3.0):
+        start_time = time.time()
+        while time.time() - start_time < timeout:
+            if len(self.visible_markers) > 0:
+                self.get_logger().info(f"👁️ Verified! Markers: {self.visible_markers}")
+                return True
+            time.sleep(0.2)
+        return False
 
     def execute_callback(self, goal_handle):
         action_type = goal_handle.request.action_type
-        self.get_logger().info(f'📩 Action Request: {action_type}')
+        self.get_logger().info(f'📩 Action: {action_type}')
         
-        feedback_msg = MoveManipulator.Feedback()
+        feedback = MoveManipulator.Feedback()
         result = MoveManipulator.Result()
-
+        
         try:
-            # =====================================================
-            # Case A: Home (이동 전 안전 자세 - Joint Control)
-            # =====================================================
-            if action_type == 'home':
-                self.publish_joint(self.home_joints)
-                self.wait_for_execution(3.0, feedback_msg, goal_handle, "Moving to Home (Joints)")
-
-            # =====================================================
-            # Case B: Pick (물체 잡기 - RMPFlow + Gripper)
-            # =====================================================
-            elif action_type == 'pick':
+            if action_type == 'pick':
                 target_pose = goal_handle.request.target_pose
                 
-                # 1. 그리퍼 열기
                 self.control_gripper("open")
-                time.sleep(0.5)
+                
+                # Pre-Approach
+                pre_pose = copy.deepcopy(target_pose)
+                pre_pose.pose.position.z += 0.20  
+                self.publish_pose(pre_pose)
+                
+                if not self.wait_until_reached(pre_pose, timeout=20.0, tolerance=0.08):
+                     self.get_logger().warn("⚠️ Pre-approach incomplete, trying descent...")
 
-                # 2. 접근 (Approach)
+                # Final Approach
                 self.publish_pose(target_pose)
-                self.wait_for_execution(3.0, feedback_msg, goal_handle, "Approaching Target")
-                
-                # 3. 잡기 (Grasp)
-                self.control_gripper("close")
-                self.wait_for_execution(1.0, feedback_msg, goal_handle, "Grasping")
-                
-                # 4. 들어올리기 (Lift) - Z축 + 20cm
-                lift_pose = target_pose
-                lift_pose.pose.position.z += 0.2
-                self.publish_pose(lift_pose)
-                self.wait_for_execution(2.0, feedback_msg, goal_handle, "Lifting Object")
+                if not self.wait_until_reached(target_pose, timeout=15.0, tolerance=0.006):
+                    raise Exception("Final Approach Timeout or Not Close Enough")
 
-            # =====================================================
-            # Case C: Place (물체 놓기)
-            # =====================================================
+                self.control_gripper("close")
+                # [수정] 1.0초 -> 3.0초로 변경 (확실하게 잡을 시간 주기)
+                self.get_logger().info("✊ [Grasping] Waiting 5s for physics update...")
+                time.sleep(1.0)
+                
+                # Verify Move
+                self.publish_pose(self.verify_pose)
+                if not self.wait_until_reached(self.verify_pose):
+                    raise Exception("Verification Move Timeout")
+                
+                if self.verify_grasp_success():
+                    goal_handle.succeed()
+                    result.success = True
+                    result.message = "Pick Success"
+                else:
+                    self.control_gripper("open")
+                    raise Exception("Grasp Failed (Marker not visible)")
+
             elif action_type == 'place':
                 target_pose = goal_handle.request.target_pose
                 
-                # 1. 이동
-                self.publish_pose(target_pose)
-                self.wait_for_execution(3.0, feedback_msg, goal_handle, "Moving to Place")
+                # 1. [Pre-Place] 목표 지점 상공 20cm로 이동
+                pre_place_pose = copy.deepcopy(target_pose)
+                pre_place_pose.pose.position.z += 0.20
                 
-                # 2. 놓기
+                self.get_logger().info("🚀 Moving to Pre-Place Position...")
+                self.publish_pose(pre_place_pose)
+                if not self.wait_until_reached(pre_place_pose, timeout=15.0, tolerance=0.08):
+                    self.get_logger().warn("⚠️ Pre-place incomplete, but proceeding...")
+
+                # 2. [Place Descent] 목표 지점으로 하강
+                self.get_logger().info("⬇️ Descending to Place Position...")
+                self.publish_pose(target_pose)
+                # 놓을 때는 잡을 때만큼 초정밀일 필요는 없으나, 바닥에 닿아야 하므로 1cm 오차 허용
+                if not self.wait_until_reached(target_pose, timeout=15.0, tolerance=0.01):
+                    raise Exception("Place Descent Timeout")
+
+                # 3. [Release] 놓기
                 self.control_gripper("open")
-                self.wait_for_execution(1.0, feedback_msg, goal_handle, "Releasing Object")
+                self.get_logger().info("👐 Releasing Object...")
+                time.sleep(1.0) # 물체가 바닥에 안착할 시간
+                
+                # 4. [Retreat] 물체를 치지 않게 위로 빠져나오기 (중요!)
+                self.get_logger().info("⬆️ Retreating (Safety Move)...")
+                self.publish_pose(pre_place_pose) # 아까 그 상공 위치로 복귀
+                if not self.wait_until_reached(pre_place_pose, timeout=10.0, tolerance=0.08):
+                    self.get_logger().warn("⚠️ Retreat incomplete")
 
-            # =====================================================
-            # Case D: Custom Joint Move (임의 각도 이동)
-            # =====================================================
-            elif action_type == 'move_to_joint':
-                joints = goal_handle.request.joint_angles
-                if len(joints) == 6:
-                    self.publish_joint(joints)
-                    self.wait_for_execution(3.0, feedback_msg, goal_handle, "Moving Joints")
-                else:
-                    raise ValueError("Joint angles must be length 6")
+                goal_handle.succeed()
+                result.success = True
+                result.message = "Place Sequence Completed (with Retreat)"
 
-            # 완료 처리
-            goal_handle.succeed()
-            result.success = True
-            result.message = f"Action {action_type} completed."
-            
         except Exception as e:
+            self.get_logger().error(f"❌ Action Aborted: {e}")
             goal_handle.abort()
             result.success = False
-            result.message = f"Failed: {str(e)}"
-            self.get_logger().error(f"❌ Error: {str(e)}")
+            result.message = str(e)
 
         return result
 
-    # --- Helper Functions ---
-
-    def publish_pose(self, pose_stamped):
-        """RMPFlow 좌표 제어"""
-        pose_stamped.header.stamp = self.get_clock().now().to_msg()
-        self.pose_pub.publish(pose_stamped)
+    def publish_pose(self, pose):
+        pose.header.stamp = self.get_clock().now().to_msg()
+        self.pose_pub.publish(pose)
 
     def publish_joint(self, joints):
-        """관절 직접 제어"""
         msg = Float64MultiArray()
         msg.data = joints
         self.joint_pub.publish(msg)
 
     def control_gripper(self, command):
-        """그리퍼 제어"""
         msg = String()
         msg.data = command
         self.gripper_pub.publish(msg)
 
-    def wait_for_execution(self, duration, feedback, goal_handle, state_text):
-        """단순 대기 (추후 Isaac Feedback 연동 시 수정 가능)"""
-        feedback.current_state = state_text
-        goal_handle.publish_feedback(feedback)
-        time.sleep(duration)
-
 def main(args=None):
     rclpy.init(args=args)
+    
     server = ArmActionServer()
-    rclpy.spin(server)
-    rclpy.shutdown()
+    
+    # [★핵심] MultiThreadedExecutor 사용
+    # 이걸 써야 액션이 실행되는 동안(while loop)에도 TF Listener가 백그라운드에서 데이터를 받음
+    executor = MultiThreadedExecutor()
+    
+    try:
+        rclpy.spin(server, executor=executor)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        server.destroy_node()
+        rclpy.shutdown()
 
 if __name__ == '__main__':
     main()

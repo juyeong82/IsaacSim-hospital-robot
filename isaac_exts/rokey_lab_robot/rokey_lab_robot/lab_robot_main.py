@@ -225,7 +225,7 @@ class LabRobotMain(BaseSample):
         self.robots.set_joint_positions(initial_pos)
 
         # 초기 목표값
-        self.current_target_pos = np.array([-0.8, 0.8, 0.93]) 
+        self.current_target_pos = np.array([-0.15, 0.8, 0.94]) 
         self.current_target_rot = euler_angles_to_quat(np.array([0, np.pi/2, 0]))
         
         self.log_timer = 0 
