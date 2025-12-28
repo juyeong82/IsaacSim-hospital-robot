@@ -189,6 +189,10 @@ class ArucoDetector(Node):
                     self.get_logger().warn(f"TF Error: {e}")
                     continue
                 
+            # [추가됨] 루프가 끝난 후 한 번에 전송
+            if len(marker_array.markers) > 0:
+                self.result_pub.publish(marker_array)
+                
         cv2.imshow("Aruco View", frame)
         cv2.waitKey(1)
 

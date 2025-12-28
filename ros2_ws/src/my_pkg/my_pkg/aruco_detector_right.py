@@ -131,7 +131,7 @@ class ArucoDetector(Node):
                     # 좌표계: X(우), Y(하), Z(전) -> OpenCV 기준
                     T_offset = np.eye(4)
                     
-                    # [튜닝 포인트] 마커 위치 대비 그리퍼가 잡아야 할 상대 위치                    
+                    # 마커 위치 대비 그리퍼가 잡아야 할 상대 위치                    
                     T_offset[0, 3] = 0.0      # X (좌우)
                     T_offset[1, 3] = 0.03    # Y (위아래, 위가 -)
                     T_offset[2, 3] = -0.04    # Z (앞뒤, 뒤가 -)

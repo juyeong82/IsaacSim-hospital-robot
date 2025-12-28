@@ -133,7 +133,7 @@ class ArucoDetector(Node):
                     T_offset = np.eye(4)
                     
                     T_offset[0, 3] = 0.0      # X (좌우)
-                    T_offset[1, 3] = 0.03    # Y (위아래, 위가 -)
+                    T_offset[1, 3] = 0.03    # Y (위아래, 위가 +)
                     T_offset[2, 3] = -0.04    # Z (앞뒤, 뒤가 -)
                     
                     # (4) 마커 위치에 오프셋을 곱함 -> 최종 잡아야 할 위치 (카메라 기준)
@@ -188,6 +188,10 @@ class ArucoDetector(Node):
                 except (tf2_ros.LookupException, tf2_ros.ExtrapolationException) as e:
                     self.get_logger().warn(f"TF Error: {e}")
                     continue
+                
+            # [추가됨] 루프가 끝난 후 한 번에 전송
+            if len(marker_array.markers) > 0:
+                self.result_pub.publish(marker_array)
                 
         cv2.imshow("Aruco View", frame)
         cv2.waitKey(1)

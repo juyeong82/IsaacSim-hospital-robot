@@ -130,9 +130,9 @@ class ArucoDetector(Node):
                     # 3. 마커 기준 오프셋 행렬 (Local Offset)
                     T_offset = np.eye(4)
                     
-                    # [튜닝 포인트] Front 카메라도 동일한 마커를 보므로 오프셋 값은 동일합니다
+                    # 아루코 마커 기준 그립을 위한 에셋상단 위치 
                     T_offset[0, 3] = 0.0      # X (좌우)
-                    T_offset[1, 3] = 0.03    # Y (위아래, 위가 -)
+                    T_offset[1, 3] = 0.03    # Y (위아래, 위가 +)
                     T_offset[2, 3] = -0.04    # Z (앞뒤, 뒤가 -)
                     
                     # 4. 최종 목표 위치 계산

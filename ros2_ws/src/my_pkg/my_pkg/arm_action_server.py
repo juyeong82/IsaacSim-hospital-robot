@@ -206,7 +206,7 @@ class ArmActionServer(Node):
                 
                 # 1. [Pre-Place] 목표 지점 상공 20cm로 이동
                 pre_place_pose = copy.deepcopy(target_pose)
-                pre_place_pose.pose.position.z += 0.20
+                pre_place_pose.pose.position.z += 0.30
                 
                 self.get_logger().info("🚀 Moving to Pre-Place Position...")
                 self.publish_pose(pre_place_pose)
