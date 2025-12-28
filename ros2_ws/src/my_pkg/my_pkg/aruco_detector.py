@@ -13,7 +13,7 @@ from std_msgs.msg import Bool
 
 class ArucoDetector(Node):
     def __init__(self):
-        super().__init__('aruco_detector_left')
+        super().__init__('aruco_detector')
         
         # [수정] 마커 및 검출기 설정 (OpenCV 4.7+ 대응)
         self.marker_size = 0.13
@@ -55,7 +55,7 @@ class ArucoDetector(Node):
         rot = Rotation.from_euler('xyz', euler)
         self.default_quat = rot.as_quat()  # [x, y, z, w]
         
-        self.get_logger().info("✅ Front Camera Detector Ready (Waiting for Enable Signal...)")
+        self.get_logger().info("✅ Camera Detector Ready (Waiting for Enable Signal...)")
         
     
     def enable_callback(self, msg):

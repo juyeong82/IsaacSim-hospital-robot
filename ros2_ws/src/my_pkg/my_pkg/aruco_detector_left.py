@@ -55,7 +55,7 @@ class ArucoDetector(Node):
         rot = Rotation.from_euler('xyz', euler)
         self.default_quat = rot.as_quat()  # [x, y, z, w]
         
-        self.get_logger().info("✅ Front Camera Detector Ready (Waiting for Enable Signal...)")
+        self.get_logger().info("✅ Left Camera Detector Ready (Waiting for Enable Signal...)")
         
     
     def enable_callback(self, msg):
