@@ -114,6 +114,39 @@ class LabRobotMain(BaseSample):
             xform_op.Set(Gf.Vec3d(25.75, 7.6, 0.8123))
             
             print(f"✅ BloodTube positioned at (25.75, 7.6, 0.8123)")
+            
+        # ---------------------------------------------------------
+        # 4. SideTable #2 추가 (위치: 26.0, 9.25, 0.0)
+        # ---------------------------------------------------------
+        # USD 경로 재사용
+        sidetable_path = "/home/jy/hospital_robot_project/assets/Collected_SideTable/SideTable.usd"
+        add_reference_to_stage(usd_path=sidetable_path, prim_path="/World/SideTable_2")
+        
+        sidetable2_prim = stage.GetPrimAtPath("/World/SideTable_2")
+        if sidetable2_prim.IsValid():
+            # 위치 설정
+            UsdGeom.XformCommonAPI(sidetable2_prim).SetTranslate(Gf.Vec3d(26.0, 9.25, 0.0))
+            print("✅ SideTable #2 added at (26.0, 9.25, 0.0)")
+
+        # ---------------------------------------------------------
+        # 5. BloodTube #2 추가 (위치: 25.75, 7.6, 0.8123 / 회전: Z 180도)
+        # ---------------------------------------------------------
+        blood_tube_path = "/home/jy/hospital_robot_project/assets/Collected_blood_tube_aruco1/blood_tube_aruco1.usd"
+        add_reference_to_stage(usd_path=blood_tube_path, prim_path="/World/BloodTube_2")
+        
+        blood2_prim = stage.GetPrimAtPath("/World/BloodTube_2")
+        if blood2_prim.IsValid():
+            # 기존 Transform 초기화 후 재설정 (안전장치)
+            xformable = UsdGeom.Xformable(blood2_prim)
+            xformable.ClearXformOpOrder()
+            
+            # 1) 위치 설정 (Translate)
+            xformable.AddTranslateOp().Set(Gf.Vec3d(25.75, 9.0, 0.8123))
+            
+            # 2) 회전 설정 (Rotate Z) - USD는 기본적으로 Degree(도) 단위 사용
+            xformable.AddRotateZOp().Set(180.0)
+            
+            print("✅ BloodTube #2 added at (25.75, 9.0, 0.8123) with Z-180deg rotation")
 
     async def setup_post_load(self):
         # [수정됨] 여기서 import 수행 (Lazy Import)
@@ -187,8 +220,23 @@ class LabRobotMain(BaseSample):
         print("   - Gripper: /gripper_command (std_msgs/String) -> 'open' or 'close'")
 
         # EE Prim (디버깅용)
+        # Prim 설정
+        # Prim 설정
         stage = self._world.stage
-        self.ee_prim = stage.GetPrimAtPath(self.ee_link_path)
+
+        # Robot Base Link (좌표 변환 기준)
+        self.base_link_path = "/World/Nova_Carter_ROS_test/chassis_link"
+        self.base_link_prim = stage.GetPrimAtPath(self.base_link_path)
+
+        # Suction Cup (그리퍼 실제 끝 위치)
+        self.suction_cup_path = "/World/Nova_Carter_ROS_test/ur10/ee_link/suction_cup"
+        self.suction_cup_prim = stage.GetPrimAtPath(self.suction_cup_path)
+
+        # 유효성 검증
+        if not self.base_link_prim.IsValid():
+            carb.log_error(f"Base Link not found: {self.base_link_path}")
+        if not self.suction_cup_prim.IsValid():
+            carb.log_error(f"Suction Cup not found: {self.suction_cup_path}")
         
         # BloodTube 위치 재확인
         blood_prim = stage.GetPrimAtPath("/World/BloodTube")
@@ -219,31 +267,42 @@ class LabRobotMain(BaseSample):
 
         full_dof = self.robots.num_dof
         initial_pos = np.zeros(full_dof)
-        arm_home = np.array([-np.pi/2, -np.pi/2, -np.pi/2, -np.pi/2, np.pi/2, 0])
+        arm_home = np.array([0, -np.pi/2, -np.pi/2, -np.pi/2, np.pi/2, 0])
         for i, idx in enumerate(self.arm_indices):
             initial_pos[idx] = arm_home[i]
         self.robots.set_joint_positions(initial_pos)
 
         # 초기 목표값
-        self.current_target_pos = np.array([-0.15, 0.8, 0.94]) 
-        self.current_target_rot = euler_angles_to_quat(np.array([0, np.pi/2, 0]))
+        # self.current_target_pos = np.array([-0.5, 0.0, 1.0]) 
+        # self.current_target_rot = euler_angles_to_quat(np.array([0, np.pi/2, 0]))
+        
+        # 외부 명령 대기
+        self.current_target_pos = None
+        self.current_target_rot = None
+        
+        # 도착 상태 플래그
+        self.reached_target = False  
         
         self.log_timer = 0 
         self._world.add_physics_callback("sim_step", callback_fn=self.physics_step)
         await self._world.play_async()
-
-    # [Callback 1] 좌표 수신
+    
     def ros_pose_callback(self, msg):
         self.control_mode = "pose"
         x, y, z = msg.pose.position.x, msg.pose.position.y, msg.pose.position.z
-        self.current_target_pos = np.array([x, y, z])
-
+        new_target = np.array([x, y, z])
+        
+        # 새 명령만 로그
+        if self.current_target_pos is None or not np.allclose(self.current_target_pos, new_target, atol=0.001):
+            print(f"📩 [New Command] Target: ({x:.2f}, {y:.2f}, {z:.2f})")
+            self.reached_target = False  # 새 명령이므로 도착 상태 초기화
+        
+        self.current_target_pos = new_target
+        
         rx, ry, rz = msg.pose.orientation.x, msg.pose.orientation.y, msg.pose.orientation.z
         rw = msg.pose.orientation.w
         if (rx*rx + ry*ry + rz*rz + rw*rw) > 0.1:
             self.current_target_rot = np.array([rw, rx, ry, rz])
-            
-        print(f"📩 [Move] To: {self.current_target_pos}")
 
     # [Callback 2] 그리퍼 명령 수신
     def ros_gripper_callback(self, msg):
@@ -271,32 +330,63 @@ class LabRobotMain(BaseSample):
 
         # ROS 2 메시지 처리 (여기서 콜백 함수들이 실행됨)
         rclpy.spin_once(self.node, timeout_sec=0)
-
-        # EE 위치 확인 (디버깅)
-        if self.ee_prim.IsValid():
-            transform_matrix = UsdGeom.Xformable(self.ee_prim).ComputeLocalToWorldTransform(Usd.TimeCode.Default())
-            translation = transform_matrix.ExtractTranslation()
-            ee_pos = np.array([translation[0], translation[1], translation[2]])
-        else:
-            ee_pos = np.array([0.0, 0.0, 0.0])
         
+        # Suction Cup 위치 확인 (그리퍼 실제 끝 위치)
+        suction_cup_relative = None
+    
+        if self.suction_cup_prim.IsValid() and self.base_link_prim.IsValid():
+            # Suction Cup의 World Transform 행렬
+            suction_world_matrix = UsdGeom.Xformable(self.suction_cup_prim).ComputeLocalToWorldTransform(Usd.TimeCode.Default())
+            
+            # Base Link의 World Transform 행렬
+            base_world_matrix = UsdGeom.Xformable(self.base_link_prim).ComputeLocalToWorldTransform(Usd.TimeCode.Default())
+            
+            # base_link 좌표계로 변환 (행렬 역변환)
+            # suction_in_base = suction_world * (base_world)^-1
+            base_world_inverse = base_world_matrix.GetInverse()
+            suction_in_base_matrix = suction_world_matrix * base_world_inverse
+            
+            # 변환된 행렬에서 위치 추출
+            translation = suction_in_base_matrix.ExtractTranslation()
+            suction_cup_relative = np.array([translation[0], translation[1], translation[2]])
+        
+        # 로그 출력
         self.log_timer += 1
-        if self.log_timer % 60 == 0:
-            print(f"🎯 Target: {self.current_target_pos} | 🤖 Current EE: {ee_pos}")
 
+        if self.current_target_pos is None:
+            # 대기 상태: 5초마다
+            if self.log_timer % 300 == 0:
+                print(f"⏸️  Idle (Waiting for command)")
+        else:
+            # 이동 중: 거리 계산
+            if suction_cup_relative is not None:
+                distance = np.linalg.norm(suction_cup_relative - self.current_target_pos)
+                
+                # 1. 도착 판정 (한 번만 로그)
+                if distance < 0.02 and not self.reached_target:
+                    print(f"✅ Reached! (Error: {distance:.3f}m)")
+                    self.reached_target = True
+                
+                # 2. 이동 중 로그 (1초마다) + 도착 안했을 때만(not self.reached_target) 출력
+                elif self.log_timer % 60 == 0 and not self.reached_target:
+                    print(f"🎯 Moving... | Target: [{self.current_target_pos[0]:.2f}, {self.current_target_pos[1]:.2f}, {self.current_target_pos[2]:.2f}] | Distance: {distance:.3f}m")
+
+            
         # 로봇 제어 (RMPFlow)
         if self.control_mode == "pose":
-            # 기존 RMPFlow 제어 (좌표 이동)
-            rmp_action = self.cspace_controller.forward(
-                target_end_effector_position=self.current_target_pos,
-                target_end_effector_orientation=self.current_target_rot
-            )
-            full_action = ArticulationAction(
-                joint_positions=rmp_action.joint_positions,
-                joint_velocities=rmp_action.joint_velocities,
-                joint_indices=np.array(self.arm_indices)
-            )
-            self.robots.apply_action(full_action)
+            # 외부 명령이 있을 때만 RMPFlow 제어 실행
+            if self.current_target_pos is not None and self.current_target_rot is not None:
+                rmp_action = self.cspace_controller.forward(
+                    target_end_effector_position=self.current_target_pos,
+                    target_end_effector_orientation=self.current_target_rot
+                )
+                full_action = ArticulationAction(
+                    joint_positions=rmp_action.joint_positions,
+                    joint_velocities=rmp_action.joint_velocities,
+                    joint_indices=np.array(self.arm_indices)
+                )
+                self.robots.apply_action(full_action)
+            # 목표값이 없으면 아무것도 하지 않음 (홈 위치 유지)
         
         elif self.control_mode == "joint" and self.target_joint_positions is not None:
             # 새로 추가된 조인트 직접 제어
@@ -306,3 +396,4 @@ class LabRobotMain(BaseSample):
                 joint_indices=np.array(self.arm_indices)
             )
             self.robots.apply_action(joint_action)
+            

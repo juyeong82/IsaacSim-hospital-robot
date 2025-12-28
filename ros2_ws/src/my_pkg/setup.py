@@ -26,7 +26,10 @@ setup(
         'console_scripts': [
             'nav_commander = my_pkg.nav_commander:main',
             'aruco_detector_front = my_pkg.aruco_detector_front:main',
+            'aruco_detector_debug = my_pkg.aruco_detector_debug:main',
             'aruco_detector_left = my_pkg.aruco_detector_left:main',
+            'aruco_detector_left_org = my_pkg.aruco_detector_left_org:main',
+            'aruco_detector_right = my_pkg.aruco_detector_right:main',
             'arm_action_server = my_pkg.arm_action_server:main',
         ],
     },

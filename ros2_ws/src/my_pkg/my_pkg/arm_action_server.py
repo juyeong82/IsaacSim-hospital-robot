@@ -44,7 +44,7 @@ class ArmActionServer(Node):
             callback_group=self.callback_group # [핵심] 액션도 병렬 처리 그룹에 포함
         )
         
-        self.home_joints = [0.0, -1.5708, 1.5708, -1.5708, -1.5708, -1.5708]
+        self.home_joints = [0.0, -1.5708, -1.5708, -1.5708, 1.5708, 0.0]
         
         self.verify_pose = PoseStamped()
         self.verify_pose.header.frame_id = "base_link"
@@ -57,7 +57,7 @@ class ArmActionServer(Node):
         self.get_logger().info('✅ Arm Action Server Ready (Multi-Threaded)')
 
     def vision_callback(self, msg):
-        self.visible_markers = [m.id for m in msg.markers]
+        self.visible_markers = msg.markers
 
     def get_current_tip_pose(self):
         try:
@@ -107,13 +107,44 @@ class ArmActionServer(Node):
         self.get_logger().warn(f"   ⚠️ Timeout! Stuck at {dist:.3f}m")
         return False
 
-    def verify_grasp_success(self, timeout=3.0):
+    def verify_grasp_success(self, timeout=3.0, tolerance=0.1):
+        # 1. 기존 데이터 초기화 (Stale Data 방지)
+        self.visible_markers = [] 
+        
+        target_x = self.verify_pose.pose.position.x
+        target_y = self.verify_pose.pose.position.y
+        target_z = self.verify_pose.pose.position.z
+
         start_time = time.time()
+        
+        self.get_logger().info(f"🔎 Verifying Grasp... Target Area: ({target_x:.2f}, {target_y:.2f}, {target_z:.2f})")
+
         while time.time() - start_time < timeout:
+            # 데이터 수신 대기
             if len(self.visible_markers) > 0:
-                self.get_logger().info(f"👁️ Verified! Markers: {self.visible_markers}")
-                return True
-            time.sleep(0.2)
+                for marker in self.visible_markers:
+                    # 마커 좌표 (Robot Base 기준)
+                    mx = marker.pose.position.x
+                    my = marker.pose.position.y
+                    mz = marker.pose.position.z
+                    
+                    # 2. 거리 오차 계산 (Euclidean Distance)
+                    dx = target_x - mx
+                    dy = target_y - my
+                    dz = target_z - mz
+                    distance = math.sqrt(dx*dx + dy*dy + dz*dz)
+                    
+                    # 3. 판단 (오차 범위 내에 들어왔는가?)
+                    if distance < tolerance:
+                        self.get_logger().info(f"👁️ Success! Marker is near gripper. (Dist: {distance:.3f}m < {tolerance}m)")
+                        return True
+                    else:
+                        # 마커가 보이긴 하는데 엉뚱한 곳(예: 바닥)에 있음
+                        self.get_logger().warn(f"⚠️ Marker seen, but too far from gripper. (Dist: {distance:.3f}m)")
+            
+            time.sleep(0.1)
+            
+        self.get_logger().warn("❌ Grasp Verification Failed: Marker not found near gripper.")
         return False
 
     def execute_callback(self, goal_handle):
@@ -134,30 +165,40 @@ class ArmActionServer(Node):
                 pre_pose.pose.position.z += 0.20  
                 self.publish_pose(pre_pose)
                 
-                if not self.wait_until_reached(pre_pose, timeout=20.0, tolerance=0.08):
+                if not self.wait_until_reached(pre_pose, timeout=20.0, tolerance=0.03):
                      self.get_logger().warn("⚠️ Pre-approach incomplete, trying descent...")
 
                 # Final Approach
                 self.publish_pose(target_pose)
-                if not self.wait_until_reached(target_pose, timeout=15.0, tolerance=0.006):
+                if not self.wait_until_reached(target_pose, timeout=15.0, tolerance=0.007):
                     raise Exception("Final Approach Timeout or Not Close Enough")
 
                 self.control_gripper("close")
-                # [수정] 1.0초 -> 3.0초로 변경 (확실하게 잡을 시간 주기)
                 self.get_logger().info("✊ [Grasping] Waiting 5s for physics update...")
                 time.sleep(1.0)
                 
-                # Verify Move
+                # 5. [Lift] 수직 상승
+                lift_pose = copy.deepcopy(target_pose)
+                lift_pose.pose.position.z += 0.30
+                
+                self.get_logger().info("⬆️ Lifting Object...")
+                self.publish_pose(lift_pose)
+                
+                # 들어 올릴 때는 오차 3cm 정도면 충분
+                if not self.wait_until_reached(lift_pose, timeout=10.0, tolerance=0.03):
+                    self.get_logger().warn("⚠️ Lift incomplete, but moving to verify...")
+
+                # 6. [Verify Move] 검증 위치로 이동
                 self.publish_pose(self.verify_pose)
                 if not self.wait_until_reached(self.verify_pose):
                     raise Exception("Verification Move Timeout")
                 
-                if self.verify_grasp_success():
+                if self.verify_grasp_success(tolerance=0.1):
                     goal_handle.succeed()
                     result.success = True
                     result.message = "Pick Success"
                 else:
-                    self.control_gripper("open")
+                    # self.control_gripper("open")
                     raise Exception("Grasp Failed (Marker not visible)")
 
             elif action_type == 'place':
@@ -193,6 +234,50 @@ class ArmActionServer(Node):
                 goal_handle.succeed()
                 result.success = True
                 result.message = "Place Sequence Completed (with Retreat)"
+            
+            # =====================================================
+            # 3. Home (Joint 제어 - 복구됨)
+            # =====================================================
+            elif action_type == 'home':
+                self.get_logger().info("🏠 Moving to Home Pose (Joint Control)...")
+                # Joint 값 발행 (관절 제어는 TF 확인 불가하므로 시간 대기 사용)
+                self.publish_joint(self.home_joints)
+                
+                # 피드백 전송
+                feedback.current_state = "Moving to Home"
+                goal_handle.publish_feedback(feedback)
+                
+                # 충분한 이동 시간 대기 (3초)
+                time.sleep(3.0)
+                
+                goal_handle.succeed()
+                result.success = True
+                result.message = "Home Success"
+
+            # =====================================================
+            # 4. Move to Joint (Joint 직접 제어 - 복구됨)
+            # =====================================================
+            elif action_type == 'move_to_joint':
+                joints = goal_handle.request.joint_angles
+                
+                # 안전 장치: 관절 개수 확인 (UR10은 6축)
+                if len(joints) == 6:
+                    self.get_logger().info(f"🦾 Moving to Joint Angles: {joints}")
+                    self.publish_joint(joints)
+                    
+                    # 피드백 전송
+                    feedback.current_state = "Moving Joints"
+                    goal_handle.publish_feedback(feedback)
+                    
+                    # 이동 시간 대기 (4초 - 관절 이동은 경로에 따라 오래 걸릴 수 있음)
+                    time.sleep(4.0)
+                    
+                    goal_handle.succeed()
+                    result.success = True
+                    result.message = "Joint Move Completed"
+                else:
+                    raise ValueError(f"Joint angles must be length 6 (Received: {len(joints)})")
+            
 
         except Exception as e:
             self.get_logger().error(f"❌ Action Aborted: {e}")

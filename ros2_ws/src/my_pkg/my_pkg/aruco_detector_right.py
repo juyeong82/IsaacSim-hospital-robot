@@ -13,7 +13,7 @@ from std_msgs.msg import Bool
 
 class ArucoDetector(Node):
     def __init__(self):
-        super().__init__('aruco_detector_left')
+        super().__init__('aruco_detector_right')
         
         # [수정] 마커 및 검출기 설정 (OpenCV 4.7+ 대응)
         self.marker_size = 0.13
@@ -32,17 +32,17 @@ class ArucoDetector(Node):
         self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
 
         # 카메라 구독
-        self.create_subscription(Image, '/left_camera/rgb', self.image_callback, 10)
-        self.create_subscription(CameraInfo, '/left_camera/camera_info', self.info_callback, 10)
+        self.create_subscription(Image, '/right_camera/rgb', self.image_callback, 10)
+        self.create_subscription(CameraInfo, '/right_camera/camera_info', self.info_callback, 10)
         
         # RMPFlow 타겟 퍼블리셔(디버깅용)
         # self.pose_pub = self.create_publisher(PoseStamped, '/rmp_target_pose', 10)
         
         # [On/Off 스위치] 외부에서 True를 보내면 검출 시작
-        self.create_subscription(Bool, '/vision/enable_left', self.enable_callback, 10)
+        self.create_subscription(Bool, '/vision/enable_right', self.enable_callback, 10)
         
         # [결과 송신] 직접 제어(/rmp_target_pose) 대신 정보만 제공
-        self.result_pub = self.create_publisher(MarkerArray, '/vision/left_markers', 10)
+        self.result_pub = self.create_publisher(MarkerArray, '/vision/right_markers', 10)
         
         # 상태 변수
         self.is_enabled = False  # 기본값: 꺼짐
@@ -115,50 +115,20 @@ class ArucoDetector(Node):
                 cv2.drawFrameAxes(frame, self.camera_matrix, self.dist_coeffs, rvec, tvec, 0.1)
 
                 try:
-                    # ---------------------------------------------------------
-                    # [수정] 로컬 오프셋 적용을 위한 행렬 연산
-                    # ---------------------------------------------------------
-                    
-                    # (1) rvec(회전벡터) -> R(3x3 회전행렬) 변환
-                    R, _ = cv2.Rodrigues(rvec)
-                    
-                    # (2) 마커의 변환 행렬 (4x4) 생성 (카메라 기준 마커 위치)
-                    T_cam_marker = np.eye(4)
-                    T_cam_marker[:3, :3] = R
-                    T_cam_marker[:3, 3] = tvec.squeeze()
-                    
-                    # (3) 오프셋 행렬 생성 (마커 기준 로컬 오프셋)
-                    # OpenCV Aruco 좌표계 기준: X(우), Y(하), Z(전방)
-                    # 목표: 마커 뒤쪽(튜브 중심) + 마커 위쪽(튜브 상단)
-                    T_offset = np.eye(4)
-                    
-                    # [튜닝 필요] 실제 에셋 크기에 맞춰 조절하세요
-                    offset_x = 0.0     # 좌우 (중앙이면 0)
-                    offset_y = -0.04   # 위아래 (OpenCV Y는 아래가 +이므로, 위로 가려면 마이너스)
-                    offset_z = -0.02   # 앞뒤 (OpenCV Z는 앞이 +이므로, 튜브 안으로 들어가려면 마이너스)
-                    
-                    T_offset[0, 3] = offset_x
-                    T_offset[1, 3] = offset_y
-                    T_offset[2, 3] = offset_z
-                    
-                    # (4) 마커 위치에 오프셋을 곱함 -> 최종 잡아야 할 위치 (카메라 기준)
-                    T_cam_target = T_cam_marker @ T_offset
-                    
-                    # ---------------------------------------------------------
-                    
-                    # UR10 베이스 프레임 변환 준비
+                    # UR10 베이스 프레임 (RMPFlow가 사용하는 좌표계)
                     target_frame = "base_link"
-                    source_frame = "left_Camera" # TF 트리에 등록된 정확한 카메라 프레임 이름 확인 필요
+                    source_frame = "right_Camera"
                     
-                    # PoseStamped 설정 (위에서 계산한 T_cam_target 사용)
+                    # PoseStamped 설정 (카메라 좌표계)
                     p_cam = PoseStamped()
                     p_cam.header.frame_id = source_frame
                     p_cam.header.stamp = msg.header.stamp
                     
-                    p_cam.pose.position.x = T_cam_target[0, 3]
-                    p_cam.pose.position.y = T_cam_target[1, 3]
-                    p_cam.pose.position.z = T_cam_target[2, 3]
-                    p_cam.pose.orientation.w = 1.0 # 위치만 변환할 것이므로 회전은 일단 무시
+                    # tvec은 (3, 1) 형태이므로 인덱싱 주의
+                    p_cam.pose.position.x = float(tvec[0][0])
+                    p_cam.pose.position.y = float(tvec[1][0])
+                    p_cam.pose.position.z = float(tvec[2][0])
+                    p_cam.pose.orientation.w = 1.0
 
                     # TF 변환: 카메라 -> UR10 베이스
                     transform = self.tf_buffer.lookup_transform(
@@ -168,31 +138,39 @@ class ArucoDetector(Node):
                         timeout=rclpy.duration.Duration(seconds=0.1)
                     )
                     
-                    # 좌표 변환 수행
+                    # 좌표 변환
                     p_robot_pose = tf2_geometry_msgs.do_transform_pose(p_cam.pose, transform)
                     
                     info = MarkerInfo()
-                    info.id = int(ids[i][0])
+                    info.id = int(ids[i][0]) # 마커 ID 저장
                     
-                    # 변환된 좌표를 그대로 사용 (이미 마커 기준 오프셋이 적용됨)
-                    info.pose.position.x = p_robot_pose.position.x
-                    info.pose.position.y = p_robot_pose.position.y
-                    info.pose.position.z = p_robot_pose.position.z
+                    # 물체 집기용 좌표 오프셋 적용
+                    robot_x = p_robot_pose.position.x
+                    robot_y = p_robot_pose.position.y - 0.04
+                    robot_z = p_robot_pose.position.z + 0.03
                     
-                    # 그리퍼 Orientation (항상 바닥을 보거나 특정 방향 고정)
-                    # 사용자가 설정한 고정값 사용
+                    # Pose 채우기
+                    info.pose.position.x = robot_x
+                    info.pose.position.y = robot_y
+                    info.pose.position.z = robot_z
+                    
+                    # Orientation은 기존 self.default_quat 값 사용
                     info.pose.orientation.x = self.default_quat[0]
                     info.pose.orientation.y = self.default_quat[1]
                     info.pose.orientation.z = self.default_quat[2]
                     info.pose.orientation.w = self.default_quat[3]
                     
+                    # 배열에 추가
                     marker_array.markers.append(info)
 
-                    self.get_logger().info(f"ID {ids[i][0]}: Target(Base) -> X:{p_robot_pose.position.x:.3f}, Y:{p_robot_pose.position.y:.3f}, Z:{p_robot_pose.position.z:.3f}")
+                    self.get_logger().info(f"ID {ids[i][0]}: Robot Base -> X:{robot_x:.3f}, Y:{robot_y:.3f}, Z:{robot_z:.3f}")
 
                 except (tf2_ros.LookupException, tf2_ros.ExtrapolationException) as e:
-                    self.get_logger().warn(f"TF Error: {e}")
                     continue
+
+            # [추가됨] 루프가 끝난 후 한 번에 전송
+            if len(marker_array.markers) > 0:
+                self.result_pub.publish(marker_array)
                 
         cv2.imshow("Aruco View", frame)
         cv2.waitKey(1)
