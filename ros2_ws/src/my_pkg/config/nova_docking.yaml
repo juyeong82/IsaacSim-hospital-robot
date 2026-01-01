@@ -10,7 +10,7 @@ docking_server:
     base_frame: "base_link"
     fixed_frame: "odom"
     dock_backwards: false
-    dock_prestaging_tolerance: 0.5
+    dock_prestaging_tolerance: 0.2 # [원래]0.5
     
     # 플러그인 설정
     dock_plugins: ['nova_carter_dock']
