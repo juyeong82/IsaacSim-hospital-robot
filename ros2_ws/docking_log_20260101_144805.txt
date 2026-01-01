@@ -1,0 +1,203 @@
+[INFO] [launch]: All log files can be found below /home/jy/.ros/log/2026-01-01-14-48-06-141401-judt-239717
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [component_container-1]: process started with pid [239731]
+[INFO] [dock_pose_publisher-2]: process started with pid [239733]
+[INFO] [opennav_docking-3]: process started with pid [239735]
+[INFO] [lifecycle_manager-4]: process started with pid [239737]
+[INFO] [static_transform_publisher-5]: process started with pid [239739]
+[opennav_docking-3] [INFO] [1767246486.297496068] [docking_server]: 
+[opennav_docking-3] 	docking_server lifecycle node launched. 
+[opennav_docking-3] 	Waiting on external lifecycle transitions to activate
+[opennav_docking-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[opennav_docking-3] [INFO] [1767246486.297596096] [docking_server]: Creating docking_server
+[static_transform_publisher-5] [INFO] [1767246486.298469628] [static_transform_publisher_0xyYes5YZ5Gps66u]: Spinning until stopped - publishing transform
+[static_transform_publisher-5] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-5] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-5] from 'map' to 'odom'
+[lifecycle_manager-4] [INFO] [1767246486.334585905] [lifecycle_manager_docking]: Creating
+[lifecycle_manager-4] [INFO] [1767246486.338454951] [lifecycle_manager_docking]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[lifecycle_manager-4] [INFO] [1767246486.386216172] [lifecycle_manager_docking]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-4] [INFO] [1767246486.386257213] [lifecycle_manager_docking]: [34m[1mConfiguring docking_server[0m[0m
+[opennav_docking-3] [INFO] [1767246486.386516111] [docking_server]: Configuring docking_server
+[opennav_docking-3] [INFO] [1767246486.386548012] [docking_server]: Controller frequency set to 50.0000Hz
+[opennav_docking-3] [INFO] [1767246486.400557786] [docking_server]: Created charging dock plugin nova_carter_dock of type opennav_docking::SimpleChargingDock
+[opennav_docking-3] [INFO] [1767246486.406916498] [docking_server]: Loading docks from parameter file.
+[opennav_docking-3] [INFO] [1767246486.407284661] [docking_server]: Docking Server has 1 dock types and 1 dock instances available.
+[lifecycle_manager-4] [INFO] [1767246486.408204434] [lifecycle_manager_docking]: [34m[1mActivating docking_server[0m[0m
+[opennav_docking-3] [INFO] [1767246486.408643920] [docking_server]: Activating docking_server
+[opennav_docking-3] [INFO] [1767246486.430813827] [docking_server]: Creating bond (docking_server) to lifecycle manager.
+[component_container-1] [INFO] [1767246486.491182292] [apriltag_container]: Load Library: /opt/ros/humble/lib/libAprilTagNode.so
+[lifecycle_manager-4] [INFO] [1767246486.544495157] [lifecycle_manager_docking]: Server docking_server connected with bond.
+[lifecycle_manager-4] [INFO] [1767246486.544535494] [lifecycle_manager_docking]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-4] [INFO] [1767246486.544543477] [lifecycle_manager_docking]: [34m[1mCreating bond timer...[0m[0m
+[component_container-1] [INFO] [1767246486.554236734] [apriltag_container]: Found class: rclcpp_components::NodeFactoryTemplate<AprilTagNode>
+[component_container-1] [INFO] [1767246486.554283236] [apriltag_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<AprilTagNode>
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/apriltag' in container '/apriltag_container'
+[dock_pose_publisher-2] [INFO] [1767246486.691391516] [dock_pose_publisher]: 🚀 Camera Frame Mode - YAML handles rotation
+[component_container-1] [WARN] [1767246487.570996379] [apriltag]: [image_transport] Topics '/front_camera/rgb' and '/front_camera/camera_info' do not appear to be synchronized. In the last 10s:
+[component_container-1] 	Image messages received:      2
+[component_container-1] 	CameraInfo messages received: 10
+[component_container-1] 	Synchronized pairs:           2
+[dock_pose_publisher-2] [INFO] [1767246489.694580345] [dock_pose_publisher]: ✅ Camera Info Received!
+[dock_pose_publisher-2] [INFO] [1767246489.784358330] [dock_pose_publisher]: 📷 Camera Frame: X=0.35, Y=-0.02, Z=2.45
+[dock_pose_publisher-2] [INFO] [1767246489.890374908] [dock_pose_publisher]: 📷 Camera Frame: X=0.35, Y=-0.02, Z=2.45
+[dock_pose_publisher-2] [INFO] [1767246489.991055828] [dock_pose_publisher]: 📷 Camera Frame: X=0.35, Y=-0.02, Z=2.45
+[dock_pose_publisher-2] [INFO] [1767246490.195778117] [dock_pose_publisher]: 📷 Camera Frame: X=0.35, Y=-0.02, Z=2.45
+[dock_pose_publisher-2] [INFO] [1767246490.405470629] [dock_pose_publisher]: 📷 Camera Frame: X=0.35, Y=-0.02, Z=2.45
+[opennav_docking-3] [INFO] [1767246490.704991902] [docking_server]: Attempting to dock robot at charger at position (23.06, 13.58).
+[opennav_docking-3] [INFO] [1767246490.705291119] [docking_server]: Robot already within pre-staging pose tolerance for dock
+[opennav_docking-3] [INFO] [1767246490.705528370] [docking_server]: Successful initial dock detection
+[dock_pose_publisher-2] [INFO] [1767246490.716383471] [dock_pose_publisher]: 📷 Camera Frame: X=0.35, Y=-0.02, Z=2.45
+[dock_pose_publisher-2] [INFO] [1767246490.918929082] [dock_pose_publisher]: 📷 Camera Frame: X=0.35, Y=-0.02, Z=2.45
+[dock_pose_publisher-2] [INFO] [1767246491.426412130] [dock_pose_publisher]: 📷 Camera Frame: X=0.35, Y=-0.02, Z=2.45
+[component_container-1] [WARN] [1767246491.570928815] [apriltag]: [image_transport] Topics '/front_camera/rgb' and '/front_camera/camera_info' do not appear to be synchronized. In the last 10s:
+[component_container-1] 	Image messages received:      3
+[component_container-1] 	CameraInfo messages received: 10
+[component_container-1] 	Synchronized pairs:           3
+[dock_pose_publisher-2] [INFO] [1767246491.634096724] [dock_pose_publisher]: 📷 Camera Frame: X=0.34, Y=-0.02, Z=2.44
+[dock_pose_publisher-2] [INFO] [1767246491.736235768] [dock_pose_publisher]: 📷 Camera Frame: X=0.34, Y=-0.02, Z=2.44
+[dock_pose_publisher-2] [INFO] [1767246492.148983398] [dock_pose_publisher]: 📷 Camera Frame: X=0.33, Y=-0.02, Z=2.42
+[dock_pose_publisher-2] [INFO] [1767246492.251695195] [dock_pose_publisher]: 📷 Camera Frame: X=0.33, Y=-0.02, Z=2.42
+[dock_pose_publisher-2] [INFO] [1767246492.859496630] [dock_pose_publisher]: 📷 Camera Frame: X=0.29, Y=-0.02, Z=2.36
+[dock_pose_publisher-2] [INFO] [1767246492.959679601] [dock_pose_publisher]: 📷 Camera Frame: X=0.29, Y=-0.02, Z=2.35
+[dock_pose_publisher-2] [INFO] [1767246493.367650714] [dock_pose_publisher]: 📷 Camera Frame: X=0.26, Y=-0.02, Z=2.32
+[dock_pose_publisher-2] [INFO] [1767246493.470690187] [dock_pose_publisher]: 📷 Camera Frame: X=0.25, Y=-0.02, Z=2.31
+[dock_pose_publisher-2] [INFO] [1767246493.650285063] [dock_pose_publisher]: 📷 Camera Frame: X=0.24, Y=-0.02, Z=2.30
+[dock_pose_publisher-2] [INFO] [1767246493.789199483] [dock_pose_publisher]: 📷 Camera Frame: X=0.23, Y=-0.02, Z=2.29
+[dock_pose_publisher-2] [INFO] [1767246493.901286123] [dock_pose_publisher]: 📷 Camera Frame: X=0.22, Y=-0.02, Z=2.28
+[dock_pose_publisher-2] [INFO] [1767246493.992831574] [dock_pose_publisher]: 📷 Camera Frame: X=0.21, Y=-0.02, Z=2.27
+[dock_pose_publisher-2] [INFO] [1767246494.269555860] [dock_pose_publisher]: 📷 Camera Frame: X=0.20, Y=-0.02, Z=2.25
+[dock_pose_publisher-2] [INFO] [1767246494.309562222] [dock_pose_publisher]: 📷 Camera Frame: X=0.19, Y=-0.02, Z=2.24
+[dock_pose_publisher-2] [INFO] [1767246494.409181230] [dock_pose_publisher]: 📷 Camera Frame: X=0.18, Y=-0.02, Z=2.23
+[dock_pose_publisher-2] [INFO] [1767246494.512934341] [dock_pose_publisher]: 📷 Camera Frame: X=0.17, Y=-0.02, Z=2.22
+[dock_pose_publisher-2] [INFO] [1767246494.614781486] [dock_pose_publisher]: 📷 Camera Frame: X=0.17, Y=-0.02, Z=2.21
+[dock_pose_publisher-2] [INFO] [1767246494.717424226] [dock_pose_publisher]: 📷 Camera Frame: X=0.16, Y=-0.02, Z=2.20
+[dock_pose_publisher-2] [INFO] [1767246495.023919551] [dock_pose_publisher]: 📷 Camera Frame: X=0.13, Y=-0.02, Z=2.17
+[dock_pose_publisher-2] [INFO] [1767246495.425625024] [dock_pose_publisher]: 📷 Camera Frame: X=0.10, Y=-0.02, Z=2.13
+[dock_pose_publisher-2] [INFO] [1767246496.027471377] [dock_pose_publisher]: 📷 Camera Frame: X=0.06, Y=-0.02, Z=2.07
+[dock_pose_publisher-2] [INFO] [1767246496.336480945] [dock_pose_publisher]: 📷 Camera Frame: X=0.04, Y=-0.02, Z=2.04
+[dock_pose_publisher-2] [INFO] [1767246496.440437527] [dock_pose_publisher]: 📷 Camera Frame: X=0.03, Y=-0.02, Z=2.03
+[dock_pose_publisher-2] [INFO] [1767246496.542727445] [dock_pose_publisher]: 📷 Camera Frame: X=0.02, Y=-0.02, Z=2.02
+[dock_pose_publisher-2] [INFO] [1767246496.643950596] [dock_pose_publisher]: 📷 Camera Frame: X=0.02, Y=-0.02, Z=2.01
+[dock_pose_publisher-2] [INFO] [1767246496.950328464] [dock_pose_publisher]: 📷 Camera Frame: X=0.00, Y=-0.02, Z=1.98
+[dock_pose_publisher-2] [INFO] [1767246497.364787034] [dock_pose_publisher]: 📷 Camera Frame: X=-0.02, Y=-0.02, Z=1.94
+[dock_pose_publisher-2] [INFO] [1767246497.463926450] [dock_pose_publisher]: 📷 Camera Frame: X=-0.02, Y=-0.02, Z=1.93
+[dock_pose_publisher-2] [INFO] [1767246497.566618687] [dock_pose_publisher]: 📷 Camera Frame: X=-0.03, Y=-0.02, Z=1.92
+[dock_pose_publisher-2] [INFO] [1767246497.974946563] [dock_pose_publisher]: 📷 Camera Frame: X=-0.04, Y=-0.02, Z=1.87
+[dock_pose_publisher-2] [INFO] [1767246498.077209598] [dock_pose_publisher]: 📷 Camera Frame: X=-0.04, Y=-0.02, Z=1.86
+[dock_pose_publisher-2] [INFO] [1767246498.285669848] [dock_pose_publisher]: 📷 Camera Frame: X=-0.05, Y=-0.02, Z=1.84
+[dock_pose_publisher-2] [INFO] [1767246498.389316859] [dock_pose_publisher]: 📷 Camera Frame: X=-0.05, Y=-0.02, Z=1.83
+[dock_pose_publisher-2] [INFO] [1767246499.307336832] [dock_pose_publisher]: 📷 Camera Frame: X=-0.06, Y=-0.02, Z=1.74
+[component_container-1] [WARN] [1767246499.570811845] [apriltag]: [image_transport] Topics '/front_camera/rgb' and '/front_camera/camera_info' do not appear to be synchronized. In the last 10s:
+[component_container-1] 	Image messages received:      1
+[component_container-1] 	CameraInfo messages received: 9
+[component_container-1] 	Synchronized pairs:           1
+[dock_pose_publisher-2] [INFO] [1767246500.331442045] [dock_pose_publisher]: 📷 Camera Frame: X=-0.05, Y=-0.02, Z=1.63
+[component_container-1] [WARN] [1767246500.570811529] [apriltag]: [image_transport] Topics '/front_camera/rgb' and '/front_camera/camera_info' do not appear to be synchronized. In the last 10s:
+[component_container-1] 	Image messages received:      1
+[component_container-1] 	CameraInfo messages received: 9
+[component_container-1] 	Synchronized pairs:           1
+[dock_pose_publisher-2] [INFO] [1767246500.843009368] [dock_pose_publisher]: 📷 Camera Frame: X=-0.05, Y=-0.02, Z=1.58
+[dock_pose_publisher-2] [INFO] [1767246500.944589137] [dock_pose_publisher]: 📷 Camera Frame: X=-0.05, Y=-0.02, Z=1.57
+[dock_pose_publisher-2] [INFO] [1767246501.053900201] [dock_pose_publisher]: 📷 Camera Frame: X=-0.04, Y=-0.02, Z=1.56
+[dock_pose_publisher-2] [INFO] [1767246501.673509746] [dock_pose_publisher]: 📷 Camera Frame: X=-0.03, Y=-0.02, Z=1.50
+[dock_pose_publisher-2] [INFO] [1767246501.877003364] [dock_pose_publisher]: 📷 Camera Frame: X=-0.03, Y=-0.02, Z=1.48
+[dock_pose_publisher-2] [INFO] [1767246501.981059372] [dock_pose_publisher]: 📷 Camera Frame: X=-0.03, Y=-0.02, Z=1.47
+[dock_pose_publisher-2] [INFO] [1767246502.184717143] [dock_pose_publisher]: 📷 Camera Frame: X=-0.02, Y=-0.02, Z=1.45
+[dock_pose_publisher-2] [INFO] [1767246502.395008070] [dock_pose_publisher]: 📷 Camera Frame: X=-0.02, Y=-0.02, Z=1.43
+[dock_pose_publisher-2] [INFO] [1767246502.502256236] [dock_pose_publisher]: 📷 Camera Frame: X=-0.02, Y=-0.02, Z=1.42
+[dock_pose_publisher-2] [INFO] [1767246502.708594089] [dock_pose_publisher]: 📷 Camera Frame: X=-0.01, Y=-0.02, Z=1.40
+[dock_pose_publisher-2] [INFO] [1767246502.814649005] [dock_pose_publisher]: 📷 Camera Frame: X=-0.01, Y=-0.02, Z=1.39
+[dock_pose_publisher-2] [INFO] [1767246502.921589100] [dock_pose_publisher]: 📷 Camera Frame: X=-0.01, Y=-0.02, Z=1.38
+[component_container-1] [WARN] [1767246503.570785925] [apriltag]: [image_transport] Topics '/front_camera/rgb' and '/front_camera/camera_info' do not appear to be synchronized. In the last 10s:
+[component_container-1] 	Image messages received:      3
+[component_container-1] 	CameraInfo messages received: 10
+[component_container-1] 	Synchronized pairs:           3
+[dock_pose_publisher-2] [INFO] [1767246503.853450126] [dock_pose_publisher]: 📷 Camera Frame: X=0.00, Y=-0.02, Z=1.28
+[dock_pose_publisher-2] [INFO] [1767246504.163152795] [dock_pose_publisher]: 📷 Camera Frame: X=0.01, Y=-0.01, Z=1.25
+[dock_pose_publisher-2] [INFO] [1767246504.267225292] [dock_pose_publisher]: 📷 Camera Frame: X=0.01, Y=-0.02, Z=1.24
+[dock_pose_publisher-2] [INFO] [1767246504.473809107] [dock_pose_publisher]: 📷 Camera Frame: X=0.01, Y=-0.01, Z=1.22
+[dock_pose_publisher-2] [INFO] [1767246504.686225559] [dock_pose_publisher]: 📷 Camera Frame: X=0.01, Y=-0.01, Z=1.20
+[component_container-1] [WARN] [1767246505.570770272] [apriltag]: [image_transport] Topics '/front_camera/rgb' and '/front_camera/camera_info' do not appear to be synchronized. In the last 10s:
+[component_container-1] 	Image messages received:      1
+[component_container-1] 	CameraInfo messages received: 8
+[component_container-1] 	Synchronized pairs:           1
+[dock_pose_publisher-2] [INFO] [1767246505.839373301] [dock_pose_publisher]: 📷 Camera Frame: X=0.02, Y=-0.01, Z=1.09
+[dock_pose_publisher-2] [INFO] [1767246506.162991540] [dock_pose_publisher]: 📷 Camera Frame: X=0.02, Y=-0.01, Z=1.05
+[dock_pose_publisher-2] [INFO] [1767246506.267042004] [dock_pose_publisher]: 📷 Camera Frame: X=0.02, Y=-0.01, Z=1.04
+[dock_pose_publisher-2] [INFO] [1767246506.369438079] [dock_pose_publisher]: 📷 Camera Frame: X=0.01, Y=-0.01, Z=1.03
+[dock_pose_publisher-2] [INFO] [1767246506.475767261] [dock_pose_publisher]: 📷 Camera Frame: X=0.01, Y=-0.01, Z=1.02
+[dock_pose_publisher-2] [INFO] [1767246506.792531484] [dock_pose_publisher]: 📷 Camera Frame: X=0.01, Y=-0.01, Z=0.99
+[dock_pose_publisher-2] [INFO] [1767246506.895687220] [dock_pose_publisher]: 📷 Camera Frame: X=0.01, Y=-0.01, Z=0.98
+[dock_pose_publisher-2] [INFO] [1767246507.002816538] [dock_pose_publisher]: 📷 Camera Frame: X=0.01, Y=-0.01, Z=0.97
+[dock_pose_publisher-2] [INFO] [1767246507.108967920] [dock_pose_publisher]: 📷 Camera Frame: X=0.01, Y=-0.01, Z=0.96
+[dock_pose_publisher-2] [INFO] [1767246507.318909716] [dock_pose_publisher]: 📷 Camera Frame: X=0.01, Y=-0.01, Z=0.94
+[dock_pose_publisher-2] [INFO] [1767246507.530451263] [dock_pose_publisher]: 📷 Camera Frame: X=0.01, Y=-0.01, Z=0.92
+[dock_pose_publisher-2] [INFO] [1767246507.641355380] [dock_pose_publisher]: 📷 Camera Frame: X=0.01, Y=-0.01, Z=0.91
+[dock_pose_publisher-2] [INFO] [1767246507.744875094] [dock_pose_publisher]: 📷 Camera Frame: X=0.01, Y=-0.01, Z=0.90
+[dock_pose_publisher-2] [INFO] [1767246508.059549900] [dock_pose_publisher]: 📷 Camera Frame: X=0.01, Y=-0.01, Z=0.87
+[dock_pose_publisher-2] [INFO] [1767246508.167935811] [dock_pose_publisher]: 📷 Camera Frame: X=0.01, Y=-0.01, Z=0.86
+[dock_pose_publisher-2] [INFO] [1767246508.593095344] [dock_pose_publisher]: 📷 Camera Frame: X=0.00, Y=-0.01, Z=0.81
+[dock_pose_publisher-2] [INFO] [1767246508.804003407] [dock_pose_publisher]: 📷 Camera Frame: X=0.00, Y=-0.01, Z=0.79
+[dock_pose_publisher-2] [INFO] [1767246509.126117863] [dock_pose_publisher]: 📷 Camera Frame: X=0.00, Y=-0.01, Z=0.76
+[component_container-1] [WARN] [1767246509.570667493] [apriltag]: [image_transport] Topics '/front_camera/rgb' and '/front_camera/camera_info' do not appear to be synchronized. In the last 10s:
+[component_container-1] 	Image messages received:      3
+[component_container-1] 	CameraInfo messages received: 10
+[component_container-1] 	Synchronized pairs:           3
+[dock_pose_publisher-2] [INFO] [1767246510.295996990] [dock_pose_publisher]: 📷 Camera Frame: X=-0.00, Y=-0.01, Z=0.65
+[dock_pose_publisher-2] [INFO] [1767246510.509568405] [dock_pose_publisher]: 📷 Camera Frame: X=-0.00, Y=-0.01, Z=0.62
+[component_container-1] [WARN] [1767246510.570647930] [apriltag]: [image_transport] Topics '/front_camera/rgb' and '/front_camera/camera_info' do not appear to be synchronized. In the last 10s:
+[component_container-1] 	Image messages received:      2
+[component_container-1] 	CameraInfo messages received: 8
+[component_container-1] 	Synchronized pairs:           2
+[dock_pose_publisher-2] [INFO] [1767246510.724906486] [dock_pose_publisher]: 📷 Camera Frame: X=-0.00, Y=-0.01, Z=0.60
+[dock_pose_publisher-2] [INFO] [1767246511.154541948] [dock_pose_publisher]: 📷 Camera Frame: X=-0.00, Y=-0.01, Z=0.56
+[dock_pose_publisher-2] [INFO] [1767246511.258543697] [dock_pose_publisher]: 📷 Camera Frame: X=-0.00, Y=-0.01, Z=0.55
+[dock_pose_publisher-2] [INFO] [1767246511.367567641] [dock_pose_publisher]: 📷 Camera Frame: X=-0.00, Y=-0.01, Z=0.54
+[dock_pose_publisher-2] [INFO] [1767246511.793489305] [dock_pose_publisher]: 📷 Camera Frame: X=-0.00, Y=-0.01, Z=0.50
+[dock_pose_publisher-2] [INFO] [1767246512.111026179] [dock_pose_publisher]: 📷 Camera Frame: X=-0.00, Y=-0.01, Z=0.47
+[dock_pose_publisher-2] [INFO] [1767246512.222005379] [dock_pose_publisher]: 📷 Camera Frame: X=-0.00, Y=-0.01, Z=0.46
+[dock_pose_publisher-2] [INFO] [1767246512.435324950] [dock_pose_publisher]: 📷 Camera Frame: X=-0.00, Y=-0.01, Z=0.43
+[dock_pose_publisher-2] [INFO] [1767246512.865749835] [dock_pose_publisher]: 📷 Camera Frame: X=-0.00, Y=-0.01, Z=0.39
+[dock_pose_publisher-2] [INFO] [1767246512.974120961] [dock_pose_publisher]: 📷 Camera Frame: X=-0.00, Y=-0.01, Z=0.38
+[opennav_docking-3] [INFO] [1767246513.085688843] [docking_server]: Made contact with dock, waiting for charge to start
+[opennav_docking-3] [INFO] [1767246513.085752332] [docking_server]: Robot is charging!
+[dock_pose_publisher-2] [INFO] [1767246513.192500390] [dock_pose_publisher]: 📷 Camera Frame: X=-0.00, Y=-0.01, Z=0.36
+[dock_pose_publisher-2] [INFO] [1767246513.407809410] [dock_pose_publisher]: 📷 Camera Frame: X=-0.00, Y=-0.01, Z=0.34
+[dock_pose_publisher-2] [INFO] [1767246513.518377176] [dock_pose_publisher]: 📷 Camera Frame: X=-0.00, Y=-0.01, Z=0.33
+[component_container-1] [WARN] [1767246514.570624299] [apriltag]: [image_transport] Topics '/front_camera/rgb' and '/front_camera/camera_info' do not appear to be synchronized. In the last 10s:
+[component_container-1] 	Image messages received:      2
+[component_container-1] 	CameraInfo messages received: 8
+[component_container-1] 	Synchronized pairs:           2
+[component_container-1] [WARN] [1767246519.570521465] [apriltag]: [image_transport] Topics '/front_camera/rgb' and '/front_camera/camera_info' do not appear to be synchronized. In the last 10s:
+[component_container-1] 	Image messages received:      0
+[component_container-1] 	CameraInfo messages received: 9
+[component_container-1] 	Synchronized pairs:           0
+[component_container-1] [WARN] [1767246520.570506909] [apriltag]: [image_transport] Topics '/front_camera/rgb' and '/front_camera/camera_info' do not appear to be synchronized. In the last 10s:
+[component_container-1] 	Image messages received:      2
+[component_container-1] 	CameraInfo messages received: 7
+[component_container-1] 	Synchronized pairs:           2
+[component_container-1] [WARN] [1767246522.570506681] [apriltag]: [image_transport] Topics '/front_camera/rgb' and '/front_camera/camera_info' do not appear to be synchronized. In the last 10s:
+[component_container-1] 	Image messages received:      1
+[component_container-1] 	CameraInfo messages received: 9
+[component_container-1] 	Synchronized pairs:           1
+[component_container-1] [WARN] [1767246523.570496297] [apriltag]: [image_transport] Topics '/front_camera/rgb' and '/front_camera/camera_info' do not appear to be synchronized. In the last 10s:
+[component_container-1] 	Image messages received:      2
+[component_container-1] 	CameraInfo messages received: 9
+[component_container-1] 	Synchronized pairs:           2
+[component_container-1] [WARN] [1767246524.570432727] [apriltag]: [image_transport] Topics '/front_camera/rgb' and '/front_camera/camera_info' do not appear to be synchronized. In the last 10s:
+[component_container-1] 	Image messages received:      1
+[component_container-1] 	CameraInfo messages received: 9
+[component_container-1] 	Synchronized pairs:           1
+[component_container-1] [WARN] [1767246526.570413506] [apriltag]: [image_transport] Topics '/front_camera/rgb' and '/front_camera/camera_info' do not appear to be synchronized. In the last 10s:
+[component_container-1] 	Image messages received:      2
+[component_container-1] 	CameraInfo messages received: 9
+[component_container-1] 	Synchronized pairs:           2
+[component_container-1] [WARN] [1767246527.570341863] [apriltag]: [image_transport] Topics '/front_camera/rgb' and '/front_camera/camera_info' do not appear to be synchronized. In the last 10s:
+[component_container-1] 	Image messages received:      2
+[component_container-1] 	CameraInfo messages received: 9
+[component_container-1] 	Synchronized pairs:           2
+[component_container-1] [WARN] [1767246534.570301015] [apriltag]: [image_transport] Topics '/front_camera/rgb' and '/front_camera/camera_info' do not appear to be synchronized. In the last 10s:
+[component_container-1] 	Image messages received:      2
+[component_container-1] 	CameraInfo messages received: 9
+[component_container-1] 	Synchronized pairs:           2
