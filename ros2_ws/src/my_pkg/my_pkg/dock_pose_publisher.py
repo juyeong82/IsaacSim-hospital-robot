@@ -21,7 +21,7 @@ class DockPosePublisher(Node):
         self.create_subscription(AprilTagDetectionArray, '/detections', self.detection_callback, 10)
         self.publisher = self.create_publisher(PoseStamped, 'detected_dock_pose', 10)
         
-        self.get_logger().info(f"🚀 Final Mode: Mapping corrected based on user observation")
+        self.get_logger().info("🚀 Camera Frame Mode - YAML handles rotation")
 
     def camera_info_callback(self, msg):
         if self.camera_matrix is None:
@@ -50,7 +50,6 @@ class DockPosePublisher(Node):
                     [ s,  s, 0], [-s,  s, 0]
                 ], dtype=np.float32)
 
-                # 기본 Solver 사용 (Fisheye 등 왜곡 보정 포함)
                 success, rvec, tvec = cv2.solvePnP(
                     object_points, 
                     image_points, 
@@ -59,31 +58,33 @@ class DockPosePublisher(Node):
                 )
 
                 if success:
-                    # OpenCV Raw 좌표 (사용자 관측 기준)
-                    # raw_x: 좌우 (오른쪽+)
-                    # raw_y: 상하 (아래+)
-                    # raw_z: 거리 (앞+)
+                    # ============================================
+                    # OpenCV 카메라 좌표계 그대로 전달
+                    # ============================================
+                    # X: 오른쪽 +
+                    # Y: 아래 +
+                    # Z: 전방 +
                     raw_x, raw_y, raw_z = tvec[0][0], tvec[1][0], tvec[2][0]
 
                     pose_msg = PoseStamped()
-                    pose_msg.header.frame_id = "Camera"
+                    pose_msg.header.frame_id = "Camera"  # ← Camera 프레임
                     pose_msg.header.stamp = self.get_clock().now().to_msg()
                     
-                    # ---------------------------------------------------------
-                    # [최종 수정] 사용자 관측 기반 매핑
-                    # ---------------------------------------------------------
-                    pose_msg.pose.position.x = raw_z      # 거리 (Z -> X)
-                    pose_msg.pose.position.y = -raw_x     # 좌우 (X -> Y, 부호반대)
-                    pose_msg.pose.position.z = -raw_y     # 상하 (Y -> Z, 부호반대)
+                    # 카메라 좌표 그대로 전달 (YAML에서 회전 처리)
+                    pose_msg.pose.position.x = raw_x
+                    pose_msg.pose.position.y = raw_y
+                    pose_msg.pose.position.z = raw_z
 
-                    # 방향 초기화 (정면 응시)
+                    # Orientation: 정면 응시 (회전 없음)
                     pose_msg.pose.orientation.w = 1.0
+                    pose_msg.pose.orientation.x = 0.0
+                    pose_msg.pose.orientation.y = 0.0
+                    pose_msg.pose.orientation.z = 0.0
                     
                     self.publisher.publish(pose_msg)
                     
-                    # 디버깅 로그: 실제 ROS로 들어가는 X(거리)와 Y(좌우) 확인
                     self.get_logger().info(
-                        f"👁️ RAW: X={raw_x:.2f}, Y={raw_y:.2f}, Z={raw_z:.2f}  ==>  🤖 ROS: Dist(X)={pose_msg.pose.position.x:.2f}, Side(Y)={pose_msg.pose.position.y:.2f}"
+                        f"📷 Camera Frame: X={raw_x:.2f}, Y={raw_y:.2f}, Z={raw_z:.2f}"
                     )
                 return
 

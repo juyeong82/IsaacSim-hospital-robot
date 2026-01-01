@@ -23,11 +23,23 @@ docking_server:
       use_battery_status: false
       use_stall_detection: false
       external_detection_timeout: 1.0
+      
+      # 카메라 물리적 오프셋 (base_link 기준)
       external_detection_translation_x: -0.18
       external_detection_translation_y: 0.0
-      external_detection_rotation_roll: -1.57
-      external_detection_rotation_pitch: -1.57
+      
+      # ============================================
+      # [핵심] 카메라 → 로봇 좌표계 변환
+      # ============================================
+      # Camera Frame:  X(좌우), Y(상하), Z(전방)
+      # Robot Frame:   X(전방), Y(좌우), Z(상하)
+      # 
+      # Roll=-90°:  Camera Y → Robot Z
+      # Pitch=-90°: Camera Z → Robot X
+      external_detection_rotation_roll: -1.57   # -90°
+      external_detection_rotation_pitch: -1.57  # -90°
       external_detection_rotation_yaw: 0.0
+      
       filter_coef: 0.1
     
     # 독(Dock) 인스턴스 설정
@@ -37,7 +49,8 @@ docking_server:
       type: 'nova_carter_dock'
       frame: odom
       # pose: [x, y, theta]
-      pose: [23.06, 10.85, 1.57]
+      # 실제 충전소 위치 (Isaac Sim 스크린샷 기준)
+      pose: [23.06, 13.58, 1.57]  # yaw=1.57 (90°, 북쪽 향함)
     
     controller:
       k_phi: 3.0

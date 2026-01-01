@@ -3,13 +3,12 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import Node, ComposableNodeContainer
 from launch_ros.descriptions import ComposableNode
-from launch.substitutions import LaunchConfiguration  # [추가]
+from launch.substitutions import LaunchConfiguration
 
 def generate_launch_description():
     pkg_dir = get_package_share_directory('my_pkg')
     config_file = os.path.join(pkg_dir, 'config', 'nova_docking.yaml')
     
-    # [추가] use_sim_time을 명시적으로 True로 고정
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
 
     # 1. AprilTag 인식 노드
@@ -32,10 +31,10 @@ def generate_launch_description():
             )
         ],
         output='screen',
-        parameters=[{'use_sim_time': use_sim_time}] # 파라미터 전달
+        parameters=[{'use_sim_time': use_sim_time}]
     )
 
-    # 2. 중계 노드
+    # 2. 도킹 포즈 퍼블리셔 (Camera frame 출력)
     dock_pose_publisher = Node(
         package='my_pkg',
         executable='dock_pose_publisher',
@@ -44,13 +43,12 @@ def generate_launch_description():
         parameters=[{'use_sim_time': use_sim_time}]
     )
 
-    # 3. 도킹 서버 (여기가 핵심)
+    # 3. 도킹 서버 (YAML에서 좌표 변환 처리)
     docking_server = Node(
         package='opennav_docking',
         executable='opennav_docking',
         name='docking_server',
         output='screen',
-        # [수정] yaml 파일과 use_sim_time을 하나의 리스트로 확실하게 전달
         parameters=[config_file, {'use_sim_time': use_sim_time}], 
         remappings=[('cmd_vel', '/cmd_vel')]
     )
@@ -61,15 +59,24 @@ def generate_launch_description():
         executable='lifecycle_manager',
         name='lifecycle_manager_docking',
         output='screen',
-        parameters=[{'autostart': True}, {'node_names': ['docking_server']}, {'use_sim_time': use_sim_time}],
+        parameters=[
+            {'autostart': True}, 
+            {'node_names': ['docking_server']}, 
+            {'use_sim_time': use_sim_time}
+        ],
     )
 
-    # 5. TF (Static Transform)
+    # 5. TF (map → odom)
     tf_map_odom = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
-        arguments = ['0', '0', '0', '0', '0', '0', 'map', 'odom'],
-        parameters=[{'use_sim_time': use_sim_time}]
+        arguments = [
+            '--x', '0', '--y', '0', '--z', '0', 
+            '--yaw', '0', '--pitch', '0', '--roll', '0', 
+            '--frame-id', 'map', '--child-frame-id', 'odom'
+        ],
+        parameters=[{'use_sim_time': use_sim_time}],
+        output='screen'
     )
 
     return LaunchDescription([
