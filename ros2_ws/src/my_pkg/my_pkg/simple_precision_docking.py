@@ -179,11 +179,15 @@ class SimplePrecisionDocking(Node):
                 self.state = DockingState.ROTATE_TO_TARGET
                 return
             
-            if distance > 0.8:
+            slowdown_distance = self.docking_threshold + 0.5 
+
+            if distance > slowdown_distance:
+                # 아직 목표 지점까지 여유가 많음 -> 빠른 접근
                 cmd.linear.x = self.approach_speed
                 cmd.angular.z = np.clip(5.0 * bearing_angle, -0.8, 0.8)
             else:
-                self.get_logger().info("📉 Slowing down for FINAL_ALIGN.")
+                # 목표 지점 근처 도달 -> FINAL_ALIGN (정밀/감속) 모드로 전환
+                self.get_logger().info(f"📉 Slowing down for FINAL_ALIGN. (Dist: {distance:.2f}m)")
                 self.state = DockingState.FINAL_ALIGN
                 
         elif self.state == DockingState.FINAL_ALIGN:
@@ -213,11 +217,11 @@ class SimplePrecisionDocking(Node):
                 throttle_duration_sec=0.2  # 더 자주 로깅
             )
 
-            if abs(yaw_error) > 0.002:  # 약 0.1도
+            if abs(yaw_error) > 0.02:  # 약 0.1도
                 cmd.linear.x = 0.0
                 # 오버슛 방지: 에러 크면 강하게, 작으면 약하게
-                if abs(yaw_error) > 0.002:  # 5.7도 이상
-                    cmd.angular.z = np.clip(5.0 * yaw_error, -0.3, 0.3)
+                if abs(yaw_error) > 0.02:  # 5.7도 이상
+                    cmd.angular.z = np.clip(6.0 * yaw_error, -0.5, 0.5)
                 else:
                     cmd.angular.z = np.clip(4.0 * yaw_error, -0.15, 0.15)
             else:
