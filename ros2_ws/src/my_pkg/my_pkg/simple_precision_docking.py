@@ -265,7 +265,7 @@ class SimplePrecisionDocking(Node):
         elif self.state == DockingState.ALIGN_TO_GRID:
             # TF 안정화 대기 (1.0초)
             time_since_start = (self.get_clock().now() - self.align_start_time).nanoseconds / 1e9
-            if time_since_start < 1.5:
+            if time_since_start < 1.0:
                 cmd.linear.x = 0.0
                 cmd.angular.z = 0.0
                 self.cmd_vel_pub.publish(cmd)
@@ -287,10 +287,10 @@ class SimplePrecisionDocking(Node):
                 if self.realignment_count > 0:
                     # 재정렬 중: 더 느리고 부드럽게
                     if abs(yaw_error) > 0.05:
-                        gain = 3.0  
+                        gain = 4.0  
                         limit = 0.15  
                     else:
-                        gain = 2.0   
+                        gain = 3.0   
                         limit = 0.15  
                     min_speed = 0.02  
                 else:
@@ -302,7 +302,7 @@ class SimplePrecisionDocking(Node):
                         
                     # 2. 중간 오차 (예: 1.0도/0.017rad ~ 2.8도 사이): 부드러운 감속 제어
                     else:
-                        gain = 2.0
+                        gain = 4.0
                         limit = 0.15
                     min_speed = 0.03
                     
@@ -357,13 +357,25 @@ class SimplePrecisionDocking(Node):
                             f"🔄 Drift detected! Error: {math.degrees(final_error):.2f}° -> Re-aligning (Retry {self.realignment_count}/3)"
                         )
                     else:
-                        # 재시도 횟수 초과 -> 그냥 실패/종료 처리 하거나 DOCKED로 강제 전환 (여기선 DOCKED로 처리)
-                        self.get_logger().error(f"❌ Alignment Failed after retries. Error: {math.degrees(final_error):.2f}°")
-                        self._finish_docking(success=False) # *헬퍼 함수 호출로 변경 (아래 설명 참조)
+                        # [핵심 수정] 재시도 횟수 초과 시, 5도 이내인지 확인
+                        final_deg_error = math.degrees(abs(final_error))
+                        
+                        if final_deg_error <= 5.0:
+                            # Case A: 5도 이내 -> 허용 범위 성공 처리
+                            self.get_logger().warn(
+                                f"⚠️ Alignment acceptable (Retries exhausted). Final Error: {final_deg_error:.2f}° (Target < 5.0°)"
+                            )
+                            self._finish_docking(success=True) # 성공으로 처리하여 종료
+                        else:
+                            # Case B: 5도 초과 -> 실제 실패
+                            self.get_logger().error(
+                                f"❌ Alignment Failed. Deviation too large. Final Error: {final_deg_error:.2f}°"
+                            )
+                            self._finish_docking(success=False) # 실패 처리
                 else:
                     # 정렬 성공
                     self.get_logger().info(
-                        f"🎉 VERIFIED! Stable. Final Error: {math.degrees(final_error):.2f}°"
+                        f"✅ VERIFIED! Stable. Final Error: {math.degrees(final_error):.2f}°"
                     )
                     self._finish_docking(success=True)
 
