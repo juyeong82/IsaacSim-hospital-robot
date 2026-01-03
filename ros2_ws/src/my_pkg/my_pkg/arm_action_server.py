@@ -30,6 +30,7 @@ class ArmActionServer(Node):
         # Subscriber (Vision)
         self.visible_markers = [] 
         self.create_subscription(MarkerArray, '/vision/left_markers', self.vision_callback, 10, callback_group=self.callback_group)
+        self.create_subscription(MarkerArray, '/vision/right_markers', self.vision_callback, 10, callback_group=self.callback_group)
 
         # TF Listener
         self.tf_buffer = Buffer()
@@ -47,13 +48,15 @@ class ArmActionServer(Node):
         self.home_joints = [0.0, -1.5708, -1.5708, -1.5708, 1.5708, 0.0]
         
         # left_camera로 검증시
-        self.verify_pose = PoseStamped()
-        self.verify_pose.header.frame_id = "base_link"
-        self.verify_pose.pose.position.x = -0.4
-        self.verify_pose.pose.position.y = 0.8
-        self.verify_pose.pose.position.z = 1.2
-        self.verify_pose.pose.orientation.w = 0.707
-        self.verify_pose.pose.orientation.y = 0.707
+        # self.verify_pose = PoseStamped()
+        # self.verify_pose.header.frame_id = "base_link"
+        # self.verify_pose.pose.position.x = -0.4
+        # self.verify_pose.pose.position.y = 0.8
+        # self.verify_pose.pose.position.z = 1.2
+        # self.verify_pose.pose.orientation.w = 0.707
+        # self.verify_pose.pose.orientation.y = 0.707
+        # self.verify_pose.pose.orientation.x = 0.0
+        # self.verify_pose.pose.orientation.z = 0.0
         
         # right_camera로 검증시
         self.verify_pose = PoseStamped()
@@ -61,8 +64,10 @@ class ArmActionServer(Node):
         self.verify_pose.pose.position.x = -0.4
         self.verify_pose.pose.position.y = -0.8
         self.verify_pose.pose.position.z = 1.2
-        self.verify_pose.pose.orientation.w = 0.707
-        self.verify_pose.pose.orientation.y = 0.707
+        self.verify_pose.pose.orientation.x = -0.707
+        self.verify_pose.pose.orientation.y = 0.0
+        self.verify_pose.pose.orientation.z = 0.707
+        self.verify_pose.pose.orientation.w = 0.0
 
         self.get_logger().info('✅ Arm Action Server Ready (Multi-Threaded)')
 
@@ -77,7 +82,7 @@ class ArmActionServer(Node):
         except Exception as e:
             return None
 
-    def wait_until_reached(self, target_pose, timeout=15.0, tolerance=0.04):
+    def wait_until_reached(self, target_pose, timeout=60.0, tolerance=0.04):
         start_time = time.time()
         tx = target_pose.pose.position.x
         ty = target_pose.pose.position.y
@@ -117,7 +122,7 @@ class ArmActionServer(Node):
         self.get_logger().warn(f"   ⚠️ Timeout! Stuck at {dist:.3f}m")
         return False
 
-    def verify_grasp_success(self, timeout=3.0, tolerance=0.1):
+    def verify_grasp_success(self, timeout=5.0, tolerance=0.1):
         # 1. 기존 데이터 초기화 (Stale Data 방지)
         self.visible_markers = [] 
         
@@ -175,12 +180,12 @@ class ArmActionServer(Node):
                 pre_pose.pose.position.z += 0.20  
                 self.publish_pose(pre_pose)
                 
-                if not self.wait_until_reached(pre_pose, timeout=20.0, tolerance=0.03):
+                if not self.wait_until_reached(pre_pose, timeout=60.0, tolerance=0.03):
                      self.get_logger().warn("⚠️ Pre-approach incomplete, trying descent...")
 
                 # Final Approach
                 self.publish_pose(target_pose)
-                if not self.wait_until_reached(target_pose, timeout=15.0, tolerance=0.007):
+                if not self.wait_until_reached(target_pose, timeout=60.0, tolerance=0.007):
                     raise Exception("Final Approach Timeout or Not Close Enough")
 
                 self.control_gripper("close")
@@ -195,7 +200,7 @@ class ArmActionServer(Node):
                 self.publish_pose(lift_pose)
                 
                 # 들어 올릴 때는 오차 3cm 정도면 충분
-                if not self.wait_until_reached(lift_pose, timeout=10.0, tolerance=0.03):
+                if not self.wait_until_reached(lift_pose, timeout=60.0, tolerance=0.03):
                     self.get_logger().warn("⚠️ Lift incomplete, but moving to verify...")
 
                 # 6. [Verify Move] 검증 위치로 이동
@@ -220,14 +225,14 @@ class ArmActionServer(Node):
                 
                 self.get_logger().info("🚀 Moving to Pre-Place Position...")
                 self.publish_pose(pre_place_pose)
-                if not self.wait_until_reached(pre_place_pose, timeout=15.0, tolerance=0.08):
+                if not self.wait_until_reached(pre_place_pose, timeout=60.0, tolerance=0.08):
                     self.get_logger().warn("⚠️ Pre-place incomplete, but proceeding...")
 
                 # 2. [Place Descent] 목표 지점으로 하강
                 self.get_logger().info("⬇️ Descending to Place Position...")
                 self.publish_pose(target_pose)
                 # 놓을 때는 잡을 때만큼 초정밀일 필요는 없으나, 바닥에 닿아야 하므로 1cm 오차 허용
-                if not self.wait_until_reached(target_pose, timeout=15.0, tolerance=0.01):
+                if not self.wait_until_reached(target_pose, timeout=60.0, tolerance=0.01):
                     raise Exception("Place Descent Timeout")
 
                 # 3. [Release] 놓기
@@ -238,7 +243,7 @@ class ArmActionServer(Node):
                 # 4. [Retreat] 물체를 치지 않게 위로 빠져나오기 (중요!)
                 self.get_logger().info("⬆️ Retreating (Safety Move)...")
                 self.publish_pose(pre_place_pose) # 아까 그 상공 위치로 복귀
-                if not self.wait_until_reached(pre_place_pose, timeout=10.0, tolerance=0.08):
+                if not self.wait_until_reached(pre_place_pose, timeout=60.0, tolerance=0.08):
                     self.get_logger().warn("⚠️ Retreat incomplete")
 
                 goal_handle.succeed()
@@ -280,7 +285,7 @@ class ArmActionServer(Node):
                     goal_handle.publish_feedback(feedback)
                     
                     # 이동 시간 대기 (4초 - 관절 이동은 경로에 따라 오래 걸릴 수 있음)
-                    time.sleep(4.0)
+                    time.sleep(3.0)
                     
                     goal_handle.succeed()
                     result.success = True

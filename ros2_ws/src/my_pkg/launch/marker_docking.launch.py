@@ -23,7 +23,12 @@ def generate_launch_description():
                     ('image_rect', '/front_camera/rgb'),
                     ('camera_info', '/front_camera/camera_info')
                 ],
-                parameters=[{'size': 0.25, 'family': '36h11'}],
+                parameters=[{
+                    'size': 0.25, 
+                    'family': '36h11',
+                    'max_hamming': 0,       # (선택) 오인식 줄이기
+                    'qos_profile': 'sensor_data' # [핵심] Best Effort로 설정하여 수신율 향상
+                }],
                 extra_arguments=[{'use_intra_process_comms': True}],
             )
         ],
