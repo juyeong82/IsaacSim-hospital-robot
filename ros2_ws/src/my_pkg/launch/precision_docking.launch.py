@@ -58,21 +58,21 @@ def generate_launch_description():
     )
 
     # 4. TF (map → odom)
-    tf_map_odom = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        arguments = [
-            '--x', '0', '--y', '0', '--z', '0', 
-            '--yaw', '0', '--pitch', '0', '--roll', '0', 
-            '--frame-id', 'map', '--child-frame-id', 'odom'
-        ],
-        parameters=[{'use_sim_time': use_sim_time}],
-        output='screen'
-    )
+    # tf_map_odom = Node(
+    #     package='tf2_ros',
+    #     executable='static_transform_publisher',
+    #     arguments = [
+    #         '--x', '0', '--y', '0', '--z', '0', 
+    #         '--yaw', '0', '--pitch', '0', '--roll', '0', 
+    #         '--frame-id', 'map', '--child-frame-id', 'odom'
+    #     ],
+    #     parameters=[{'use_sim_time': use_sim_time}],
+    #     output='screen'
+    # )
 
     return LaunchDescription([
         apriltag_node,
         dock_pose_publisher,
         precision_docking,
-        tf_map_odom
+        # tf_map_odom
     ])

@@ -217,13 +217,13 @@ class SimplePrecisionDocking(Node):
                 throttle_duration_sec=0.2  # 더 자주 로깅
             )
 
-            if abs(yaw_error) > 0.02:  # 약 0.1도
+            if abs(yaw_error) > 0.03:  # 약 0.1도
                 cmd.linear.x = 0.0
                 # 오버슛 방지: 에러 크면 강하게, 작으면 약하게
-                if abs(yaw_error) > 0.02:  # 5.7도 이상
-                    cmd.angular.z = np.clip(6.0 * yaw_error, -0.5, 0.5)
+                if abs(yaw_error) > 0.05:  # 5.7도 이상
+                    cmd.angular.z = np.clip(8.0 * yaw_error, -0.5, 0.5)
                 else:
-                    cmd.angular.z = np.clip(4.0 * yaw_error, -0.15, 0.15)
+                    cmd.angular.z = np.clip(6.0 * yaw_error, -0.3, 0.3)
             else:
                 self.state = DockingState.DOCKED
                 self.stop_robot()

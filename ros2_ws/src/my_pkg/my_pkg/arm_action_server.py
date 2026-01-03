@@ -46,10 +46,20 @@ class ArmActionServer(Node):
         
         self.home_joints = [0.0, -1.5708, -1.5708, -1.5708, 1.5708, 0.0]
         
+        # left_camera로 검증시
         self.verify_pose = PoseStamped()
         self.verify_pose.header.frame_id = "base_link"
         self.verify_pose.pose.position.x = -0.4
         self.verify_pose.pose.position.y = 0.8
+        self.verify_pose.pose.position.z = 1.2
+        self.verify_pose.pose.orientation.w = 0.707
+        self.verify_pose.pose.orientation.y = 0.707
+        
+        # right_camera로 검증시
+        self.verify_pose = PoseStamped()
+        self.verify_pose.header.frame_id = "base_link"
+        self.verify_pose.pose.position.x = -0.4
+        self.verify_pose.pose.position.y = -0.8
         self.verify_pose.pose.position.z = 1.2
         self.verify_pose.pose.orientation.w = 0.707
         self.verify_pose.pose.orientation.y = 0.707
