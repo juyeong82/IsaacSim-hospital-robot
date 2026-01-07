@@ -7,6 +7,10 @@ from geometry_msgs.msg import PoseStamped
 import cv2
 import numpy as np
 
+# [추가] 시각화를 위한 이미지 구독 및 브릿지 설정
+from cv_bridge import CvBridge
+from sensor_msgs.msg import Image
+
 class DockPosePublisher(Node):
     def __init__(self):
         super().__init__('dock_pose_publisher')
@@ -14,8 +18,12 @@ class DockPosePublisher(Node):
         self.target_id = 4       
         self.tag_size = 0.25     # 태그 크기 25cm
         
-        # 마지막 인식 시간 저장을 위한 변수
-        self.last_detection_time = self.get_clock().now()
+        # [추가] object_points는 변하지 않으므로 초기화 때 한 번만 선언 (최적화 핵심)
+        s = self.tag_size / 2.0
+        self.object_points = np.array([
+            [-s, -s, 0], [ s, -s, 0],
+            [ s,  s, 0], [-s,  s, 0]
+        ], dtype=np.float32)
 
         self.camera_matrix = None
         self.dist_coeffs = None
@@ -26,6 +34,18 @@ class DockPosePublisher(Node):
         
         self.get_logger().info(f"🚀 Dock Pose Publisher Started (Target ID: {self.target_id})")
         
+        self.bridge = CvBridge()
+        self.latest_image = None
+        # 토픽 이름은 실제 카메라 토픽으로 맞춰주세요 (예: /front_camera/rgb)
+        self.create_subscription(Image, '/front_camera/rgb', self.image_callback, 10)        
+
+    def image_callback(self, msg):
+        try:
+            # ROS Image -> OpenCV Image 변환 (부하 적음)
+            self.latest_image = self.bridge.imgmsg_to_cv2(msg, "bgr8")
+        except Exception as e:
+            self.get_logger().error(f"Image conversion failed: {e}")
+    
     # ---------------------------------------------------------
     # 회전 행렬을 쿼터니언으로 변환하는 헬퍼 함수
     # ---------------------------------------------------------
@@ -66,6 +86,9 @@ class DockPosePublisher(Node):
     def detection_callback(self, msg):
         if self.camera_matrix is None:
             return
+        
+        # 시각화용 이미지 복사 (이미지가 없으면 빈 화면 생성 방지)
+        debug_image = self.latest_image.copy() if self.latest_image is not None else None
 
         for detection in msg.detections:
             det_id = detection.id[0] if isinstance(detection.id, (list, tuple)) else detection.id
@@ -78,34 +101,28 @@ class DockPosePublisher(Node):
                     [detection.corners[3].x, detection.corners[3].y]
                 ], dtype=np.float32)
 
-                s = self.tag_size / 2.0
-                object_points = np.array([
-                    [-s, -s, 0], [ s, -s, 0],
-                    [ s,  s, 0], [-s,  s, 0]
-                ], dtype=np.float32)
+                # s = self.tag_size / 2.0
+                # object_points = np.array([
+                #     [-s, -s, 0], [ s, -s, 0],
+                #     [ s,  s, 0], [-s,  s, 0]
+                # ], dtype=np.float32)
 
                 success, rvec, tvec = cv2.solvePnP(
-                    object_points, 
+                    self.object_points, 
                     image_points, 
                     self.camera_matrix, 
                     self.dist_coeffs
                 )
 
                 if success:
-                    # ============================================
-                    # 1. Translation (위치)
-                    # ============================================
+                    # Translation & Rotation
                     raw_x, raw_y, raw_z = tvec[0][0], tvec[1][0], tvec[2][0]
-
-                    # ============================================
-                    # 2. Rotation (회전)
-                    # ============================================
                     # rvec -> Rotation Matrix
                     R, _ = cv2.Rodrigues(rvec)
+
+                    # Quaternion 변환 (Publisher용)
                     
-                    # ------------------------------------------------
-                    # [추가] 로그 출력을 위해 오일러 각도 별도 계산
-                    # ------------------------------------------------
+                    # 로그 출력을 위해 오일러 각도 별도 계산
                     sy = np.sqrt(R[0, 0] * R[0, 0] + R[1, 0] * R[1, 0])
                     singular = sy < 1e-6
 
@@ -126,6 +143,7 @@ class DockPosePublisher(Node):
                     # Matrix -> Quaternion
                     qx, qy, qz, qw = self.get_quaternion_from_rotation_matrix(R)
 
+                    # Pose Publish
                     pose_msg = PoseStamped()
                     pose_msg.header.frame_id = "Camera"
                     pose_msg.header.stamp = self.get_clock().now().to_msg()
@@ -149,6 +167,31 @@ class DockPosePublisher(Node):
                         throttle_duration_sec=0.5
                     )
                     self.last_detection_time = self.get_clock().now()
+                    
+                    # 저부하 시각화 (Low-Overhead Visualization)
+                    if debug_image is not None:
+                        # 좌표축 그리기 (길이 0.15m) -> X:빨강, Y:초록, Z:파랑 자동 생성
+                        cv2.drawFrameAxes(debug_image, self.camera_matrix, self.dist_coeffs, rvec, tvec, 0.15)
+                        
+                        # 상태 텍스트 표시 (거리, Yaw 각도 등)
+                        # Yaw 계산 (약식: R[1,0], R[0,0] 이용) -> 전체 오일러 계산보다 빠름
+                        yaw_deg = np.degrees(np.arctan2(R[1, 0], R[0, 0])) 
+                        
+                        info_text = f"ID:{det_id} Dist:{raw_z:.2f}m Yaw:{yaw_deg:.1f}deg"
+                        
+                        # 텍스트 배경 박스 (가독성)
+                        cv2.rectangle(debug_image, (10, 10), (450, 40), (0, 0, 0), -1)
+                        cv2.putText(debug_image, info_text, (20, 32), 
+                                    cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
+                        
+                        # 마커 테두리 (녹색)
+                        pts = image_points.astype(int).reshape((-1, 1, 2))
+                        cv2.polylines(debug_image, [pts], True, (0, 255, 0), 2)
+        
+        # 화면 표시 (이미지가 있을 때만 1ms 대기)
+        if debug_image is not None:
+            cv2.imshow("Docking Debug", debug_image)
+            cv2.waitKey(1)
 
 def main(args=None):
     rclpy.init(args=args)

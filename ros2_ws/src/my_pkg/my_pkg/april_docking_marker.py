@@ -75,13 +75,14 @@ class SimplePrecisionDocking(Node):
         self.filtered_yaw = None
         self.alpha = 0.6  # 0.0~1.0 사이. 클수록 최신값 반영 비율 높음 (반응성 좋음)
         
+        self.current_yaw_raw = 0.0
+        
         # [추가] 정렬 중 마커 놓침 방지용 카운터
         self.marker_lost_count = 0
         
         # 재정렬 카운터 (최대 2번 재시도)
         self.realignment_count = 0
         self.verification_start_time = None
-        self.align_start_time = None
         
         # Subscribers/Publishers
         self.create_subscription(PoseStamped, 'detected_dock_pose', self.dock_pose_callback, 10)
@@ -126,6 +127,8 @@ class SimplePrecisionDocking(Node):
         self.state = DockingState.IDLE
         self.realignment_count = 0
         self.verification_start_time = None
+        self.filtered_yaw = None
+        
         
         # 2. 완료 대기 루프 (Timer가 로직을 수행하는 동안 여기서 대기)
         # Feedback은 Timer Loop에서 publish 하거나 여기서 polling 할 수 있음
@@ -203,8 +206,8 @@ class SimplePrecisionDocking(Node):
             
             if self.latest_dock_pose:
                 feedback_msg.distance_to_target = self.latest_dock_pose.pose.position.z
-                # filtered_yaw가 있으면 넣고 없으면 0.0
-                feedback_msg.yaw_error = self.filtered_yaw if self.filtered_yaw else 0.0
+                # 필터링된 값이 있으면 그거 쓰고, 없으면 방금 계산한 Raw 값 사용 (모니터링 목적)
+                feedback_msg.yaw_error = self.filtered_yaw if self.filtered_yaw is not None else self.current_yaw_raw
             
             self.goal_handle.publish_feedback(feedback_msg)
         
@@ -225,21 +228,26 @@ class SimplePrecisionDocking(Node):
             return
 
         # Marker 기반 데이터 계산
-        if self.state not in [DockingState.ALIGN_TO_MARKER, DockingState.VERIFY_ALIGNMENT, DockingState.DOCKED, DockingState.IDLE]:
-            if self.latest_dock_pose is None: return
-            
-            # Marker Loss 체크 (1초)
-            if (self.get_clock().now() - self.latest_pose_time).nanoseconds / 1e9 > 1.0:
-                self.get_logger().warn('⚠️ Marker lost - STOPPING!')
-                hold_cmd = Twist()
-                hold_cmd.linear.x = 0.0
-                hold_cmd.angular.z = 0.0
-                self.cmd_vel_pub.publish(hold_cmd)
-                return
+        if self.latest_dock_pose is None: return
+        
+        # Marker Loss 체크 (1초)
+        if (self.get_clock().now() - self.latest_pose_time).nanoseconds / 1e9 > 1.0:
+            self.get_logger().warn('⚠️ Marker lost - STOPPING!')
+            hold_cmd = Twist()
+            hold_cmd.linear.x = 0.0
+            hold_cmd.angular.z = 0.0
+            self.cmd_vel_pub.publish(hold_cmd)
+            return
 
-            lateral = -self.latest_dock_pose.pose.position.x
-            distance = self.latest_dock_pose.pose.position.z
-            bearing_angle = np.arctan2(lateral, distance)
+        lateral = -self.latest_dock_pose.pose.position.x
+        distance = self.latest_dock_pose.pose.position.z
+        bearing_angle = np.arctan2(lateral, distance)
+        
+        # [추가] 여기서 미리 Yaw를 계산해서 저장해둠 (모니터링용)
+        q = self.latest_dock_pose.pose.orientation
+        # 쿼터니언이 유효할 때만 계산
+        if not (q.w == 0.0 and q.x == 0.0 and q.y == 0.0 and q.z == 0.0):
+            _, self.current_yaw_raw, _ = euler_from_quaternion(q.x, q.y, q.z, q.w)
         
         cmd = Twist()
         
@@ -279,30 +287,16 @@ class SimplePrecisionDocking(Node):
                 cmd.linear.x = 0.0
                 cmd.angular.z = 0.0
                     
-                # 상태 전환 시 시작 시간 기록
-                self.align_start_time = self.get_clock().now()
                 self.state = DockingState.ALIGN_TO_MARKER
                 self.get_logger().info(f"🎯 Distance Reached. Starting Grid Snap.")
 
         elif self.state == DockingState.ALIGN_TO_MARKER:
-            if self.latest_dock_pose is None:
-                return
-
-            # 마커 데이터 유효성 검사
-            q = self.latest_dock_pose.pose.orientation
-            if q.w == 0.0 and q.x == 0.0 and q.y == 0.0 and q.z == 0.0:
-                self.get_logger().warn("⚠️ Invalid Quaternion Detected!")
-                return
-            
-            # 오일러 변환 (roll, pitch, yaw)
-            # OpenCV 좌표계(Z전방, X우측, Y하방) 기준, Y축 회전이 로봇의 Yaw 편차임
-            _, current_marker_yaw, _ = euler_from_quaternion(q.x, q.y, q.z, q.w)
-            
+                        
             # EMA 필터 적용 (노이즈/튀는 값 억제)
             if self.filtered_yaw is None:
-                self.filtered_yaw = current_marker_yaw
+                self.filtered_yaw = self.current_yaw_raw
             else:
-                self.filtered_yaw = (self.alpha * current_marker_yaw) + ((1 - self.alpha) * self.filtered_yaw)
+                self.filtered_yaw = (self.alpha * self.current_yaw_raw) + ((1 - self.alpha) * self.filtered_yaw)
             
             # 제어에는 필터된 값 사용
             yaw_error = self.filtered_yaw
@@ -360,15 +354,11 @@ class SimplePrecisionDocking(Node):
         elif self.state == DockingState.VERIFY_ALIGNMENT:
             cmd.linear.x = 0.0
             cmd.angular.z = 0.0
-            
-            if self.latest_dock_pose is not None:
-                q = self.latest_dock_pose.pose.orientation
-                _, current_yaw, _ = euler_from_quaternion(q.x, q.y, q.z, q.w)
-                
-                if self.filtered_yaw is None:
-                    self.filtered_yaw = current_yaw
-                else:
-                    self.filtered_yaw = (self.alpha * current_yaw) + ((1 - self.alpha) * self.filtered_yaw)
+                    
+            if self.filtered_yaw is None:
+                self.filtered_yaw = self.current_yaw_raw
+            else:
+                self.filtered_yaw = (self.alpha * self.current_yaw_raw) + ((1 - self.alpha) * self.filtered_yaw)
             
             wait_time = (self.get_clock().now() - self.verification_start_time).nanoseconds / 1e9
             
