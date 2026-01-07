@@ -1,0 +1,11 @@
+# Goal
+bool dock_mode  # True: Docking, False: Undocking (필요시 확장)
+---
+# Result
+bool success    # 성공 여부
+string message  # 결과 메시지
+---
+# Feedback
+string state             # 현재 상태 (APPROACH, ALIGN 등)
+float32 distance_to_target
+float32 yaw_error

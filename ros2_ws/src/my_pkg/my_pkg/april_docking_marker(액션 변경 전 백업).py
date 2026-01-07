@@ -8,14 +8,7 @@ Simple Precision Docking Controller (Optimized)
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import PoseStamped, Twist
-
-from rclpy.action import ActionServer, CancelResponse, GoalResponse
-from rclpy.callback_groups import ReentrantCallbackGroup
-from rclpy.executors import MultiThreadedExecutor
-# 패키지명은 실제 패키지 이름으로 변경 (예: my_pkg)
-from moma_interfaces.action import Dock 
-import time
-
+from std_srvs.srv import Trigger
 import numpy as np
 import math
 from enum import Enum
@@ -87,75 +80,31 @@ class SimplePrecisionDocking(Node):
         self.create_subscription(PoseStamped, 'detected_dock_pose', self.dock_pose_callback, 10)
         self.cmd_vel_pub = self.create_publisher(Twist, '/cmd_vel', 10)
         
-        # Action
-        self.callback_group = ReentrantCallbackGroup()
-
-        self._action_server = ActionServer(
-            self,
-            Dock,
-            'dock_robot',
-            self.execute_callback,
-            callback_group=self.callback_group,
-            goal_callback=self.goal_callback,
-            cancel_callback=self.cancel_callback
-        )
-
-        # 현재 액션 핸들을 저장할 변수 (Feedback/Result 전송용)
-        self.goal_handle = None
-        
+        # Services
+        self.create_service(Trigger, 'start_docking', self.start_docking_callback)
+        self.create_service(Trigger, 'stop_docking', self.stop_docking_callback)
         
         self.create_timer(0.05, self.control_loop)
         
         self.get_logger().info('🎯 Simple Precision Docking Started (Optimized)')
 
-    def goal_callback(self, goal_request):
-        # 이미 도킹 중이면 거절하거나, 선점 로직 구현 가능
-        self.get_logger().info('🔔 Action Goal Received')
-        return GoalResponse.ACCEPT
-
-    def cancel_callback(self, goal_handle):
-        self.get_logger().info('⚠️ Action Cancel Received')
-        return CancelResponse.ACCEPT
-
-    async def execute_callback(self, goal_handle):
-        self.get_logger().info('🚀 Executing Docking Action...')
-        self.goal_handle = goal_handle
-        
-        # 1. 도킹 시작 설정
+    def start_docking_callback(self, request, response):
         self.docking_enabled = True
         self.state = DockingState.IDLE
+        
         self.realignment_count = 0
         self.verification_start_time = None
         
-        # 2. 완료 대기 루프 (Timer가 로직을 수행하는 동안 여기서 대기)
-        # Feedback은 Timer Loop에서 publish 하거나 여기서 polling 할 수 있음
-        while self.docking_enabled and rclpy.ok():
-            # 취소 요청 확인
-            if goal_handle.is_cancel_requested:
-                self.stop_robot()
-                self.docking_enabled = False
-                goal_handle.canceled()
-                self.get_logger().info('🛑 Action Canceled')
-                return Dock.Result(success=False, message="Canceled by user")
-            
-            # Action 처리를 위해 약간의 sleep 필요 (Busy waiting 방지)
-            time.sleep(0.1)
-
-        # 3. 루프 탈출 후 결과 반환 (성공/실패 여부는 _finish_docking에서 state로 판단 가능)
-        # Timer 로직에서 docking_enabled를 False로 만들면 여기로 내려옴
+        response.success = True
+        response.message = "Docking enabled"
+        return response
         
-        result = Dock.Result()
-        if self.state == DockingState.DOCKED:
-            result.success = True
-            result.message = "Docking Completed Successfully"
-            goal_handle.succeed()
-        else:
-            result.success = False
-            result.message = "Docking Failed or Aborted"
-            goal_handle.abort() # 또는 succeed(False) 처리
-            
-        self.goal_handle = None
-        return result
+    def stop_docking_callback(self, request, response):
+        self.docking_enabled = False
+        self.stop_robot()
+        response.success = True
+        response.message = "Docking stopped"
+        return response
         
     def dock_pose_callback(self, msg):
         self.latest_dock_pose = msg
@@ -195,18 +144,6 @@ class SimplePrecisionDocking(Node):
     def control_loop(self):
         if not self.docking_enabled:
             return
-        
-        if self.docking_enabled and self.goal_handle is not None:
-            # Feedback 메시지 생성 및 전송
-            feedback_msg = Dock.Feedback()
-            feedback_msg.state = self.state.name
-            
-            if self.latest_dock_pose:
-                feedback_msg.distance_to_target = self.latest_dock_pose.pose.position.z
-                # filtered_yaw가 있으면 넣고 없으면 0.0
-                feedback_msg.yaw_error = self.filtered_yaw if self.filtered_yaw else 0.0
-            
-            self.goal_handle.publish_feedback(feedback_msg)
         
         # 데이터 신선도 체크: 0.2초 이상 된 데이터는 '과거 정보'로 간주
         if self.latest_pose_time is not None:
@@ -431,13 +368,8 @@ class SimplePrecisionDocking(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = SimplePrecisionDocking()
-    
-    # MultiThreadedExecutor
-    executor = MultiThreadedExecutor()
-    executor.add_node(node)
-    
     try:
-        executor.spin()
+        rclpy.spin(node)
     except KeyboardInterrupt:
         pass
     node.destroy_node()
