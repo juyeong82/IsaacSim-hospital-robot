@@ -6,10 +6,9 @@ from sensor_msgs.msg import CameraInfo
 from geometry_msgs.msg import PoseStamped
 import cv2
 import numpy as np
-
-# [추가] 시각화를 위한 이미지 구독 및 브릿지 설정
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
+from std_msgs.msg import Bool
 
 class DockPosePublisher(Node):
     def __init__(self):
@@ -36,9 +35,24 @@ class DockPosePublisher(Node):
         
         self.bridge = CvBridge()
         self.latest_image = None
-        # 토픽 이름은 실제 카메라 토픽으로 맞춰주세요 (예: /front_camera/rgb)
-        self.create_subscription(Image, '/front_camera/rgb', self.image_callback, 10)        
+        
+        # 디버깅 모드 설정 (True일 때만 화면 띄움)
+        self.SHOW_DEBUG_IMAGE = True 
+        
+        # 초기 상태는 비활성화 (Docking 노드가 켜줘야 작동)
+        self.is_active = False
+        
+        self.create_subscription(Image, '/front_camera/rgb', self.image_callback, 10)     
+        
+        # 활성화/비활성화 트리거 구독
+        self.create_subscription(Bool, '/docking/trigger', self.trigger_callback, 10)   
 
+    # [추가] 도킹 노드에서 보내는 신호(True/False)를 받아 상태 변경
+    def trigger_callback(self, msg):
+        self.is_active = msg.data
+        status = "ON" if self.is_active else "OFF"
+        self.get_logger().info(f"🔄 Tracking Status Changed: {status}")
+        
     def image_callback(self, msg):
         try:
             # ROS Image -> OpenCV Image 변환 (부하 적음)
@@ -84,11 +98,12 @@ class DockPosePublisher(Node):
             self.get_logger().info("✅ Camera Info Received!")
 
     def detection_callback(self, msg):
-        if self.camera_matrix is None:
+        # [수정] 카메라 정보가 없거나, 비활성화(is_active=False) 상태면 즉시 리턴
+        if self.camera_matrix is None or not self.is_active:
             return
         
         # 시각화용 이미지 복사 (이미지가 없으면 빈 화면 생성 방지)
-        debug_image = self.latest_image.copy() if self.latest_image is not None else None
+        debug_image = self.latest_image.copy() if (self.latest_image is not None and self.SHOW_DEBUG_IMAGE) else None
 
         for detection in msg.detections:
             det_id = detection.id[0] if isinstance(detection.id, (list, tuple)) else detection.id
@@ -169,13 +184,12 @@ class DockPosePublisher(Node):
                     self.last_detection_time = self.get_clock().now()
                     
                     # 저부하 시각화 (Low-Overhead Visualization)
-                    if debug_image is not None:
+                    if self.SHOW_DEBUG_IMAGE and debug_image is not None:
                         # 좌표축 그리기 (길이 0.15m) -> X:빨강, Y:초록, Z:파랑 자동 생성
                         cv2.drawFrameAxes(debug_image, self.camera_matrix, self.dist_coeffs, rvec, tvec, 0.15)
                         
                         # 상태 텍스트 표시 (거리, Yaw 각도 등)
-                        # Yaw 계산 (약식: R[1,0], R[0,0] 이용) -> 전체 오일러 계산보다 빠름
-                        yaw_deg = np.degrees(np.arctan2(R[1, 0], R[0, 0])) 
+                        yaw_deg = deg_y
                         
                         info_text = f"ID:{det_id} Dist:{raw_z:.2f}m Yaw:{yaw_deg:.1f}deg"
                         

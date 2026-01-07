@@ -8,6 +8,7 @@ Simple Precision Docking Controller (Optimized)
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import PoseStamped, Twist
+from std_msgs.msg import Bool  # 비전 트리거 신호용
 
 from rclpy.action import ActionServer, CancelResponse, GoalResponse
 from rclpy.callback_groups import ReentrantCallbackGroup
@@ -52,7 +53,7 @@ class SimplePrecisionDocking(Node):
         self.declare_parameter('approach_speed', 0.4)
         self.declare_parameter('rotation_speed', 0.5)
         self.declare_parameter('final_speed', 0.15)
-        self.declare_parameter('auto_start', True)
+        self.declare_parameter('auto_start', False)
         self.declare_parameter('map_frame', 'map')
         self.declare_parameter('base_frame', 'base_link')
         
@@ -88,6 +89,8 @@ class SimplePrecisionDocking(Node):
         self.create_subscription(PoseStamped, 'detected_dock_pose', self.dock_pose_callback, 10)
         self.cmd_vel_pub = self.create_publisher(Twist, '/cmd_vel', 10)
         
+        self.trigger_pub = self.create_publisher(Bool, '/docking/trigger', 10)
+        
         # Action
         self.callback_group = ReentrantCallbackGroup()
 
@@ -104,10 +107,14 @@ class SimplePrecisionDocking(Node):
         # 현재 액션 핸들을 저장할 변수 (Feedback/Result 전송용)
         self.goal_handle = None
         
-        
         self.create_timer(0.05, self.control_loop)
         
-        self.get_logger().info('🎯 Simple Precision Docking Started (Optimized)')
+        # [추가] 초기 설정된 auto_start 값에 맞춰 퍼블리셔 상태 동기화
+        trigger_msg = Bool()
+        trigger_msg.data = self.docking_enabled
+        self.trigger_pub.publish(trigger_msg)
+        
+        self.get_logger().info('🎯 Docking node ready')
 
     def goal_callback(self, goal_request):
         # 이미 도킹 중이면 거절하거나, 선점 로직 구현 가능
@@ -124,6 +131,10 @@ class SimplePrecisionDocking(Node):
         
         # 1. 도킹 시작 설정
         self.docking_enabled = True
+        
+        # 마커 인식 시작 신호 전송
+        self.trigger_pub.publish(Bool(data=True))
+        
         self.state = DockingState.IDLE
         self.realignment_count = 0
         self.verification_start_time = None
@@ -184,6 +195,9 @@ class SimplePrecisionDocking(Node):
 
         # 3. 도킹 활성화 플래그 끄기
         self.docking_enabled = False
+        
+        # 마커 인식 중지 신호 전송
+        self.trigger_pub.publish(Bool(data=False))
         
         # 4. 상태 전환
         # 성공이든 실패든 프로세스가 끝났으므로 DOCKED 상태로 전환하여 IDLE 자동 시작 방지
