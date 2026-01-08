@@ -1,0 +1,977 @@
+[INFO] [launch]: All log files can be found below /home/jy/.ros/log/2026-01-07-19-57-44-095565-judt-361452
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [rviz2-1]: process started with pid [361475]
+[INFO] [component_container_isolated-2]: process started with pid [361477]
+[INFO] [pointcloud_to_laserscan_node-3]: process started with pid [361479]
+[component_container_isolated-2] [INFO] [1767783465.633519701] [nav2_container]: Load Library: /opt/ros/humble/lib/libmap_server_core.so
+[component_container_isolated-2] [INFO] [1767783465.662945609] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_map_server::CostmapFilterInfoServer>
+[component_container_isolated-2] [INFO] [1767783465.663440828] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_map_server::MapSaver>
+[component_container_isolated-2] [INFO] [1767783465.663450229] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_map_server::MapServer>
+[component_container_isolated-2] [INFO] [1767783465.663455645] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_map_server::MapServer>
+[component_container_isolated-2] [INFO] [1767783465.690833278] [map_server]: 
+[component_container_isolated-2] 	map_server lifecycle node launched. 
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/map_server' in container '/nav2_container'
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767783465.690876735] [map_server]: Creating
+[component_container_isolated-2] [INFO] [1767783465.691150917] [nav2_container]: Load Library: /opt/ros/humble/lib/libcontroller_server_core.so
+[component_container_isolated-2] [INFO] [1767783465.694050657] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_controller::ControllerServer>
+[component_container_isolated-2] [INFO] [1767783465.694083528] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_controller::ControllerServer>
+[component_container_isolated-2] [INFO] [1767783465.708519481] [controller_server]: 
+[component_container_isolated-2] 	controller_server lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767783465.716675581] [controller_server]: Creating controller server
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/controller_server' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767783465.743827813] [local_costmap.local_costmap]: 
+[component_container_isolated-2] 	local_costmap lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767783465.744422584] [local_costmap.local_costmap]: Creating Costmap
+[component_container_isolated-2] [INFO] [1767783465.745329260] [nav2_container]: Load Library: /opt/ros/humble/lib/libamcl_core.so
+[component_container_isolated-2] [INFO] [1767783465.747169402] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_amcl::AmclNode>
+[component_container_isolated-2] [INFO] [1767783465.747203488] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_amcl::AmclNode>
+[component_container_isolated-2] [INFO] [1767783465.774490885] [amcl]: 
+[component_container_isolated-2] 	amcl lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767783465.774795675] [amcl]: Creating
+[component_container_isolated-2] [INFO] [1767783465.783258006] [nav2_container]: Load Library: /opt/ros/humble/lib/libsmoother_server_core.so
+[component_container_isolated-2] [INFO] [1767783465.784391713] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_smoother::SmootherServer>
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/amcl' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767783465.784418449] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_smoother::SmootherServer>
+[component_container_isolated-2] [INFO] [1767783465.815758679] [smoother_server]: 
+[component_container_isolated-2] 	smoother_server lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767783465.817154877] [smoother_server]: Creating smoother server
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/smoother_server' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767783465.817972411] [nav2_container]: Load Library: /opt/ros/humble/lib/libnav2_lifecycle_manager_core.so
+[component_container_isolated-2] [INFO] [1767783465.818481653] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[component_container_isolated-2] [INFO] [1767783465.818499012] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[rviz2-1] [INFO] [1767783465.825543342] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-1] [INFO] [1767783465.825643108] [rviz2]: OpenGl version: 4.5 (GLSL 4.5)
+[component_container_isolated-2] [INFO] [1767783465.834623651] [lifecycle_manager_localization]: Creating
+[component_container_isolated-2] [INFO] [1767783465.838531655] [nav2_container]: Load Library: /opt/ros/humble/lib/libplanner_server_core.so
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/lifecycle_manager_localization' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767783465.838580676] [lifecycle_manager_localization]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[component_container_isolated-2] [INFO] [1767783465.839163010] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_planner::PlannerServer>
+[component_container_isolated-2] [INFO] [1767783465.839180477] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_planner::PlannerServer>
+[component_container_isolated-2] [INFO] [1767783465.852724411] [lifecycle_manager_localization]: [34m[1mStarting managed nodes bringup...[0m[0m
+[component_container_isolated-2] [INFO] [1767783465.852766550] [lifecycle_manager_localization]: [34m[1mConfiguring map_server[0m[0m
+[component_container_isolated-2] [INFO] [1767783465.852935654] [map_server]: Configuring
+[component_container_isolated-2] [INFO] [1767783465.852985240] [map_io]: Loading yaml file: /home/jy/hospital_robot_project/ros2_ws/install/carter_navigation/share/carter_navigation/maps/carter_hospital_navigation.yaml
+[component_container_isolated-2] [INFO] [1767783465.853221021] [map_io]: resolution: 0.05
+[component_container_isolated-2] [INFO] [1767783465.853230351] [map_io]: origin[0]: -29.975
+[component_container_isolated-2] [INFO] [1767783465.853234937] [map_io]: origin[1]: -4.975
+[component_container_isolated-2] [INFO] [1767783465.853239019] [map_io]: origin[2]: 0
+[component_container_isolated-2] [INFO] [1767783465.853243381] [map_io]: free_thresh: 0.196
+[component_container_isolated-2] [INFO] [1767783465.853247838] [map_io]: occupied_thresh: 0.65
+[component_container_isolated-2] [INFO] [1767783465.853252646] [map_io]: mode: trinary
+[component_container_isolated-2] [INFO] [1767783465.853257848] [map_io]: negate: 0
+[component_container_isolated-2] [INFO] [1767783465.853437121] [map_io]: Loading image_file: /home/jy/hospital_robot_project/ros2_ws/install/carter_navigation/share/carter_navigation/maps/carter_hospital_navigation.png
+[component_container_isolated-2] [INFO] [1767783465.871498002] [planner_server]: 
+[component_container_isolated-2] 	planner_server lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767783465.872729092] [planner_server]: Creating
+[component_container_isolated-2] [INFO] [1767783465.898678140] [global_costmap.global_costmap]: 
+[component_container_isolated-2] 	global_costmap lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767783465.899207299] [global_costmap.global_costmap]: Creating Costmap
+[rviz2-1] [INFO] [1767783465.902401917] [rviz2]: Stereo is NOT SUPPORTED
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/planner_server' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767783465.905501936] [nav2_container]: Load Library: /opt/ros/humble/lib/libbehavior_server_core.so
+[component_container_isolated-2] [INFO] [1767783465.909360731] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<behavior_server::BehaviorServer>
+[component_container_isolated-2] [INFO] [1767783465.909447405] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<behavior_server::BehaviorServer>
+[component_container_isolated-2] [INFO] [1767783465.952491312] [map_io]: Read map /home/jy/hospital_robot_project/ros2_ws/install/carter_navigation/share/carter_navigation/maps/carter_hospital_navigation.png: 1141 X 680 map @ 0.05 m/cell
+[component_container_isolated-2] [INFO] [1767783465.954247755] [behavior_server]: 
+[component_container_isolated-2] 	behavior_server lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767783465.972507524] [lifecycle_manager_localization]: [34m[1mConfiguring amcl[0m[0m
+[component_container_isolated-2] [INFO] [1767783465.972627685] [amcl]: Configuring
+[component_container_isolated-2] [INFO] [1767783465.972702814] [amcl]: initTransforms
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/behavior_server' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767783465.977043768] [nav2_container]: Load Library: /opt/ros/humble/lib/libbt_navigator_core.so
+[component_container_isolated-2] [INFO] [1767783465.978498071] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_bt_navigator::BtNavigator>
+[component_container_isolated-2] [INFO] [1767783465.978563002] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_bt_navigator::BtNavigator>
+[component_container_isolated-2] [INFO] [1767783466.005842964] [amcl]: initPubSub
+[component_container_isolated-2] [INFO] [1767783466.019293717] [amcl]: Subscribed to map topic.
+[pointcloud_to_laserscan_node-3] [WARN] [1767783466.027639935] [pointcloud_to_laserscan]: New subscription discovered on topic '/scan', requesting incompatible QoS. No messages will be sent to it. Last incompatible policy: RELIABILITY_QOS_POLICY
+[component_container_isolated-2] [INFO] [1767783466.027973115] [lifecycle_manager_localization]: [34m[1mActivating map_server[0m[0m
+[component_container_isolated-2] [INFO] [1767783466.028110859] [map_server]: Activating
+[component_container_isolated-2] [INFO] [1767783466.029054580] [map_server]: Creating bond (map_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1767783466.029923099] [amcl]: Received a 1141 X 680 map @ 0.050 m/pix
+[pointcloud_to_laserscan_node-3] [INFO] [1767783466.035616376] [pointcloud_to_laserscan]: Got a subscriber to laserscan, starting pointcloud subscriber
+[component_container_isolated-2] [INFO] [1767783466.045903610] [bt_navigator]: 
+[component_container_isolated-2] 	bt_navigator lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767783466.045951576] [bt_navigator]: Creating
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/bt_navigator' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767783466.053384382] [nav2_container]: Load Library: /opt/ros/humble/lib/libwaypoint_follower_core.so
+[component_container_isolated-2] [INFO] [1767783466.053977868] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_waypoint_follower::WaypointFollower>
+[component_container_isolated-2] [INFO] [1767783466.054025846] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_waypoint_follower::WaypointFollower>
+[component_container_isolated-2] [INFO] [1767783466.096165368] [waypoint_follower]: 
+[component_container_isolated-2] 	waypoint_follower lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767783466.096560462] [waypoint_follower]: Creating
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/waypoint_follower' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767783466.103689327] [nav2_container]: Load Library: /opt/ros/humble/lib/libvelocity_smoother_core.so
+[component_container_isolated-2] [INFO] [1767783466.104377170] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_velocity_smoother::VelocitySmoother>
+[component_container_isolated-2] [INFO] [1767783466.104401281] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_velocity_smoother::VelocitySmoother>
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/velocity_smoother' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767783466.136513423] [velocity_smoother]: 
+[component_container_isolated-2] 	velocity_smoother lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767783466.138135896] [lifecycle_manager_localization]: Server map_server connected with bond.
+[component_container_isolated-2] [INFO] [1767783466.138166404] [lifecycle_manager_localization]: [34m[1mActivating amcl[0m[0m
+[component_container_isolated-2] [INFO] [1767783466.138388526] [amcl]: Activating
+[component_container_isolated-2] [INFO] [1767783466.138420797] [amcl]: initialPoseReceived
+[component_container_isolated-2] [INFO] [1767783466.138448386] [amcl]: Setting pose (0.733333): 25.600 8.400 3.140
+[component_container_isolated-2] [INFO] [1767783466.138854640] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[component_container_isolated-2] [INFO] [1767783466.138875606] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[component_container_isolated-2] [INFO] [1767783466.138871265] [amcl]: Creating bond (amcl) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1767783466.173648569] [lifecycle_manager_navigation]: Creating
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/lifecycle_manager_navigation' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767783466.180988406] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[component_container_isolated-2] [INFO] [1767783466.216624519] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[component_container_isolated-2] [INFO] [1767783466.216667430] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[component_container_isolated-2] [INFO] [1767783466.217004718] [controller_server]: Configuring controller interface
+[component_container_isolated-2] [INFO] [1767783466.217861942] [controller_server]: getting goal checker plugins..
+[component_container_isolated-2] [INFO] [1767783466.218916387] [controller_server]: Controller frequency set to 20.0000Hz
+[component_container_isolated-2] [INFO] [1767783466.218968026] [local_costmap.local_costmap]: Configuring
+[component_container_isolated-2] [INFO] [1767783466.226667717] [amcl]: createLaserObject
+[component_container_isolated-2] [INFO] [1767783466.248704190] [lifecycle_manager_localization]: Server amcl connected with bond.
+[component_container_isolated-2] [INFO] [1767783466.248744674] [lifecycle_manager_localization]: [34m[1mManaged nodes are active[0m[0m
+[component_container_isolated-2] [INFO] [1767783466.248756489] [lifecycle_manager_localization]: [34m[1mCreating bond timer...[0m[0m
+[component_container_isolated-2] [INFO] [1767783466.248995374] [local_costmap.local_costmap]: Using plugin "hesai_voxel_layer"
+[component_container_isolated-2] [INFO] [1767783466.255557724] [local_costmap.local_costmap]: Subscribed to Topics: pointcloud
+[component_container_isolated-2] [INFO] [1767783466.277490879] [local_costmap.local_costmap]: Initialized plugin "hesai_voxel_layer"
+[component_container_isolated-2] [INFO] [1767783466.277609443] [local_costmap.local_costmap]: Using plugin "front_rplidar_obstacle_layer"
+[component_container_isolated-2] [INFO] [1767783466.280898717] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[component_container_isolated-2] [INFO] [1767783466.288278522] [local_costmap.local_costmap]: Initialized plugin "front_rplidar_obstacle_layer"
+[component_container_isolated-2] [INFO] [1767783466.288321465] [local_costmap.local_costmap]: Using plugin "back_rplidar_obstacle_layer"
+[component_container_isolated-2] [INFO] [1767783466.289930670] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[component_container_isolated-2] [INFO] [1767783466.301671728] [local_costmap.local_costmap]: Initialized plugin "back_rplidar_obstacle_layer"
+[component_container_isolated-2] [INFO] [1767783466.301732184] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[component_container_isolated-2] [INFO] [1767783466.305620546] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[component_container_isolated-2] [INFO] [1767783466.353007803] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[component_container_isolated-2] [INFO] [1767783466.353801819] [controller_server]: Created goal checker : goal_checker of type nav2_controller::SimpleGoalChecker
+[component_container_isolated-2] [INFO] [1767783466.354005657] [controller_server]: Controller Server has goal_checker  goal checkers available.
+[component_container_isolated-2] [INFO] [1767783466.355300332] [controller_server]: Created controller : FollowPath of type dwb_core::DWBLocalPlanner
+[component_container_isolated-2] [INFO] [1767783466.357810101] [controller_server]: Setting transform_tolerance to 0.200000
+[component_container_isolated-2] [INFO] [1767783466.409119763] [controller_server]: Using critic "RotateToGoal" (dwb_critics::RotateToGoalCritic)
+[component_container_isolated-2] [INFO] [1767783466.410771904] [controller_server]: Critic plugin initialized
+[component_container_isolated-2] [INFO] [1767783466.410997321] [controller_server]: Using critic "Oscillation" (dwb_critics::OscillationCritic)
+[component_container_isolated-2] [INFO] [1767783466.411291714] [controller_server]: Critic plugin initialized
+[component_container_isolated-2] [INFO] [1767783466.411385866] [controller_server]: Using critic "BaseObstacle" (dwb_critics::BaseObstacleCritic)
+[component_container_isolated-2] [INFO] [1767783466.411514617] [controller_server]: Critic plugin initialized
+[component_container_isolated-2] [INFO] [1767783466.411595442] [controller_server]: Using critic "GoalAlign" (dwb_critics::GoalAlignCritic)
+[component_container_isolated-2] [INFO] [1767783466.412448099] [controller_server]: Critic plugin initialized
+[component_container_isolated-2] [INFO] [1767783466.412662787] [controller_server]: Using critic "PathAlign" (dwb_critics::PathAlignCritic)
+[component_container_isolated-2] [INFO] [1767783466.414626693] [controller_server]: Critic plugin initialized
+[component_container_isolated-2] [INFO] [1767783466.414737149] [controller_server]: Using critic "PathDist" (dwb_critics::PathDistCritic)
+[component_container_isolated-2] [INFO] [1767783466.415141395] [controller_server]: Critic plugin initialized
+[component_container_isolated-2] [INFO] [1767783466.415221208] [controller_server]: Using critic "GoalDist" (dwb_critics::GoalDistCritic)
+[component_container_isolated-2] [INFO] [1767783466.415617307] [controller_server]: Critic plugin initialized
+[component_container_isolated-2] [INFO] [1767783466.415632123] [controller_server]: Controller Server has FollowPath  controllers available.
+[component_container_isolated-2] [INFO] [1767783466.433364965] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[component_container_isolated-2] [INFO] [1767783466.433659671] [smoother_server]: Configuring smoother server
+[component_container_isolated-2] [INFO] [1767783466.452437616] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[component_container_isolated-2] [INFO] [1767783466.454809797] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[rviz2-1] [INFO] [1767783466.456344830] [rviz2]: Stereo is NOT SUPPORTED
+[component_container_isolated-2] [INFO] [1767783466.477637228] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[component_container_isolated-2] [INFO] [1767783466.478149608] [planner_server]: Configuring
+[component_container_isolated-2] [INFO] [1767783466.478190181] [global_costmap.global_costmap]: Configuring
+[component_container_isolated-2] [INFO] [1767783466.495383518] [global_costmap.global_costmap]: Using plugin "static_layer"
+[component_container_isolated-2] [INFO] [1767783466.500206554] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[component_container_isolated-2] [INFO] [1767783466.501877214] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[component_container_isolated-2] [INFO] [1767783466.501910008] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[component_container_isolated-2] [INFO] [1767783466.506852126] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[component_container_isolated-2] [INFO] [1767783466.515129346] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[component_container_isolated-2] [INFO] [1767783466.515162300] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[component_container_isolated-2] [INFO] [1767783466.520308179] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[component_container_isolated-2] [INFO] [1767783466.542651749] [planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner/NavfnPlanner
+[component_container_isolated-2] [INFO] [1767783466.542688452] [planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[component_container_isolated-2] [INFO] [1767783466.543150853] [planner_server]: Planner Server has GridBased  planners available.
+[component_container_isolated-2] [INFO] [1767783466.576216294] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[component_container_isolated-2] [INFO] [1767783466.576411117] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 1141 X 680 at 0.050000 m/pix
+[component_container_isolated-2] [INFO] [1767783466.576465160] [behavior_server]: Configuring
+[component_container_isolated-2] [INFO] [1767783466.592497789] [behavior_server]: Creating behavior plugin spin of type nav2_behaviors/Spin
+[component_container_isolated-2] [INFO] [1767783466.593460600] [behavior_server]: Configuring spin
+[component_container_isolated-2] [INFO] [1767783466.610359438] [behavior_server]: Creating behavior plugin backup of type nav2_behaviors/BackUp
+[component_container_isolated-2] [INFO] [1767783466.611106816] [behavior_server]: Configuring backup
+[component_container_isolated-2] [INFO] [1767783466.626341836] [behavior_server]: Creating behavior plugin drive_on_heading of type nav2_behaviors/DriveOnHeading
+[component_container_isolated-2] [INFO] [1767783466.627124988] [behavior_server]: Configuring drive_on_heading
+[component_container_isolated-2] [INFO] [1767783466.641842356] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors/Wait
+[component_container_isolated-2] [INFO] [1767783466.642518852] [behavior_server]: Configuring wait
+[component_container_isolated-2] [INFO] [1767783466.653933761] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[component_container_isolated-2] [INFO] [1767783466.654328385] [bt_navigator]: Configuring
+[rviz2-1] [INFO] [1767783466.754165301] [rviz2]: Trying to create a map of size 1141 x 680 using 1 swatches
+[rviz2-1] [ERROR] [1767783466.777901528] [rviz2]: Vertex Program:rviz/glsl120/indexed_8bit_image.vert Fragment Program:rviz/glsl120/indexed_8bit_image.frag GLSL link result : 
+[rviz2-1] active samplers with a different type refer to the same texture image unit
+[component_container_isolated-2] [INFO] [1767783466.801331024] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[component_container_isolated-2] [INFO] [1767783466.801500329] [waypoint_follower]: Configuring
+[component_container_isolated-2] [INFO] [1767783466.841596939] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[component_container_isolated-2] [INFO] [1767783466.843014267] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[component_container_isolated-2] [INFO] [1767783466.843233664] [velocity_smoother]: Configuring velocity smoother
+[component_container_isolated-2] [INFO] [1767783466.849847224] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[component_container_isolated-2] [INFO] [1767783466.850134241] [controller_server]: Activating
+[component_container_isolated-2] [INFO] [1767783466.850170452] [local_costmap.local_costmap]: Activating
+[component_container_isolated-2] [INFO] [1767783466.850185006] [local_costmap.local_costmap]: Checking transform
+[component_container_isolated-2] [INFO] [1767783466.850289643] [local_costmap.local_costmap]: start
+[component_container_isolated-2] [INFO] [1767783467.106483792] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1767783467.221152574] [lifecycle_manager_navigation]: Server controller_server connected with bond.
+[component_container_isolated-2] [INFO] [1767783467.221192568] [lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[component_container_isolated-2] [INFO] [1767783467.221386391] [smoother_server]: Activating
+[component_container_isolated-2] [INFO] [1767783467.221415687] [smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1767783467.333784198] [lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[component_container_isolated-2] [INFO] [1767783467.333841737] [lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[component_container_isolated-2] [INFO] [1767783467.334072325] [planner_server]: Activating
+[component_container_isolated-2] [INFO] [1767783467.334109701] [global_costmap.global_costmap]: Activating
+[component_container_isolated-2] [INFO] [1767783467.334118574] [global_costmap.global_costmap]: Checking transform
+[component_container_isolated-2] [INFO] [1767783467.334145785] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 0.866667 but the earliest data is at time 1.733333, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767783467.646762953] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.733 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783467.646980041] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.733 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783467.774490760] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.750 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783467.774561858] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.750 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767783467.834224514] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 0.933333 but the earliest data is at time 1.733333, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767783467.902836995] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.767 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783467.902919959] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.767 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783468.031447352] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.783 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783468.031535836] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.783 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783468.158136852] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.800 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783468.158204533] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.800 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783468.286565709] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.817 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783468.322158685] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.817 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767783468.334219763] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 1.000000 but the earliest data is at time 1.733333, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767783468.446033345] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.833 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783468.446114729] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.833 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783468.588885321] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.850 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783468.588976481] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.850 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783468.756489230] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.867 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783468.756572731] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.867 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767783468.839734646] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 1.050000 but the earliest data is at time 1.733333, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767783468.862022633] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.883 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783468.862101318] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.883 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783468.990631669] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.900 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783468.993165412] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.900 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783469.087143603] [rviz]: Message Filter dropping message: frame 'odom' at time 0.833 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783469.120678704] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.917 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783469.120768879] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.917 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783469.281163998] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.933 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783469.283503712] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.933 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783469.283555304] [rviz]: Message Filter dropping message: frame 'odom' at time 0.867 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767783469.334180678] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 1.116667 but the earliest data is at time 1.733333, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767783469.416041034] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.950 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783469.416744903] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.950 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783469.470887906] [rviz]: Message Filter dropping message: frame 'odom' at time 0.883 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783469.537069286] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.967 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783469.537141892] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.967 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783469.666423797] [rviz]: Message Filter dropping message: frame 'odom' at time 0.917 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783469.695195072] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.983 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783469.695271991] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.983 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783469.825979837] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.000 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783469.826050099] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.000 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767783469.834185358] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 1.183333 but the earliest data is at time 1.733333, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767783469.886517961] [rviz]: Message Filter dropping message: frame 'odom' at time 0.933 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783469.950140560] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.017 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783469.952521551] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.017 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783470.078662633] [rviz]: Message Filter dropping message: frame 'odom' at time 0.967 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783470.110479198] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.033 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783470.114163617] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.033 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783470.245066729] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.050 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783470.245151278] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.050 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783470.271891845] [rviz]: Message Filter dropping message: frame 'odom' at time 0.983 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767783470.334220929] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 1.233333 but the earliest data is at time 1.733333, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767783470.398144570] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.067 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783470.398228422] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.067 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783470.462101719] [rviz]: Message Filter dropping message: frame 'odom' at time 1.000 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783470.530069326] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.083 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783470.530184315] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.083 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783470.658419134] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.100 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783470.658502103] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.100 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783470.688709263] [rviz]: Message Filter dropping message: frame 'odom' at time 1.033 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783470.802212223] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.117 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783470.802324867] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.117 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767783470.834348839] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 1.300000 but the earliest data is at time 1.733333, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767783470.869866735] [rviz]: Message Filter dropping message: frame 'odom' at time 1.050 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783470.977903465] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.133 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783470.977986164] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.133 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783471.074427287] [rviz]: Message Filter dropping message: frame 'odom' at time 1.083 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783471.138158117] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.150 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783471.140936512] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.150 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783471.269315520] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.167 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783471.270142998] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.167 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783471.270215419] [rviz]: Message Filter dropping message: frame 'odom' at time 1.100 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767783471.334192742] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 1.350000 but the earliest data is at time 1.733333, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767783471.394184428] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.183 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783471.394277903] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.183 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783471.458680119] [rviz]: Message Filter dropping message: frame 'odom' at time 1.133 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783471.523861340] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.200 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783471.525064006] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.200 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783471.651216185] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.217 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783471.651357044] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.217 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783471.682746791] [rviz]: Message Filter dropping message: frame 'odom' at time 1.150 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783471.777989373] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.233 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783471.782055698] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.233 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767783471.834201368] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 1.416667 but the earliest data is at time 1.733333, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767783471.874403932] [rviz]: Message Filter dropping message: frame 'odom' at time 1.183 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783471.907196560] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.250 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783471.907275033] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.250 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783472.034429134] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.267 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783472.034545332] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.267 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783472.066158927] [rviz]: Message Filter dropping message: frame 'odom' at time 1.200 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783472.130619203] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.283 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783472.162637788] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.283 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783472.258271624] [rviz]: Message Filter dropping message: frame 'odom' at time 1.233 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783472.290708336] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.300 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783472.291097892] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.300 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767783472.334204928] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 1.483333 but the earliest data is at time 1.733333, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767783472.386881036] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.317 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783472.418295019] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.317 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783472.482539718] [rviz]: Message Filter dropping message: frame 'odom' at time 1.250 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783472.514761367] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.333 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783472.514859096] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.333 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783472.643366126] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.350 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783472.643438959] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.350 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783472.674671943] [rviz]: Message Filter dropping message: frame 'odom' at time 1.267 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783472.770489619] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.367 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783472.776113246] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.367 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767783472.834230025] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 1.550000 but the earliest data is at time 1.733333, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767783472.866085385] [rviz]: Message Filter dropping message: frame 'odom' at time 1.300 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783472.899630712] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.383 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783472.899723959] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.383 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783473.026857142] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.400 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783473.026977421] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.400 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783473.058420507] [rviz]: Message Filter dropping message: frame 'odom' at time 1.317 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783473.154498191] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.417 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783473.156243337] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.417 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783473.284977336] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.433 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783473.285077842] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.433 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783473.285112407] [rviz]: Message Filter dropping message: frame 'odom' at time 1.333 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767783473.336656820] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 1.616667 but the earliest data is at time 1.733333, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767783473.442997379] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.450 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783473.445712009] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.450 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783473.475127698] [rviz]: Message Filter dropping message: frame 'odom' at time 1.367 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783473.571743701] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.467 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783473.571839258] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.467 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783473.666115811] [rviz]: Message Filter dropping message: frame 'odom' at time 1.400 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783473.699355939] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.483 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783473.699766428] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.483 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783473.827351319] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.500 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783473.831348609] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.500 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767783473.834199739] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 1.683333 but the earliest data is at time 1.733333, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767783473.858279959] [rviz]: Message Filter dropping message: frame 'odom' at time 1.417 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783473.957134153] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.517 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783473.963298386] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.517 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783474.083721450] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.533 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783474.084028988] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.533 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783474.084080862] [rviz]: Message Filter dropping message: frame 'odom' at time 1.450 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767783474.087993581] [amcl]: Message Filter dropping message: frame 'front_3d_lidar' at time 0.717 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783474.210858659] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.550 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783474.210935934] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.550 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783474.274301300] [rviz]: Message Filter dropping message: frame 'odom' at time 1.467 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767783474.334312991] [global_costmap.global_costmap]: start
+[rviz2-1] [INFO] [1767783474.339237121] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.567 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767783474.341711716] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.567 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767783475.387763109] [planner_server]: Activating plugin GridBased of type NavfnPlanner
+[component_container_isolated-2] [INFO] [1767783475.391103826] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[rviz2-1] [INFO] [1767783475.401722036] [rviz2]: Trying to create a map of size 1141 x 680 using 1 swatches
+[component_container_isolated-2] [INFO] [1767783475.498760157] [lifecycle_manager_navigation]: Server planner_server connected with bond.
+[component_container_isolated-2] [INFO] [1767783475.498804598] [lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[component_container_isolated-2] [INFO] [1767783475.499042402] [behavior_server]: Activating
+[component_container_isolated-2] [INFO] [1767783475.499060778] [behavior_server]: Activating spin
+[component_container_isolated-2] [INFO] [1767783475.499079985] [behavior_server]: Activating backup
+[component_container_isolated-2] [INFO] [1767783475.499091112] [behavior_server]: Activating drive_on_heading
+[component_container_isolated-2] [INFO] [1767783475.499120004] [behavior_server]: Activating wait
+[component_container_isolated-2] [INFO] [1767783475.499133015] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1767783475.604541758] [lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[component_container_isolated-2] [INFO] [1767783475.604579071] [lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[component_container_isolated-2] [INFO] [1767783475.604851945] [bt_navigator]: Activating
+[component_container_isolated-2] [INFO] [1767783475.783008129] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1767783475.893505912] [lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[component_container_isolated-2] [INFO] [1767783475.893544051] [lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[component_container_isolated-2] [INFO] [1767783475.893761968] [waypoint_follower]: Activating
+[component_container_isolated-2] [INFO] [1767783475.893788235] [waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1767783476.017431950] [lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[component_container_isolated-2] [INFO] [1767783476.017480942] [lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[component_container_isolated-2] [INFO] [1767783476.018236127] [velocity_smoother]: Activating
+[component_container_isolated-2] [INFO] [1767783476.018286965] [velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1767783476.135530855] [lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[component_container_isolated-2] [INFO] [1767783476.135588433] [lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[component_container_isolated-2] [INFO] [1767783476.135596911] [lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[rviz2-1] [INFO] [1767783535.009258833] [rviz]: Message Filter dropping message: frame 'odom' at time 0.833 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783540.273064836] [rviz]: Message Filter dropping message: frame 'odom' at time 1.500 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783540.512714827] [rviz]: Message Filter dropping message: frame 'odom' at time 1.533 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783540.635170319] [rviz]: Message Filter dropping message: frame 'odom' at time 1.550 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783540.896270417] [rviz]: Message Filter dropping message: frame 'odom' at time 1.583 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783541.038891190] [rviz]: Message Filter dropping message: frame 'odom' at time 1.600 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783541.306982841] [rviz]: Message Filter dropping message: frame 'odom' at time 1.633 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783541.434545922] [rviz]: Message Filter dropping message: frame 'odom' at time 1.650 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783541.682481319] [rviz]: Message Filter dropping message: frame 'odom' at time 1.683 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783541.801341505] [rviz]: Message Filter dropping message: frame 'odom' at time 1.700 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783548.589692729] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.583 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783548.589927180] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.583 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783548.717893411] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.600 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783548.717973212] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.600 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783548.835388431] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.617 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783548.835578955] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.617 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783548.958832763] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.633 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783548.959004599] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.633 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783549.088778835] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.650 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783549.088872552] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.650 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783549.205493855] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.667 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783549.205629422] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.667 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783549.333255732] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.683 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783549.333373595] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.683 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783549.461988176] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.700 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783549.462050283] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.700 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783549.572811931] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.717 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767783549.573709296] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 1.717 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[component_container_isolated-2] [INFO] [1767783573.202192887] [bt_navigator]: Begin navigating from current location (25.60, 8.40) to (-6.53, 4.08)
+[component_container_isolated-2] [INFO] [1767783573.243990596] [controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [WARN] [1767783573.244435211] [controller_server]: No goal checker was specified in parameter 'current_goal_checker'. Server will use only plugin loaded goal_checker . This warning will appear once.
+[component_container_isolated-2] [INFO] [1767783574.345927365] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783575.396217199] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783576.445618980] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783577.495620772] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783578.548102448] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783579.647855812] [controller_server]: Passing new path to controller.
+[rviz2-1] [INFO] [1767783579.740797103] [rviz2]: Trying to create a map of size 200 x 200 using 1 swatches
+[component_container_isolated-2] [INFO] [1767783580.745624319] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783581.845622120] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783582.895626970] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783583.995661677] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783585.045582900] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [WARN] [1767783585.899142810] [controller_server]: Control loop missed its desired rate of 20.0000Hz
+[component_container_isolated-2] [INFO] [1767783586.096738178] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783587.146348564] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783588.248376505] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783589.299672485] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783590.396720376] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783591.447043861] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783592.545623929] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783593.598174086] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783594.648477619] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783595.746126027] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783596.851178949] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783597.946496686] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783599.047184452] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783600.095856849] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783601.145981383] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783602.196498521] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783603.295627302] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783604.348724438] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783605.450608256] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783606.545623238] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [WARN] [1767783607.295641109] [controller_server]: Control loop missed its desired rate of 20.0000Hz
+[component_container_isolated-2] [INFO] [1767783607.596098790] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783608.698907856] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783609.748978714] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783610.846011157] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783611.896073926] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783612.996933604] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783614.047684266] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783615.148720539] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783616.195835180] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783617.295650423] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783618.395591720] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783619.445708490] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783620.553049792] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783621.596170137] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783622.648277451] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783623.745649012] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783624.846180942] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783625.895717930] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783626.996934508] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783628.046420315] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783629.095624387] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783630.146775042] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783631.247423668] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783632.248075230] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783633.349716287] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783634.445601883] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783635.545803432] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783636.595964939] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783637.649855928] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783638.697636447] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783639.746891971] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783640.846835857] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783641.845582076] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783642.945605564] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783644.045626618] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783645.097090793] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783646.196724153] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783647.245628634] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783648.295655904] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783649.396240461] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783650.446771140] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783651.545615205] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783652.645636445] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783653.695964064] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783654.795785600] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783655.845622687] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783656.895630212] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [WARN] [1767783657.698953983] [controller_server]: Control loop missed its desired rate of 20.0000Hz
+[component_container_isolated-2] [INFO] [1767783657.945767305] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783659.045897326] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783660.098912001] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783661.145626837] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783662.258197262] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783663.295629186] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783664.346659079] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783665.445620772] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783666.545624463] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783667.545631978] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783668.595978972] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783669.645722228] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783670.750329302] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783671.797790783] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [WARN] [1767783672.704645813] [controller_server]: Control loop missed its desired rate of 20.0000Hz
+[component_container_isolated-2] [INFO] [1767783672.845654979] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783673.906136542] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783674.946346024] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783676.045662491] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783677.145617298] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783678.196483540] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783679.296888009] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783680.347724278] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783681.395853723] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783682.451726227] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783683.545856644] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783684.548709119] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783685.620722644] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783686.696066086] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783687.747613820] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783688.845611875] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [WARN] [1767783689.597857672] [controller_server]: Control loop missed its desired rate of 20.0000Hz
+[component_container_isolated-2] [INFO] [1767783689.900497819] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783690.995658475] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783692.045630321] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783693.095659411] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783694.195730587] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783695.295659898] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783696.345627876] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783697.449893458] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [WARN] [1767783698.404356885] [controller_server]: Control loop missed its desired rate of 20.0000Hz
+[component_container_isolated-2] [INFO] [1767783698.495812339] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783699.545638671] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783700.595673459] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783701.695752127] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783702.745652581] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783703.845653095] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783704.895984970] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [WARN] [1767783705.347573458] [controller_server]: Control loop missed its desired rate of 20.0000Hz
+[component_container_isolated-2] [INFO] [1767783705.947302977] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783707.047913933] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783708.095926030] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783709.149199102] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783710.195739662] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783711.246811193] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783712.346721599] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783713.395626067] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783714.446296623] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783715.496463912] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783716.545998099] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783717.595637972] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783718.645654537] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783719.695658043] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783720.745599624] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783721.795897282] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783722.847095996] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783723.947399872] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783724.995773544] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783726.045623112] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783727.095624022] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783728.148380994] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783729.195603043] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783730.245653216] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783731.299177594] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783732.346095217] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783733.395621682] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783734.445772333] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783735.545647170] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783736.596003471] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783737.645653408] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783738.695647139] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783739.745647304] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783740.795643839] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783741.846778968] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783742.899702611] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783743.949314717] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783745.005232931] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783746.046271102] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783747.097680074] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783748.195945526] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783749.245653806] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783750.295839449] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783751.346976073] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783752.396416192] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783753.445634428] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783754.495617418] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783755.547601425] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783756.652746379] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783757.646805086] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783758.745647176] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783759.795626175] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783760.845973096] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783761.895628408] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783762.995607815] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783764.045978604] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783765.095624036] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783766.145619133] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783767.245650664] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783768.295630955] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783769.345621377] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783770.395622796] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783771.445918818] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783772.545685397] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783773.599399960] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783774.645623566] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783775.700723373] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783776.745640838] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783777.795620753] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783778.847180979] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783779.945620221] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783780.945615449] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783782.047719977] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783783.097474380] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783784.145751779] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783785.197357346] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783786.247331035] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783787.349986404] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783788.395882030] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783789.445617870] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783790.496295852] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783791.545627502] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783792.645620945] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783793.697548002] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783794.745619136] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783795.845647040] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783796.846448708] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783797.945673322] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783798.945745922] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783799.995642283] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [WARN] [1767783800.551270688] [controller_server]: Control loop missed its desired rate of 20.0000Hz
+[component_container_isolated-2] [INFO] [1767783801.045614981] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783802.150032390] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783803.195623985] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783804.245716247] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783805.296417520] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783806.347672232] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783807.445617311] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783808.495622851] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783809.545694216] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783810.595623425] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783811.646140598] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783812.695612690] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783813.745616472] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783814.798033269] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783815.848652077] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783816.945618848] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783817.995620527] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783819.047711643] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783820.107788939] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783821.148712410] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783822.197802332] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783823.247974985] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783824.345646261] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783825.395850879] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783826.446245452] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783827.495899657] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783828.545618596] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783829.596285676] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783830.647546826] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783831.695603407] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783832.745687880] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783833.796404524] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783834.845618691] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783835.945615991] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783836.947776143] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783838.046113012] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783839.095621896] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783840.146023730] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783841.195856352] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783842.245616788] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783843.295621450] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783844.345704767] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783845.446731725] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783846.495623266] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783847.546868269] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783848.595665276] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783849.645617699] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783850.695616359] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783851.745742786] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783852.795576441] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783853.845646353] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783854.945627788] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783855.995656895] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783857.045645924] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783858.101032895] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783859.145632765] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783860.195986337] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783861.245640627] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783862.345621981] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783863.395620801] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783864.445627832] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783865.496830709] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783866.545596458] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783867.595618785] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783868.645618331] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783869.696041062] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783870.749638454] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783871.848174929] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783872.895637100] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783873.945619570] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783874.995608849] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783876.047408748] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783877.095617607] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783878.147493719] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783879.196077007] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783880.245618126] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783881.298958022] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783882.345642913] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783883.395601275] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783884.445643027] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783885.545648327] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783886.545633920] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783887.645811704] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783888.696299189] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783889.746605920] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783890.796498548] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783891.845622870] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783892.945616259] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783893.995595017] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783895.046724619] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783896.100645534] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783897.145631373] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783898.195672266] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783899.246796842] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783900.295624422] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783901.396573192] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783902.396583428] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783903.446311106] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783904.495649854] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783905.546907216] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783906.646241721] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783907.647823374] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783908.695768492] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783909.745733192] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783910.795648817] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783911.848174527] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783912.945618594] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783913.995618245] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783915.045760429] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783916.095620740] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783917.145638221] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783918.249044124] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783919.204471656] [controller_server]: Reached the goal!
+[component_container_isolated-2] [INFO] [1767783919.282474753] [bt_navigator]: Goal succeeded
+[component_container_isolated-2] [INFO] [1767783921.416776570] [bt_navigator]: Begin navigating from current location (-6.35, 3.92) to (-6.53, 4.08)
+[component_container_isolated-2] [INFO] [1767783921.458648338] [controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [INFO] [1767783921.459072754] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767783921.468080866] [controller_server]: Reached the goal!
+[component_container_isolated-2] [INFO] [1767783921.559985839] [bt_navigator]: Goal succeeded
+[component_container_isolated-2] [INFO] [1767784809.485563306] [bt_navigator]: Begin navigating from current location (-9.35, 4.65) to (-0.03, 4.08)
+[component_container_isolated-2] [WARN] [1767784809.488448016] [planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-2] [WARN] [1767784809.488513615] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (-0.03, 4.08)
+[component_container_isolated-2] [WARN] [1767784809.488526720] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-2] [INFO] [1767784809.526200848] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[component_container_isolated-2] [WARN] [1767784810.369370628] [planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-2] [WARN] [1767784810.369869018] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (-0.03, 4.08)
+[component_container_isolated-2] [WARN] [1767784810.369890235] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-2] [INFO] [1767784810.408426157] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[component_container_isolated-2] [INFO] [1767784810.409068169] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[component_container_isolated-2] [WARN] [1767784811.367244921] [planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-2] [WARN] [1767784811.367358476] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (-0.03, 4.08)
+[component_container_isolated-2] [WARN] [1767784811.367377353] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-2] [INFO] [1767784811.385865678] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[component_container_isolated-2] [WARN] [1767784812.384191245] [planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-2] [WARN] [1767784812.384257480] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (-0.03, 4.08)
+[component_container_isolated-2] [WARN] [1767784812.384272148] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-2] [INFO] [1767784812.426486849] [behavior_server]: Running spin
+[component_container_isolated-2] [INFO] [1767784812.426607783] [behavior_server]: Turning 1.57 for spin behavior.
+[component_container_isolated-2] [WARN] [1767784820.026952645] [behavior_server]: Collision Ahead - Exiting Spin
+[component_container_isolated-2] [WARN] [1767784820.026987052] [behavior_server]: spin failed
+[component_container_isolated-2] [WARN] [1767784820.026998690] [behavior_server]: [spin] [ActionServer] Aborting handle.
+[component_container_isolated-2] [INFO] [1767784820.066219449] [behavior_server]: Running wait
+[component_container_isolated-2] [INFO] [1767784871.066371919] [behavior_server]: wait completed successfully
+[component_container_isolated-2] [WARN] [1767784871.131756354] [planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-2] [WARN] [1767784871.131826084] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (-0.03, 4.08)
+[component_container_isolated-2] [WARN] [1767784871.131839780] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-2] [INFO] [1767784871.165841739] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[component_container_isolated-2] [WARN] [1767784871.358583013] [planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-2] [WARN] [1767784871.358635737] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (-0.03, 4.08)
+[component_container_isolated-2] [WARN] [1767784871.358647965] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-2] [INFO] [1767784871.386044382] [behavior_server]: Running backup
+[component_container_isolated-2] [INFO] [1767784871.386175994] [behavior_server]: DriveOnHeading: no acceleration or deceleration limits set
+[component_container_isolated-2] [WARN] [1767784871.386713662] [behavior_server]: Collision Ahead - Exiting DriveOnHeading
+[component_container_isolated-2] [WARN] [1767784871.386736939] [behavior_server]: backup failed
+[component_container_isolated-2] [WARN] [1767784871.386747346] [behavior_server]: [backup] [ActionServer] Aborting handle.
+[component_container_isolated-2] [INFO] [1767784871.446998486] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[component_container_isolated-2] [INFO] [1767784871.447341104] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[component_container_isolated-2] [WARN] [1767784872.350966511] [planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-2] [WARN] [1767784872.351021000] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (-0.03, 4.08)
+[component_container_isolated-2] [WARN] [1767784872.351033443] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-2] [INFO] [1767784872.388518783] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[component_container_isolated-2] [WARN] [1767784873.352781448] [planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-2] [WARN] [1767784873.352868341] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (-0.03, 4.08)
+[component_container_isolated-2] [WARN] [1767784873.352883985] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-2] [INFO] [1767784873.387725354] [behavior_server]: Running spin
+[component_container_isolated-2] [INFO] [1767784873.387798552] [behavior_server]: Turning 1.57 for spin behavior.
+[component_container_isolated-2] [WARN] [1767784877.588046309] [behavior_server]: Collision Ahead - Exiting Spin
+[component_container_isolated-2] [WARN] [1767784877.588081139] [behavior_server]: spin failed
+[component_container_isolated-2] [WARN] [1767784877.588090309] [behavior_server]: [spin] [ActionServer] Aborting handle.
+[component_container_isolated-2] [INFO] [1767784877.645916518] [behavior_server]: Running wait
+[component_container_isolated-2] [INFO] [1767784929.046066388] [behavior_server]: wait completed successfully
+[component_container_isolated-2] [WARN] [1767784929.090638466] [planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-2] [WARN] [1767784929.091148857] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (-0.03, 4.08)
+[component_container_isolated-2] [WARN] [1767784929.091183100] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-2] [INFO] [1767784929.125755309] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[component_container_isolated-2] [WARN] [1767784929.359963077] [planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-2] [WARN] [1767784929.360048065] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (-0.03, 4.08)
+[component_container_isolated-2] [WARN] [1767784929.360064462] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-2] [INFO] [1767784929.385964287] [behavior_server]: Running backup
+[component_container_isolated-2] [WARN] [1767784929.386950187] [behavior_server]: Collision Ahead - Exiting DriveOnHeading
+[component_container_isolated-2] [WARN] [1767784929.386978270] [behavior_server]: backup failed
+[component_container_isolated-2] [WARN] [1767784929.386987211] [behavior_server]: [backup] [ActionServer] Aborting handle.
+[component_container_isolated-2] [INFO] [1767784929.445863727] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[component_container_isolated-2] [INFO] [1767784929.446154005] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[component_container_isolated-2] [WARN] [1767784930.362367285] [planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-2] [WARN] [1767784930.362458347] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (-0.03, 4.08)
+[component_container_isolated-2] [WARN] [1767784930.362473455] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-2] [INFO] [1767784930.388737469] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[component_container_isolated-2] [WARN] [1767784931.353060369] [planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-2] [WARN] [1767784931.353396306] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (-0.03, 4.08)
+[component_container_isolated-2] [WARN] [1767784931.353409785] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-2] [INFO] [1767784931.386290521] [behavior_server]: Running spin
+[component_container_isolated-2] [INFO] [1767784931.386351646] [behavior_server]: Turning 1.57 for spin behavior.
+[component_container_isolated-2] [WARN] [1767784935.186560596] [behavior_server]: Collision Ahead - Exiting Spin
+[component_container_isolated-2] [WARN] [1767784935.186593477] [behavior_server]: spin failed
+[component_container_isolated-2] [WARN] [1767784935.186602850] [behavior_server]: [spin] [ActionServer] Aborting handle.
+[component_container_isolated-2] [INFO] [1767784935.248874437] [behavior_server]: Running wait
+[rviz2-1] Start navigation
+[rviz2-1] [INFO] [1767784955.621432002] [rviz_navigation_dialog_action_client]: NavigateToPose will be called using the BT Navigator's default behavior tree.
+[component_container_isolated-2] [INFO] [1767784955.625765344] [bt_navigator]: Received goal preemption request
+[component_container_isolated-2] [INFO] [1767784955.626327093] [bt_navigator]: Begin navigating from current location (-9.36, 4.68) to (-9.96, 3.44)
+[component_container_isolated-2] [INFO] [1767784985.850667002] [behavior_server]: wait completed successfully
+[component_container_isolated-2] [WARN] [1767784985.908423274] [planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-2] [WARN] [1767784985.909009363] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (-9.96, 3.44)
+[component_container_isolated-2] [WARN] [1767784985.909031705] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-2] [INFO] [1767784985.949859138] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[component_container_isolated-2] [WARN] [1767784986.404055291] [planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-2] [WARN] [1767784986.404324797] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (-9.96, 3.44)
+[component_container_isolated-2] [WARN] [1767784986.404343057] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-2] [WARN] [1767784986.445697355] [bt_navigator]: [navigate_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-2] [ERROR] [1767784986.445866013] [bt_navigator]: Goal failed
+[component_container_isolated-2] [INFO] [1767785240.653456521] [bt_navigator]: Begin navigating from current location (1.28, 3.51) to (-0.03, 3.57)
+[component_container_isolated-2] [INFO] [1767785240.694889973] [controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [INFO] [1767785241.796050380] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785242.845433396] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785243.895434801] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785244.945465714] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785245.995410129] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785247.045723813] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785248.095465306] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785249.145470194] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785250.195800522] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785251.245458337] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785252.295509440] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785253.395476419] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785254.445712222] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785255.500716599] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785256.548848523] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785257.596632595] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785258.645416612] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785259.695433336] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785260.795428187] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785261.846102328] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785262.895478084] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785263.945658975] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785264.997833590] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785266.045420362] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785267.095723929] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785268.195432736] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785269.245548837] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767785269.908993163] [controller_server]: Reached the goal!
+[component_container_isolated-2] [INFO] [1767785269.973806149] [bt_navigator]: Goal succeeded
+[component_container_isolated-2] [INFO] [1767786589.505991118] [bt_navigator]: Begin navigating from current location (2.07, 4.00) to (-6.53, 3.87)
+[component_container_isolated-2] [INFO] [1767786589.549929537] [controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [INFO] [1767786590.651277694] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786591.702462708] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [WARN] [1767786591.800520789] [controller_server]: Control loop missed its desired rate of 20.0000Hz
+[component_container_isolated-2] [INFO] [1767786592.751378929] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786593.802071661] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786594.852716983] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786595.900743469] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786596.950516544] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786598.000381853] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786599.050378344] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786600.100833631] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786601.150375375] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786602.200527992] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786603.300906181] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786604.350415249] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786605.401607392] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786606.450390808] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786607.500409591] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786608.550484954] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786609.250653468] [controller_server]: Goal was canceled. Stopping the robot.
+[component_container_isolated-2] [INFO] [1767786609.250705600] [controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[component_container_isolated-2] [INFO] [1767786609.251166421] [bt_navigator]: [navigate_to_pose] [ActionServer] Client requested to cancel the goal. Cancelling.
+[component_container_isolated-2] [INFO] [1767786609.251275891] [bt_navigator]: Goal canceled
+[component_container_isolated-2] [INFO] [1767786621.333143240] [bt_navigator]: Begin navigating from current location (0.52, 4.04) to (-0.03, 3.87)
+[component_container_isolated-2] [INFO] [1767786621.373807642] [controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-2] [INFO] [1767786622.474333990] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786623.524350267] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786624.576783586] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786625.624378887] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786626.674546124] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786627.724373841] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786628.775854784] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786629.824559482] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786630.876413246] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786631.924361660] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786632.974335950] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786634.024352033] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786635.074379509] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786636.124674821] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786637.174344794] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786638.224425023] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786639.274378069] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786640.374355861] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786641.424411840] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786642.474528713] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786643.527277073] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786644.578506306] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786645.625271235] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786646.674370828] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786647.774310469] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786648.778872545] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786649.874754063] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786650.876996455] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786651.975086383] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786653.024371960] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786654.074372856] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786655.124760240] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786656.174345558] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786657.279219516] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786658.324625291] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786659.374529550] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786660.424355682] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786661.474303876] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786662.574403444] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786663.574351096] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786664.674835435] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786665.674352644] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786666.774960610] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786667.824567498] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786668.874376219] [controller_server]: Passing new path to controller.
+[component_container_isolated-2] [INFO] [1767786669.340270457] [controller_server]: Reached the goal!
+[component_container_isolated-2] [INFO] [1767786669.414219566] [bt_navigator]: Goal succeeded

@@ -13,7 +13,7 @@ from std_msgs.msg import Bool
 
 class ArucoDetector(Node):
     def __init__(self):
-        super().__init__('aruco_detector_left')
+        super().__init__('aruco_detector_right')
         
         self.use_debug_offset = False
         
@@ -34,17 +34,17 @@ class ArucoDetector(Node):
         self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
 
         # 카메라 구독
-        self.create_subscription(Image, '/left_camera/rgb', self.image_callback, 10)
-        self.create_subscription(CameraInfo, '/left_camera/camera_info', self.info_callback, 10)
+        self.create_subscription(Image, '/right_camera/rgb', self.image_callback, 10)
+        self.create_subscription(CameraInfo, '/right_camera/camera_info', self.info_callback, 10)
         
         # RMPFlow 타겟 퍼블리셔(디버깅용)
         # self.pose_pub = self.create_publisher(PoseStamped, '/rmp_target_pose', 10)
         
         # [On/Off 스위치] 외부에서 True를 보내면 검출 시작
-        self.create_subscription(Bool, '/vision/enable_left', self.enable_callback, 10)
+        self.create_subscription(Bool, '/vision/enable_right', self.enable_callback, 10)
         
         # [결과 송신] 직접 제어(/rmp_target_pose) 대신 정보만 제공
-        self.result_pub = self.create_publisher(MarkerArray, '/vision/left_markers', 10)
+        self.result_pub = self.create_publisher(MarkerArray, '/vision/right_markers', 10)
         
         # 상태 변수
         self.is_enabled = False  # 기본값: 꺼짐
@@ -57,25 +57,18 @@ class ArucoDetector(Node):
         rot = Rotation.from_euler('xyz', euler)
         self.default_quat = rot.as_quat()  # [x, y, z, w]
         
-        self.get_logger().info("✅ Left Camera Detector Ready (Waiting for Enable Signal...)")
+        self.get_logger().info("✅ Right Camera Detector Ready (Waiting for Enable Signal...)")
         
     
     def enable_callback(self, msg):
-        """On/Off 스위치 콜백 (창 제어 로직 추가)"""
-        # 1. 켜는 신호 (False -> True)
+        """On/Off 스위치 콜백"""
         if msg.data and not self.is_enabled:
             self.get_logger().info("🟢 Detector STARTED")
             self.is_enabled = True
-            # 별도의 창 생성 코드는 필요 없음 
-            # (이후 image_callback이 돌면서 cv2.imshow가 호출되면 창이 자동으로 뜸)
-
-        # 2. 끄는 신호 (True -> False)
         elif not msg.data and self.is_enabled:
             self.get_logger().info("🔴 Detector STOPPED")
             self.is_enabled = False
-            
-            # [핵심] 리소스 절약을 위해 열려있는 모든 OpenCV 창을 즉시 닫음
-            cv2.destroyAllWindows()
+
     def info_callback(self, msg):
         if self.camera_matrix is None:
             self.camera_matrix = np.array(msg.k).reshape((3, 3))
@@ -124,21 +117,20 @@ class ArucoDetector(Node):
                 cv2.drawFrameAxes(frame, self.camera_matrix, self.dist_coeffs, rvec, tvec, 0.1)
 
                 try:
-                    # ---------------------------------------------------------
-                    # [수정] 로컬 오프셋 적용을 위한 행렬 연산
-                    # ---------------------------------------------------------
+                    # =========================================================
+                    # [수정] 로컬 오프셋 적용 (Matrix 연산)
+                    # =========================================================
                     
-                    # (1) rvec(회전벡터) -> R(3x3 회전행렬) 변환
+                    # 1. 회전 벡터(rvec) -> 3x3 회전 행렬(R) 변환
                     R, _ = cv2.Rodrigues(rvec)
                     
-                    # (2) 마커의 변환 행렬 (4x4) 생성 (카메라 기준 마커 위치)
+                    # 2. 카메라 기준 마커의 변환 행렬 (4x4)
                     T_cam_marker = np.eye(4)
                     T_cam_marker[:3, :3] = R
                     T_cam_marker[:3, 3] = tvec.squeeze()
                     
-                    # (3) 오프셋 행렬 생성 (마커 기준 로컬 오프셋)
-                    # OpenCV Aruco 좌표계 기준: X(우), Y(하), Z(전방)
-                    # 목표: 마커 뒤쪽(튜브 중심) + 마커 위쪽(튜브 상단)
+                    # 3. 마커 기준 오프셋 행렬 (Local Offset)
+                    # 좌표계: X(우), Y(하), Z(전) -> OpenCV 기준
                     T_offset = np.eye(4)
                     
                     # 플래그에 따른 오프셋 적용 분기
@@ -152,14 +144,14 @@ class ArucoDetector(Node):
                         # (Identity Matrix 유지 -> 오프셋 0)
                         pass
                     
-                    # (4) 마커 위치에 오프셋을 곱함 -> 최종 잡아야 할 위치 (카메라 기준)
+                    # 4. 최종 목표 위치 계산 (행렬 곱)
                     T_cam_target = T_cam_marker @ T_offset
                     
-                    # ---------------------------------------------------------
-                    
-                    # UR10 베이스 프레임 변환 준비
+                    # =========================================================
+
+                    # UR10 베이스 프레임 (RMPFlow가 사용하는 좌표계)
                     target_frame = "base_link"
-                    source_frame = "left_Camera" # TF 트리에 등록된 정확한 카메라 프레임 이름 확인 필요
+                    source_frame = "right_Camera" # 우측 카메라 프레임 이름 확인
                     
                     # PoseStamped 설정 (카메라 좌표계)
                     p_cam = PoseStamped()
@@ -171,36 +163,39 @@ class ArucoDetector(Node):
                     p_cam.pose.position.y = T_cam_target[1, 3]
                     p_cam.pose.position.z = T_cam_target[2, 3]
                     p_cam.pose.orientation.w = 1.0
-                    
-                    # 회전 추출 (카메라 기준 마커의 회전)
-                    q_cam = Rotation.from_matrix(T_cam_target[:3, :3]).as_quat()
-                    p_cam.pose.orientation.x = q_cam[0]
-                    p_cam.pose.orientation.y = q_cam[1]
-                    p_cam.pose.orientation.z = q_cam[2]
-                    p_cam.pose.orientation.w = q_cam[3]
-                    
-                    # 좌표 변환
-                    p_robot_pose_stamped = self.tf_buffer.transform(
-                        p_cam, 
-                        target_frame, # "base_link"
+
+                    # TF 변환: 카메라 -> UR10 베이스
+                    transform = self.tf_buffer.lookup_transform(
+                        target_frame,
+                        source_frame,
+                        rclpy.time.Time(), 
                         timeout=rclpy.duration.Duration(seconds=0.1)
                     )
+                    
+                    # 좌표 변환
+                    p_robot_pose = tf2_geometry_msgs.do_transform_pose(p_cam.pose, transform)
                     
                     info = MarkerInfo()
                     info.id = int(ids[i][0]) # 마커 ID 저장
                     
                     # 변환된 좌표를 그대로 사용 (이미 마커 기준 오프셋 적용됨)
-                    info.pose = p_robot_pose_stamped.pose
+                    info.pose.position.x = p_robot_pose.position.x
+                    info.pose.position.y = p_robot_pose.position.y
+                    info.pose.position.z = p_robot_pose.position.z
+                    
+                    # Orientation은 기존 self.default_quat 값 사용
+                    info.pose.orientation.x = self.default_quat[0]
+                    info.pose.orientation.y = self.default_quat[1]
+                    info.pose.orientation.z = self.default_quat[2]
+                    info.pose.orientation.w = self.default_quat[3]
                     
                     # 배열에 추가
                     marker_array.markers.append(info)
 
-                    self.get_logger().info(f"ID {ids[i][0]}: Transformed Pose -> {info.pose.position.x:.3f}, {info.pose.position.y:.3f}, {info.pose.position.z:.3f}")
-                    
+                    self.get_logger().info(f"ID {ids[i][0]}: Robot Base -> X:{p_robot_pose.position.x:.3f}, Y:{p_robot_pose.position.y:.3f}, Z:{p_robot_pose.position.z:.3f}")
+
                 except (tf2_ros.LookupException, tf2_ros.ExtrapolationException) as e:
-                    self.get_logger().warn(f"TF Error: {e}")
                     continue
-                
             # [추가됨] 루프가 끝난 후 한 번에 전송
             if len(marker_array.markers) > 0:
                 self.result_pub.publish(marker_array)

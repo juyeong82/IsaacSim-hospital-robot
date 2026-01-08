@@ -15,6 +15,8 @@ class ArucoDetector(Node):
     def __init__(self):
         super().__init__('aruco_detector_right')
         
+        self.use_debug_offset = False
+        
         # [수정] 마커 및 검출기 설정 (OpenCV 4.7+ 대응)
         self.marker_size = 0.13
         self.aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
@@ -59,13 +61,21 @@ class ArucoDetector(Node):
         
     
     def enable_callback(self, msg):
-        """On/Off 스위치 콜백"""
+        """On/Off 스위치 콜백 (창 제어 로직 추가)"""
+        # 1. 켜는 신호 (False -> True)
         if msg.data and not self.is_enabled:
             self.get_logger().info("🟢 Detector STARTED")
             self.is_enabled = True
+            # 별도의 창 생성 코드는 필요 없음 
+            # (이후 image_callback이 돌면서 cv2.imshow가 호출되면 창이 자동으로 뜸)
+
+        # 2. 끄는 신호 (True -> False)
         elif not msg.data and self.is_enabled:
             self.get_logger().info("🔴 Detector STOPPED")
             self.is_enabled = False
+            
+            # [핵심] 리소스 절약을 위해 열려있는 모든 OpenCV 창을 즉시 닫음
+            cv2.destroyAllWindows()
 
     def info_callback(self, msg):
         if self.camera_matrix is None:
@@ -131,10 +141,16 @@ class ArucoDetector(Node):
                     # 좌표계: X(우), Y(하), Z(전) -> OpenCV 기준
                     T_offset = np.eye(4)
                     
-                    # 마커 위치 대비 그리퍼가 잡아야 할 상대 위치                    
-                    T_offset[0, 3] = 0.0      # X (좌우)
-                    T_offset[1, 3] = 0.03    # Y (위아래, 위가 -)
-                    T_offset[2, 3] = -0.04    # Z (앞뒤, 뒤가 -)
+                    # 플래그에 따른 오프셋 적용 분기
+                    if self.use_debug_offset:
+                        # 디버깅 모드: 그리퍼가 잡아야 할 위치로 변환해서 보냄
+                        T_offset[0, 3] = 0.0      # X (좌우)
+                        T_offset[1, 3] = 0.03     # Y (위아래)
+                        T_offset[2, 3] = -0.04    # Z (앞뒤)
+                    else:
+                        # Raw 데이터 모드: 마커의 정중앙(원점) 좌표를 그대로 보냄
+                        # (Identity Matrix 유지 -> 오프셋 0)
+                        pass
                     
                     # 4. 최종 목표 위치 계산 (행렬 곱)
                     T_cam_target = T_cam_marker @ T_offset
@@ -155,37 +171,31 @@ class ArucoDetector(Node):
                     p_cam.pose.position.y = T_cam_target[1, 3]
                     p_cam.pose.position.z = T_cam_target[2, 3]
                     p_cam.pose.orientation.w = 1.0
+                    
+                    # 회전 추출 (카메라 기준 마커의 회전)
+                    q_cam = Rotation.from_matrix(T_cam_target[:3, :3]).as_quat()
+                    p_cam.pose.orientation.x = q_cam[0]
+                    p_cam.pose.orientation.y = q_cam[1]
+                    p_cam.pose.orientation.z = q_cam[2]
+                    p_cam.pose.orientation.w = q_cam[3]
 
                     # TF 변환: 카메라 -> UR10 베이스
-                    transform = self.tf_buffer.lookup_transform(
-                        target_frame,
-                        source_frame,
-                        rclpy.time.Time(), 
+                    p_robot_pose_stamped = self.tf_buffer.transform(
+                        p_cam, 
+                        target_frame, # "base_link"
                         timeout=rclpy.duration.Duration(seconds=0.1)
                     )
-                    
-                    # 좌표 변환
-                    p_robot_pose = tf2_geometry_msgs.do_transform_pose(p_cam.pose, transform)
-                    
+                                        
                     info = MarkerInfo()
                     info.id = int(ids[i][0]) # 마커 ID 저장
                     
                     # 변환된 좌표를 그대로 사용 (이미 마커 기준 오프셋 적용됨)
-                    info.pose.position.x = p_robot_pose.position.x
-                    info.pose.position.y = p_robot_pose.position.y
-                    info.pose.position.z = p_robot_pose.position.z
-                    
-                    # Orientation은 기존 self.default_quat 값 사용
-                    info.pose.orientation.x = self.default_quat[0]
-                    info.pose.orientation.y = self.default_quat[1]
-                    info.pose.orientation.z = self.default_quat[2]
-                    info.pose.orientation.w = self.default_quat[3]
+                    info.pose = p_robot_pose_stamped.pose
                     
                     # 배열에 추가
                     marker_array.markers.append(info)
 
-                    self.get_logger().info(f"ID {ids[i][0]}: Robot Base -> X:{p_robot_pose.position.x:.3f}, Y:{p_robot_pose.position.y:.3f}, Z:{p_robot_pose.position.z:.3f}")
-
+                    self.get_logger().info(f"ID {ids[i][0]}: Transformed Pose -> {info.pose.position.x:.3f}, {info.pose.position.y:.3f}, {info.pose.position.z:.3f}")
                 except (tf2_ros.LookupException, tf2_ros.ExtrapolationException) as e:
                     continue
             # [추가됨] 루프가 끝난 후 한 번에 전송

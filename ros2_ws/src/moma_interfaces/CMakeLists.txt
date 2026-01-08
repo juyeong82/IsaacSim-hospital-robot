@@ -15,6 +15,7 @@ find_package(std_msgs REQUIRED)
 set(action_files
   "action/MoveManipulator.action"
   "action/Dock.action"
+  "action/RunDelivery.action"
 )
 
 set(msg_files

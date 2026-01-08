@@ -61,21 +61,14 @@ class ArucoDetector(Node):
         
     
     def enable_callback(self, msg):
-        """On/Off 스위치 콜백 (창 제어 로직 추가)"""
-        # 1. 켜는 신호 (False -> True)
+        """On/Off 스위치 콜백"""
         if msg.data and not self.is_enabled:
             self.get_logger().info("🟢 Detector STARTED")
             self.is_enabled = True
-            # 별도의 창 생성 코드는 필요 없음 
-            # (이후 image_callback이 돌면서 cv2.imshow가 호출되면 창이 자동으로 뜸)
-
-        # 2. 끄는 신호 (True -> False)
         elif not msg.data and self.is_enabled:
             self.get_logger().info("🔴 Detector STOPPED")
             self.is_enabled = False
-            
-            # [핵심] 리소스 절약을 위해 열려있는 모든 OpenCV 창을 즉시 닫음
-            cv2.destroyAllWindows()
+
     def info_callback(self, msg):
         if self.camera_matrix is None:
             self.camera_matrix = np.array(msg.k).reshape((3, 3))
@@ -161,42 +154,46 @@ class ArucoDetector(Node):
                     target_frame = "base_link"
                     source_frame = "left_Camera" # TF 트리에 등록된 정확한 카메라 프레임 이름 확인 필요
                     
-                    # PoseStamped 설정 (카메라 좌표계)
+                    # PoseStamped 설정 (위에서 계산한 T_cam_target 사용)
                     p_cam = PoseStamped()
                     p_cam.header.frame_id = source_frame
                     p_cam.header.stamp = msg.header.stamp
                     
-                    # 계산된 T_cam_target에서 위치 추출
                     p_cam.pose.position.x = T_cam_target[0, 3]
                     p_cam.pose.position.y = T_cam_target[1, 3]
                     p_cam.pose.position.z = T_cam_target[2, 3]
-                    p_cam.pose.orientation.w = 1.0
-                    
-                    # 회전 추출 (카메라 기준 마커의 회전)
-                    q_cam = Rotation.from_matrix(T_cam_target[:3, :3]).as_quat()
-                    p_cam.pose.orientation.x = q_cam[0]
-                    p_cam.pose.orientation.y = q_cam[1]
-                    p_cam.pose.orientation.z = q_cam[2]
-                    p_cam.pose.orientation.w = q_cam[3]
-                    
-                    # 좌표 변환
-                    p_robot_pose_stamped = self.tf_buffer.transform(
-                        p_cam, 
-                        target_frame, # "base_link"
+                    p_cam.pose.orientation.w = 1.0 # 위치만 변환할 것이므로 회전은 일단 무시
+
+                    # TF 변환: 카메라 -> UR10 베이스
+                    transform = self.tf_buffer.lookup_transform(
+                        target_frame,
+                        source_frame,
+                        rclpy.time.Time(), 
                         timeout=rclpy.duration.Duration(seconds=0.1)
                     )
                     
+                    # 좌표 변환 수행
+                    p_robot_pose = tf2_geometry_msgs.do_transform_pose(p_cam.pose, transform)
+                    
                     info = MarkerInfo()
-                    info.id = int(ids[i][0]) # 마커 ID 저장
+                    info.id = int(ids[i][0])
                     
-                    # 변환된 좌표를 그대로 사용 (이미 마커 기준 오프셋 적용됨)
-                    info.pose = p_robot_pose_stamped.pose
+                    # 변환된 좌표를 그대로 사용 (이미 마커 기준 오프셋이 적용됨)
+                    info.pose.position.x = p_robot_pose.position.x
+                    info.pose.position.y = p_robot_pose.position.y
+                    info.pose.position.z = p_robot_pose.position.z
                     
-                    # 배열에 추가
+                    # 그리퍼 Orientation (항상 바닥을 보거나 특정 방향 고정)
+                    # 사용자가 설정한 고정값 사용
+                    info.pose.orientation.x = self.default_quat[0]
+                    info.pose.orientation.y = self.default_quat[1]
+                    info.pose.orientation.z = self.default_quat[2]
+                    info.pose.orientation.w = self.default_quat[3]
+                    
                     marker_array.markers.append(info)
 
-                    self.get_logger().info(f"ID {ids[i][0]}: Transformed Pose -> {info.pose.position.x:.3f}, {info.pose.position.y:.3f}, {info.pose.position.z:.3f}")
-                    
+                    self.get_logger().info(f"ID {ids[i][0]}: Target(Base) -> X:{p_robot_pose.position.x:.3f}, Y:{p_robot_pose.position.y:.3f}, Z:{p_robot_pose.position.z:.3f}")
+
                 except (tf2_ros.LookupException, tf2_ros.ExtrapolationException) as e:
                     self.get_logger().warn(f"TF Error: {e}")
                     continue

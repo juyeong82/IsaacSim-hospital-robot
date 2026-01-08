@@ -1,0 +1,425 @@
+[INFO] [launch]: All log files can be found below /home/jy/.ros/log/2026-01-07-17-47-27-852456-judt-319811
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [rviz2-1]: process started with pid [319826]
+[INFO] [component_container_isolated-2]: process started with pid [319828]
+[INFO] [pointcloud_to_laserscan_node-3]: process started with pid [319830]
+[component_container_isolated-2] [INFO] [1767775648.770825424] [nav2_container]: Load Library: /opt/ros/humble/lib/libmap_server_core.so
+[component_container_isolated-2] [INFO] [1767775648.803066920] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_map_server::CostmapFilterInfoServer>
+[component_container_isolated-2] [INFO] [1767775648.803174786] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_map_server::MapSaver>
+[component_container_isolated-2] [INFO] [1767775648.803182734] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_map_server::MapServer>
+[component_container_isolated-2] [INFO] [1767775648.803187941] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_map_server::MapServer>
+[component_container_isolated-2] [INFO] [1767775648.817506663] [map_server]: 
+[component_container_isolated-2] 	map_server lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767775648.818148927] [map_server]: Creating
+[component_container_isolated-2] [INFO] [1767775648.818665131] [nav2_container]: Load Library: /opt/ros/humble/lib/libcontroller_server_core.so
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/map_server' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767775648.835091005] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_controller::ControllerServer>
+[component_container_isolated-2] [INFO] [1767775648.835146786] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_controller::ControllerServer>
+[component_container_isolated-2] [INFO] [1767775648.845794819] [controller_server]: 
+[component_container_isolated-2] 	controller_server lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767775648.858202855] [controller_server]: Creating controller server
+[component_container_isolated-2] [INFO] [1767775648.877028963] [local_costmap.local_costmap]: 
+[component_container_isolated-2] 	local_costmap lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767775648.879909198] [local_costmap.local_costmap]: Creating Costmap
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/controller_server' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767775648.880715120] [nav2_container]: Load Library: /opt/ros/humble/lib/libamcl_core.so
+[component_container_isolated-2] [INFO] [1767775648.888320014] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_amcl::AmclNode>
+[component_container_isolated-2] [INFO] [1767775648.888354668] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_amcl::AmclNode>
+[component_container_isolated-2] [INFO] [1767775648.896318105] [amcl]: 
+[component_container_isolated-2] 	amcl lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767775648.897278138] [amcl]: Creating
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/amcl' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767775648.899572423] [nav2_container]: Load Library: /opt/ros/humble/lib/libsmoother_server_core.so
+[component_container_isolated-2] [INFO] [1767775648.906322421] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_smoother::SmootherServer>
+[component_container_isolated-2] [INFO] [1767775648.906370665] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_smoother::SmootherServer>
+[component_container_isolated-2] [INFO] [1767775648.915203619] [smoother_server]: 
+[component_container_isolated-2] 	smoother_server lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767775648.916585919] [smoother_server]: Creating smoother server
+[component_container_isolated-2] [INFO] [1767775648.917602436] [nav2_container]: Load Library: /opt/ros/humble/lib/libnav2_lifecycle_manager_core.so
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/smoother_server' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767775648.922066766] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[component_container_isolated-2] [INFO] [1767775648.922129497] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[component_container_isolated-2] [INFO] [1767775648.935272341] [lifecycle_manager_localization]: Creating
+[component_container_isolated-2] [INFO] [1767775648.950514145] [nav2_container]: Load Library: /opt/ros/humble/lib/libplanner_server_core.so
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/lifecycle_manager_localization' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767775648.950549847] [lifecycle_manager_localization]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[component_container_isolated-2] [INFO] [1767775648.955018703] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_planner::PlannerServer>
+[component_container_isolated-2] [INFO] [1767775648.955059821] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_planner::PlannerServer>
+[component_container_isolated-2] [INFO] [1767775648.963863564] [lifecycle_manager_localization]: [34m[1mStarting managed nodes bringup...[0m[0m
+[component_container_isolated-2] [INFO] [1767775648.963970224] [lifecycle_manager_localization]: [34m[1mConfiguring map_server[0m[0m
+[component_container_isolated-2] [INFO] [1767775648.964103226] [map_server]: Configuring
+[component_container_isolated-2] [INFO] [1767775648.964160571] [map_io]: Loading yaml file: /home/jy/hospital_robot_project/ros2_ws/install/carter_navigation/share/carter_navigation/maps/carter_hospital_navigation.yaml
+[component_container_isolated-2] [INFO] [1767775648.964362055] [map_io]: resolution: 0.05
+[component_container_isolated-2] [INFO] [1767775648.964370690] [map_io]: origin[0]: -29.975
+[component_container_isolated-2] [INFO] [1767775648.964375025] [map_io]: origin[1]: -4.975
+[component_container_isolated-2] [INFO] [1767775648.964378919] [map_io]: origin[2]: 0
+[component_container_isolated-2] [INFO] [1767775648.964383053] [map_io]: free_thresh: 0.196
+[component_container_isolated-2] [INFO] [1767775648.964387038] [map_io]: occupied_thresh: 0.65
+[component_container_isolated-2] [INFO] [1767775648.964391710] [map_io]: mode: trinary
+[component_container_isolated-2] [INFO] [1767775648.964396611] [map_io]: negate: 0
+[component_container_isolated-2] [INFO] [1767775648.970267361] [planner_server]: 
+[component_container_isolated-2] 	planner_server lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767775648.971462282] [planner_server]: Creating
+[component_container_isolated-2] [INFO] [1767775648.971493112] [map_io]: Loading image_file: /home/jy/hospital_robot_project/ros2_ws/install/carter_navigation/share/carter_navigation/maps/carter_hospital_navigation.png
+[component_container_isolated-2] [INFO] [1767775648.984370830] [global_costmap.global_costmap]: 
+[component_container_isolated-2] 	global_costmap lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767775648.984784919] [global_costmap.global_costmap]: Creating Costmap
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/planner_server' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767775648.992381929] [nav2_container]: Load Library: /opt/ros/humble/lib/libbehavior_server_core.so
+[component_container_isolated-2] [INFO] [1767775649.009307401] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<behavior_server::BehaviorServer>
+[component_container_isolated-2] [INFO] [1767775649.009365085] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<behavior_server::BehaviorServer>
+[component_container_isolated-2] [INFO] [1767775649.030210661] [behavior_server]: 
+[component_container_isolated-2] 	behavior_server lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[rviz2-1] [INFO] [1767775649.034353767] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-1] [INFO] [1767775649.034421666] [rviz2]: OpenGl version: 4.5 (GLSL 4.5)
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/behavior_server' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767775649.035747454] [nav2_container]: Load Library: /opt/ros/humble/lib/libbt_navigator_core.so
+[component_container_isolated-2] [INFO] [1767775649.042368077] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_bt_navigator::BtNavigator>
+[component_container_isolated-2] [INFO] [1767775649.042416584] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_bt_navigator::BtNavigator>
+[component_container_isolated-2] [INFO] [1767775649.062202794] [bt_navigator]: 
+[component_container_isolated-2] 	bt_navigator lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767775649.062245829] [bt_navigator]: Creating
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/bt_navigator' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767775649.064535964] [nav2_container]: Load Library: /opt/ros/humble/lib/libwaypoint_follower_core.so
+[component_container_isolated-2] [INFO] [1767775649.068384472] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_waypoint_follower::WaypointFollower>
+[component_container_isolated-2] [INFO] [1767775649.068427242] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_waypoint_follower::WaypointFollower>
+[component_container_isolated-2] [INFO] [1767775649.075161518] [map_io]: Read map /home/jy/hospital_robot_project/ros2_ws/install/carter_navigation/share/carter_navigation/maps/carter_hospital_navigation.png: 1141 X 680 map @ 0.05 m/cell
+[component_container_isolated-2] [INFO] [1767775649.088791656] [lifecycle_manager_localization]: [34m[1mConfiguring amcl[0m[0m
+[component_container_isolated-2] [INFO] [1767775649.089685967] [amcl]: Configuring
+[component_container_isolated-2] [INFO] [1767775649.089778541] [amcl]: initTransforms
+[component_container_isolated-2] [INFO] [1767775649.096977175] [waypoint_follower]: 
+[component_container_isolated-2] 	waypoint_follower lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767775649.098477830] [waypoint_follower]: Creating
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/waypoint_follower' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767775649.101888928] [nav2_container]: Load Library: /opt/ros/humble/lib/libvelocity_smoother_core.so
+[component_container_isolated-2] [INFO] [1767775649.104946962] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_velocity_smoother::VelocitySmoother>
+[component_container_isolated-2] [INFO] [1767775649.104979972] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_velocity_smoother::VelocitySmoother>
+[component_container_isolated-2] [INFO] [1767775649.111983925] [amcl]: initPubSub
+[pointcloud_to_laserscan_node-3] [INFO] [1767775649.111999859] [pointcloud_to_laserscan]: Got a subscriber to laserscan, starting pointcloud subscriber
+[component_container_isolated-2] [INFO] [1767775649.124955845] [amcl]: Subscribed to map topic.
+[component_container_isolated-2] [INFO] [1767775649.131299955] [lifecycle_manager_localization]: [34m[1mActivating map_server[0m[0m
+[component_container_isolated-2] [INFO] [1767775649.131487983] [map_server]: Activating
+[component_container_isolated-2] [INFO] [1767775649.132191032] [map_server]: Creating bond (map_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1767775649.133061602] [velocity_smoother]: 
+[component_container_isolated-2] 	velocity_smoother lifecycle node launched. 
+[component_container_isolated-2] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-2] [INFO] [1767775649.133320702] [amcl]: Received a 1141 X 680 map @ 0.050 m/pix
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/velocity_smoother' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767775649.135401584] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[component_container_isolated-2] [INFO] [1767775649.135429505] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[rviz2-1] [INFO] [1767775649.141404869] [rviz2]: Stereo is NOT SUPPORTED
+[component_container_isolated-2] [INFO] [1767775649.148692223] [lifecycle_manager_navigation]: Creating
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/lifecycle_manager_navigation' in container '/nav2_container'
+[component_container_isolated-2] [INFO] [1767775649.151849331] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[component_container_isolated-2] [INFO] [1767775649.164365491] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[component_container_isolated-2] [INFO] [1767775649.164760850] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[component_container_isolated-2] [INFO] [1767775649.165098499] [controller_server]: Configuring controller interface
+[component_container_isolated-2] [INFO] [1767775649.165282751] [controller_server]: getting goal checker plugins..
+[component_container_isolated-2] [INFO] [1767775649.165411986] [controller_server]: Controller frequency set to 20.0000Hz
+[component_container_isolated-2] [INFO] [1767775649.165439503] [local_costmap.local_costmap]: Configuring
+[component_container_isolated-2] [INFO] [1767775649.169636029] [local_costmap.local_costmap]: Using plugin "hesai_voxel_layer"
+[component_container_isolated-2] [INFO] [1767775649.182422185] [local_costmap.local_costmap]: Subscribed to Topics: pointcloud
+[component_container_isolated-2] [INFO] [1767775649.191147009] [local_costmap.local_costmap]: Initialized plugin "hesai_voxel_layer"
+[component_container_isolated-2] [INFO] [1767775649.191178929] [local_costmap.local_costmap]: Using plugin "front_rplidar_obstacle_layer"
+[component_container_isolated-2] [INFO] [1767775649.192502384] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[component_container_isolated-2] [INFO] [1767775649.197129388] [local_costmap.local_costmap]: Initialized plugin "front_rplidar_obstacle_layer"
+[component_container_isolated-2] [INFO] [1767775649.197163987] [local_costmap.local_costmap]: Using plugin "back_rplidar_obstacle_layer"
+[component_container_isolated-2] [INFO] [1767775649.197583639] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[component_container_isolated-2] [INFO] [1767775649.204189262] [local_costmap.local_costmap]: Initialized plugin "back_rplidar_obstacle_layer"
+[component_container_isolated-2] [INFO] [1767775649.204226366] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[component_container_isolated-2] [INFO] [1767775649.206210256] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[component_container_isolated-2] [INFO] [1767775649.217950129] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[component_container_isolated-2] [INFO] [1767775649.219970466] [controller_server]: Created goal checker : goal_checker of type nav2_controller::SimpleGoalChecker
+[component_container_isolated-2] [INFO] [1767775649.221033932] [controller_server]: Controller Server has goal_checker  goal checkers available.
+[component_container_isolated-2] [INFO] [1767775649.230002245] [controller_server]: Created controller : FollowPath of type dwb_core::DWBLocalPlanner
+[component_container_isolated-2] [INFO] [1767775649.231981412] [controller_server]: Setting transform_tolerance to 0.200000
+[component_container_isolated-2] [INFO] [1767775649.238790534] [lifecycle_manager_localization]: Server map_server connected with bond.
+[component_container_isolated-2] [INFO] [1767775649.238824137] [lifecycle_manager_localization]: [34m[1mActivating amcl[0m[0m
+[component_container_isolated-2] [INFO] [1767775649.239364284] [amcl]: Activating
+[component_container_isolated-2] [INFO] [1767775649.239396272] [amcl]: initialPoseReceived
+[component_container_isolated-2] [INFO] [1767775649.239434509] [amcl]: Setting pose (22.233334): 25.600 8.400 3.140
+[component_container_isolated-2] [INFO] [1767775649.240331545] [amcl]: Creating bond (amcl) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1767775649.256528948] [controller_server]: Using critic "RotateToGoal" (dwb_critics::RotateToGoalCritic)
+[component_container_isolated-2] [INFO] [1767775649.257379764] [controller_server]: Critic plugin initialized
+[component_container_isolated-2] [INFO] [1767775649.257984219] [controller_server]: Using critic "Oscillation" (dwb_critics::OscillationCritic)
+[component_container_isolated-2] [INFO] [1767775649.259665203] [controller_server]: Critic plugin initialized
+[component_container_isolated-2] [INFO] [1767775649.260873455] [controller_server]: Using critic "BaseObstacle" (dwb_critics::BaseObstacleCritic)
+[component_container_isolated-2] [INFO] [1767775649.261437120] [controller_server]: Critic plugin initialized
+[component_container_isolated-2] [INFO] [1767775649.261710019] [controller_server]: Using critic "GoalAlign" (dwb_critics::GoalAlignCritic)
+[component_container_isolated-2] [INFO] [1767775649.262842146] [controller_server]: Critic plugin initialized
+[component_container_isolated-2] [INFO] [1767775649.263160750] [controller_server]: Using critic "PathAlign" (dwb_critics::PathAlignCritic)
+[component_container_isolated-2] [INFO] [1767775649.264161393] [controller_server]: Critic plugin initialized
+[component_container_isolated-2] [INFO] [1767775649.264507577] [controller_server]: Using critic "PathDist" (dwb_critics::PathDistCritic)
+[component_container_isolated-2] [INFO] [1767775649.265352725] [controller_server]: Critic plugin initialized
+[component_container_isolated-2] [INFO] [1767775649.265468072] [controller_server]: Using critic "GoalDist" (dwb_critics::GoalDistCritic)
+[component_container_isolated-2] [INFO] [1767775649.266317929] [controller_server]: Critic plugin initialized
+[component_container_isolated-2] [INFO] [1767775649.266346912] [controller_server]: Controller Server has FollowPath  controllers available.
+[component_container_isolated-2] [INFO] [1767775649.274111893] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[component_container_isolated-2] [INFO] [1767775649.274235915] [smoother_server]: Configuring smoother server
+[component_container_isolated-2] [INFO] [1767775649.280154867] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[component_container_isolated-2] [INFO] [1767775649.280768949] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[component_container_isolated-2] [INFO] [1767775649.287218175] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[component_container_isolated-2] [INFO] [1767775649.287383934] [planner_server]: Configuring
+[component_container_isolated-2] [INFO] [1767775649.287416201] [global_costmap.global_costmap]: Configuring
+[component_container_isolated-2] [INFO] [1767775649.300060180] [global_costmap.global_costmap]: Using plugin "static_layer"
+[component_container_isolated-2] [INFO] [1767775649.303173405] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[component_container_isolated-2] [INFO] [1767775649.304947964] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[component_container_isolated-2] [INFO] [1767775649.304980403] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[component_container_isolated-2] [INFO] [1767775649.309973885] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[pointcloud_to_laserscan_node-3] [WARN] [1767775649.311253644] [pointcloud_to_laserscan]: New subscription discovered on topic '/scan', requesting incompatible QoS. No messages will be sent to it. Last incompatible policy: RELIABILITY_QOS_POLICY
+[component_container_isolated-2] [INFO] [1767775649.317981188] [amcl]: createLaserObject
+[component_container_isolated-2] [INFO] [1767775649.318252416] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[component_container_isolated-2] [INFO] [1767775649.318272189] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[component_container_isolated-2] [INFO] [1767775649.320420147] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[component_container_isolated-2] [INFO] [1767775649.340225193] [planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner/NavfnPlanner
+[component_container_isolated-2] [INFO] [1767775649.340266069] [planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[component_container_isolated-2] [INFO] [1767775649.343051618] [planner_server]: Planner Server has GridBased  planners available.
+[component_container_isolated-2] [INFO] [1767775649.351083791] [lifecycle_manager_localization]: Server amcl connected with bond.
+[component_container_isolated-2] [INFO] [1767775649.351119248] [lifecycle_manager_localization]: [34m[1mManaged nodes are active[0m[0m
+[component_container_isolated-2] [INFO] [1767775649.351131276] [lifecycle_manager_localization]: [34m[1mCreating bond timer...[0m[0m
+[component_container_isolated-2] [INFO] [1767775649.362297957] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[component_container_isolated-2] [INFO] [1767775649.362576233] [behavior_server]: Configuring
+[component_container_isolated-2] [INFO] [1767775649.370036456] [behavior_server]: Creating behavior plugin spin of type nav2_behaviors/Spin
+[component_container_isolated-2] [INFO] [1767775649.373054456] [behavior_server]: Configuring spin
+[component_container_isolated-2] [INFO] [1767775649.374937119] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 1141 X 680 at 0.050000 m/pix
+[component_container_isolated-2] [INFO] [1767775649.384052982] [behavior_server]: Creating behavior plugin backup of type nav2_behaviors/BackUp
+[component_container_isolated-2] [INFO] [1767775649.389367911] [behavior_server]: Configuring backup
+[component_container_isolated-2] [INFO] [1767775649.411975597] [behavior_server]: Creating behavior plugin drive_on_heading of type nav2_behaviors/DriveOnHeading
+[component_container_isolated-2] [INFO] [1767775649.415645473] [behavior_server]: Configuring drive_on_heading
+[component_container_isolated-2] [INFO] [1767775649.426154388] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors/Wait
+[component_container_isolated-2] [INFO] [1767775649.428410546] [behavior_server]: Configuring wait
+[component_container_isolated-2] [INFO] [1767775649.443973356] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[component_container_isolated-2] [INFO] [1767775649.444424614] [bt_navigator]: Configuring
+[component_container_isolated-2] [INFO] [1767775649.619198832] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[component_container_isolated-2] [INFO] [1767775649.619361598] [waypoint_follower]: Configuring
+[rviz2-1] [INFO] [1767775649.631272345] [rviz2]: Stereo is NOT SUPPORTED
+[component_container_isolated-2] [INFO] [1767775649.633608259] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[component_container_isolated-2] [INFO] [1767775649.634943564] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[component_container_isolated-2] [INFO] [1767775649.635084631] [velocity_smoother]: Configuring velocity smoother
+[component_container_isolated-2] [INFO] [1767775649.641222501] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[component_container_isolated-2] [INFO] [1767775649.641350641] [controller_server]: Activating
+[component_container_isolated-2] [INFO] [1767775649.641377692] [local_costmap.local_costmap]: Activating
+[component_container_isolated-2] [INFO] [1767775649.641390540] [local_costmap.local_costmap]: Checking transform
+[component_container_isolated-2] [INFO] [1767775649.641495180] [local_costmap.local_costmap]: start
+[rviz2-1] [INFO] [1767775649.702074707] [rviz2]: Trying to create a map of size 1141 x 680 using 1 swatches
+[rviz2-1] [ERROR] [1767775649.717666134] [rviz2]: Vertex Program:rviz/glsl120/indexed_8bit_image.vert Fragment Program:rviz/glsl120/indexed_8bit_image.frag GLSL link result : 
+[rviz2-1] active samplers with a different type refer to the same texture image unit
+[component_container_isolated-2] [INFO] [1767775649.895819181] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1767775650.006970159] [lifecycle_manager_navigation]: Server controller_server connected with bond.
+[component_container_isolated-2] [INFO] [1767775650.007012226] [lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[component_container_isolated-2] [INFO] [1767775650.009772034] [smoother_server]: Activating
+[component_container_isolated-2] [INFO] [1767775650.009816115] [smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1767775650.116234604] [lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[component_container_isolated-2] [INFO] [1767775650.116269655] [lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[component_container_isolated-2] [INFO] [1767775650.116475724] [planner_server]: Activating
+[component_container_isolated-2] [INFO] [1767775650.116511636] [global_costmap.global_costmap]: Activating
+[component_container_isolated-2] [INFO] [1767775650.116520430] [global_costmap.global_costmap]: Checking transform
+[component_container_isolated-2] [INFO] [1767775650.116542809] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 22.350001 but the earliest data is at time 23.233334, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767775650.550589336] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.250 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775650.550719907] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.250 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767775650.616617178] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 22.433335 but the earliest data is at time 23.233334, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767775650.678563704] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.267 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775650.678677538] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.267 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775650.774367446] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.283 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775650.774445710] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.283 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775650.902535731] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.300 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775650.902617256] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.300 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775650.998198447] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.317 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775650.998265213] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.317 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775651.094257191] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.333 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775651.094348011] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.333 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767775651.116616213] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 22.516668 but the earliest data is at time 23.233334, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767775651.222671766] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.350 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775651.222765232] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.350 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775651.318377428] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.367 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775651.318458457] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.367 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775651.446624718] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.383 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775651.446693861] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.383 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775651.542838393] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.400 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775651.542923754] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.400 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767775651.616601689] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 22.583335 but the earliest data is at time 23.233334, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767775651.638909269] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.417 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775651.639034299] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.417 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775651.766213777] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.433 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775651.766298287] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.433 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775651.862194181] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.450 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775651.862267905] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.450 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775651.862299836] [rviz]: Message Filter dropping message: frame 'odom' at time 22.317 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775651.990123684] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.467 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775651.990201746] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.467 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.054422455] [rviz]: Message Filter dropping message: frame 'odom' at time 22.350 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.086309706] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.483 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.087796371] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.483 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767775652.116611768] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 22.666668 but the earliest data is at time 23.233334, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767775652.183166665] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.500 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.183257374] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.500 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.246898520] [rviz]: Message Filter dropping message: frame 'odom' at time 22.383 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.310646897] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.517 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.310748144] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.517 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.406312535] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.533 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.406385614] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.533 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.471887332] [rviz]: Message Filter dropping message: frame 'odom' at time 22.400 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.534033413] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.550 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.534112212] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.550 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767775652.616627719] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 22.733335 but the earliest data is at time 23.233334, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767775652.630320797] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.567 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.630508018] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.567 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.662350802] [rviz]: Message Filter dropping message: frame 'odom' at time 22.433 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.726823235] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.583 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.726988039] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.583 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.854454194] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.600 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.854553068] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.600 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.854589943] [rviz]: Message Filter dropping message: frame 'odom' at time 22.467 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.950975772] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.617 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775652.951058262] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.617 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.046629824] [rviz]: Message Filter dropping message: frame 'odom' at time 22.500 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.078562501] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.633 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.078660107] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.633 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767775653.116603243] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 22.816668 but the earliest data is at time 23.233334, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767775653.174776328] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.650 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.181055802] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.650 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.270850973] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.667 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.271045004] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.667 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.271251809] [rviz]: Message Filter dropping message: frame 'odom' at time 22.533 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.397980518] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.683 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.398058161] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.683 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.462308968] [rviz]: Message Filter dropping message: frame 'odom' at time 22.567 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.494049369] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.700 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.494134042] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.700 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.590679055] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.717 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.590997316] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.717 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767775653.616624412] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 22.900001 but the earliest data is at time 23.233334, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767775653.654598967] [rviz]: Message Filter dropping message: frame 'odom' at time 22.583 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.718446190] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.733 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.718740517] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.733 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.814270105] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.750 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.814451747] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.750 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.847982457] [rviz]: Message Filter dropping message: frame 'odom' at time 22.617 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.942681566] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.767 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775653.942750711] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.767 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.038219939] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.783 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.038852366] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.783 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.070111657] [rviz]: Message Filter dropping message: frame 'odom' at time 22.650 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767775654.116652768] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 22.966668 but the earliest data is at time 23.233334, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767775654.166205411] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.800 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.166279460] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.800 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.262401472] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.817 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.267121384] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.817 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.267168652] [rviz]: Message Filter dropping message: frame 'odom' at time 22.683 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.359814077] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.833 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.359908835] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.833 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.454370744] [rviz]: Message Filter dropping message: frame 'odom' at time 22.717 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.486778752] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.850 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.486862444] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.850 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.582515619] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.867 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.582600452] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.867 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767775654.616604095] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 23.050001 but the earliest data is at time 23.233334, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767775654.646883426] [rviz]: Message Filter dropping message: frame 'odom' at time 22.750 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.678648669] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.883 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.678751254] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.883 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.806593872] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.900 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.807528763] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.900 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.870419795] [rviz]: Message Filter dropping message: frame 'odom' at time 22.783 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.903621462] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.917 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775654.903742563] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.917 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.030623583] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.933 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.030697076] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.933 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.061945075] [rviz]: Message Filter dropping message: frame 'odom' at time 22.800 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767775655.116598123] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 23.116668 but the earliest data is at time 23.233334, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767775655.126357811] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.950 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.126443552] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.950 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.222541462] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.967 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.254140403] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.967 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.254233074] [rviz]: Message Filter dropping message: frame 'odom' at time 22.833 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.350514332] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.983 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.351071711] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 22.983 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.446249144] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.000 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.446443589] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.000 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.446517687] [rviz]: Message Filter dropping message: frame 'odom' at time 22.867 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.574483421] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.017 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.574575484] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.017 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767775655.616625014] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 23.200001 but the earliest data is at time 23.233334, when looking up transform from frame [base_link] to frame [map]
+[rviz2-1] [INFO] [1767775655.670080018] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.033 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.673252083] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.033 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.676375176] [rviz]: Message Filter dropping message: frame 'odom' at time 22.900 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.798136683] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.050 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.798232408] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.050 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.862420597] [rviz]: Message Filter dropping message: frame 'odom' at time 22.933 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.894057462] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.067 for reason 'discarding message because the queue is full'
+[rviz2-1] [INFO] [1767775655.895650034] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.067 for reason 'discarding message because the queue is full'
+[component_container_isolated-2] [INFO] [1767775656.118742971] [global_costmap.global_costmap]: start
+[component_container_isolated-2] [INFO] [1767775657.169690283] [planner_server]: Activating plugin GridBased of type NavfnPlanner
+[component_container_isolated-2] [INFO] [1767775657.175918731] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[rviz2-1] [INFO] [1767775657.191488641] [rviz2]: Trying to create a map of size 1141 x 680 using 1 swatches
+[component_container_isolated-2] [INFO] [1767775657.296830211] [lifecycle_manager_navigation]: Server planner_server connected with bond.
+[component_container_isolated-2] [INFO] [1767775657.296867380] [lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[component_container_isolated-2] [INFO] [1767775657.297052450] [behavior_server]: Activating
+[component_container_isolated-2] [INFO] [1767775657.297066309] [behavior_server]: Activating spin
+[component_container_isolated-2] [INFO] [1767775657.297082800] [behavior_server]: Activating backup
+[component_container_isolated-2] [INFO] [1767775657.297092159] [behavior_server]: Activating drive_on_heading
+[component_container_isolated-2] [INFO] [1767775657.297101311] [behavior_server]: Activating wait
+[component_container_isolated-2] [INFO] [1767775657.297111792] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1767775657.406428551] [lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[component_container_isolated-2] [INFO] [1767775657.406475373] [lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[component_container_isolated-2] [INFO] [1767775657.406942026] [bt_navigator]: Activating
+[component_container_isolated-2] [INFO] [1767775657.509331985] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1767775657.620736269] [lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[component_container_isolated-2] [INFO] [1767775657.620776942] [lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[component_container_isolated-2] [INFO] [1767775657.620979453] [waypoint_follower]: Activating
+[component_container_isolated-2] [INFO] [1767775657.621027324] [waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1767775657.728296680] [lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[component_container_isolated-2] [INFO] [1767775657.728362144] [lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[component_container_isolated-2] [INFO] [1767775657.728758580] [velocity_smoother]: Activating
+[component_container_isolated-2] [INFO] [1767775657.728811891] [velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[component_container_isolated-2] [INFO] [1767775657.836626391] [lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[component_container_isolated-2] [INFO] [1767775657.836659870] [lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[component_container_isolated-2] [INFO] [1767775657.836667285] [lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[rviz2-1] [INFO] [1767775709.159496443] [rviz]: Message Filter dropping message: frame 'odom' at time 22.317 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775713.471301241] [rviz]: Message Filter dropping message: frame 'odom' at time 22.967 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775713.573433616] [rviz]: Message Filter dropping message: frame 'odom' at time 22.983 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775713.798567140] [rviz]: Message Filter dropping message: frame 'odom' at time 23.017 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775714.040501742] [rviz]: Message Filter dropping message: frame 'odom' at time 23.050 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775714.268412354] [rviz]: Message Filter dropping message: frame 'odom' at time 23.083 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775714.480745517] [rviz]: Message Filter dropping message: frame 'odom' at time 23.117 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775714.720391981] [rviz]: Message Filter dropping message: frame 'odom' at time 23.150 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775714.866689476] [rviz]: Message Filter dropping message: frame 'odom' at time 23.167 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775715.080147418] [rviz]: Message Filter dropping message: frame 'odom' at time 23.200 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775720.876943008] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.083 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775720.877012304] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.083 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775720.980539767] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.100 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775720.980684997] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.100 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775721.088235692] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.117 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775721.088356556] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.117 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775721.195651164] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.133 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775721.195763564] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.133 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775721.302091631] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.150 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775721.302319034] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.150 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775721.408685086] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.167 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775721.408792454] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.167 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775721.511527625] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.183 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775721.511610819] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.183 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775721.615316915] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.200 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775721.615389504] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.200 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775721.719675138] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.217 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-1] [INFO] [1767775721.719731719] [rviz]: Message Filter dropping message: frame 'front_3d_lidar' at time 23.217 for reason 'the timestamp on the message is earlier than all the data in the transform cache'

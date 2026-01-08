@@ -1,0 +1,10 @@
+# RunDelivery.action
+string task_mode      # [추가] "ALL", "NAV_PICKUP", "DOCK_PICKUP", "PICK", "NAV_DROPOFF", "DOCK_DROPOFF", "PLACE", "HOME"
+string item_type      
+string pickup_loc     
+string dropoff_loc    
+---
+bool success
+string message
+---
+string current_state

@@ -51,11 +51,12 @@ setup(
             'aruco_detector_right = my_pkg.aruco_detector_right:main',
 
             # 4. Main Controllers (시스템 제어)
-            'master_controller = my_pkg.master_controller:main',
+            'main_controller = my_pkg.main_controller:main',
             'nav_commander = my_pkg.nav_commander:main',
 
             # 5. UI (사용자 인터페이스)
             'ui = my_pkg.ui:main',
+            'ui2 = my_pkg.ui2:main',
         ],
     },
 )

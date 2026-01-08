@@ -15,6 +15,8 @@ import copy
 
 from moma_interfaces.action import MoveManipulator
 
+from scipy.spatial.transform import Rotation  # 이미 있음
+
 class ArmActionServer(Node):
     def __init__(self):
         super().__init__('arm_action_server')
@@ -51,8 +53,8 @@ class ArmActionServer(Node):
         self.verify_pose_left = PoseStamped()
         self.verify_pose_left.header.frame_id = "base_link"
         self.verify_pose_left.pose.position.x = -0.4
-        self.verify_pose_left.pose.position.y = 0.8  # 좌측
-        self.verify_pose_left.pose.position.z = 1.2
+        self.verify_pose_left.pose.position.y = 0.7  # 좌측
+        self.verify_pose_left.pose.position.z = 1.1
         self.verify_pose_left.pose.orientation.w = 0.707
         self.verify_pose_left.pose.orientation.y = 0.707
         self.verify_pose_left.pose.orientation.x = 0.0
@@ -62,8 +64,8 @@ class ArmActionServer(Node):
         self.verify_pose_right = PoseStamped()
         self.verify_pose_right.header.frame_id = "base_link"
         self.verify_pose_right.pose.position.x = -0.4
-        self.verify_pose_right.pose.position.y = -0.8 # 우측
-        self.verify_pose_right.pose.position.z = 1.2
+        self.verify_pose_right.pose.position.y = -0.7 # 우측
+        self.verify_pose_right.pose.position.z = 1.1
         self.verify_pose_right.pose.orientation.x = -0.707
         self.verify_pose_right.pose.orientation.y = 0.0
         self.verify_pose_right.pose.orientation.z = 0.707
@@ -71,6 +73,8 @@ class ArmActionServer(Node):
         
         # 현재 선택된 검증 위치를 담을 변수
         self.current_verify_pose = None
+        
+        self.fix_quat = Rotation.from_quat([0.707, 0.0, 0.707, 0.0])
 
         self.get_logger().info('✅ Arm Action Server Ready (Multi-Threaded)')
 
@@ -81,48 +85,99 @@ class ArmActionServer(Node):
         try:
             # 타임아웃 0.0 -> 즉시 리턴 (block 방지)
             t = self.tf_buffer.lookup_transform('base_link', 'suction_cup', rclpy.time.Time())
-            return t.transform.translation
+            return t.transform
         except Exception as e:
             return None
 
-    def wait_until_reached(self, target_pose, timeout=60.0, tolerance=0.04):
+    def get_orientation_error(self, target_quat, current_quat):
+        # 1. 메시지 타입 -> Scipy Rotation 변환
+        r_target = Rotation.from_quat([target_quat.x, target_quat.y, target_quat.z, target_quat.w])
+        r_current = Rotation.from_quat([current_quat.x, current_quat.y, current_quat.z, current_quat.w])
+        
+        # 2. [핵심] 현재 자세에 보정값(Offset) 적용
+        # 공식: q_corrected = q_current * q_fix
+        # (TF 상의 suction_cup 좌표계를 제어 좌표계와 일치시킴)
+        r_current_corrected = r_current * self.fix_quat
+        
+        # 3. 두 Rotation 간의 각도 차이 계산 (magnitude)
+        # diff = target * current_corrected^-1
+        diff = r_target * r_current_corrected.inv()
+        
+        # 회전량을 라디안으로 추출
+        angle_error = diff.magnitude()
+        
+        return angle_error
+    
+    # [수정] tolerance_angle 인자 추가 (기본값: 0.05 라디안 ≈ 2.8도)
+    def wait_until_reached(self, target_pose, timeout=60.0, tolerance=0.04, tolerance_angle=0.08):
         start_time = time.time()
+        
+        # 목표 위치
         tx = target_pose.pose.position.x
         ty = target_pose.pose.position.y
         tz = target_pose.pose.position.z
+        
+        # 목표 회전 (Quaternion)
+        t_rot = target_pose.pose.orientation
 
         self.get_logger().info(f"   ⏳ [Move Start] Goal: ({tx:.2f}, {ty:.2f}, {tz:.2f})")
         last_log_time = time.time()
 
         while time.time() - start_time < timeout:
-            current = self.get_current_tip_pose()
+            current_tf = self.get_current_tip_pose()
             
             # TF 못 받아오면 대기
-            if current is None:
+            if current_tf is None:
                 if time.time() - last_log_time > 1.0:
                     self.get_logger().warn("      ⚠️ Waiting for TF update...")
                     last_log_time = time.time()
                 time.sleep(0.1)
                 continue
             
-            dx = tx - current.x
-            dy = ty - current.y
-            dz = tz - current.z
+            # 1. 위치 오차 계산 (기존 코드)
+            curr_pos = current_tf.translation
+            dx = tx - curr_pos.x
+            dy = ty - curr_pos.y
+            dz = tz - curr_pos.z
             dist = math.sqrt(dx*dx + dy*dy + dz*dz)
 
-            # [요청하신 변수 디버깅 로그] 1초마다 출력
+            # 2. [추가] 회전 오차 계산
+            curr_rot = current_tf.rotation
+            angle_diff = self.get_orientation_error(t_rot, curr_rot)
+
+            # # 로그 출력 (1초마다)
+            # if time.time() - last_log_time > 1.0:
+            #     # 라디안 -> 도로 변환하여 로그 출력 (가독성)
+            #     deg_diff = math.degrees(angle_diff)
+            #     self.get_logger().info(
+            #         f"      📉 Err: Dist={dist:.3f}m (Tol:{tolerance}), "
+            #         f"Angle={deg_diff:.2f}° (Tol:{math.degrees(tolerance_angle):.1f}°)"
+            #     )
+            #     last_log_time = time.time()
+            
             if time.time() - last_log_time > 1.0:
-                self.get_logger().info(f"      📉 [Diff] Target({tx:.2f}, {ty:.2f}, {tz:.2f}) - Cur({current.x:.2f}, {current.y:.2f}, {current.z:.2f})")
-                self.get_logger().info(f"         -> Error: {dist:.3f}m")
+                deg_diff = math.degrees(angle_diff)
+                
+                # [디버깅] 보정된 쿼터니언 확인
+                r_curr = Rotation.from_quat([curr_rot.x, curr_rot.y, curr_rot.z, curr_rot.w])
+                r_corr = r_curr * self.fix_quat
+                qx_c, qy_c, qz_c, qw_c = r_corr.as_quat()
+
+                self.get_logger().info(
+                    f"      📉 Err: Dist={dist:.3f}m, Angle={deg_diff:.2f}°\n"
+                    f"         👉 [Raw Quat] x={curr_rot.x:.3f}, y={curr_rot.y:.3f}, z={curr_rot.z:.3f}, w={curr_rot.w:.3f}\n"
+                    f"         ✅ [Fix Quat] x={qx_c:.3f}, y={qy_c:.3f}, z={qz_c:.3f}, w={qw_c:.3f}"
+                )
                 last_log_time = time.time()
 
-            if dist < tolerance:
-                self.get_logger().info(f"   ✅ Reached! Final Error: {dist:.3f}m")
+            # 3. [핵심] 위치와 각도 둘 다 만족해야 True 리턴
+            if dist < tolerance and angle_diff < tolerance_angle:
+                self.get_logger().info(f"   ✅ Reached! Dist: {dist:.3f}m, Angle: {math.degrees(angle_diff):.2f}°")
                 return True
             
-            time.sleep(0.05) # 루프 주기 단축
+            time.sleep(0.05)
         
-        self.get_logger().warn(f"   ⚠️ Timeout! Stuck at {dist:.3f}m")
+        self.get_logger().warn(f"   ⚠️ Timeout! Final Dist: {dist:.3f}m, Angle: {math.degrees(angle_diff):.2f}°")
         return False
 
     def verify_grasp_success(self, timeout=5.0, tolerance=0.1):
@@ -249,7 +304,7 @@ class ArmActionServer(Node):
                 self.get_logger().info("⬇️ Descending to Place Position...")
                 self.publish_pose(target_pose)
                 # 놓을 때는 잡을 때만큼 초정밀일 필요는 없으나, 바닥에 닿아야 하므로 1cm 오차 허용
-                if not self.wait_until_reached(target_pose, timeout=60.0, tolerance=0.01):
+                if not self.wait_until_reached(target_pose, timeout=60.0, tolerance=0.08):
                     raise Exception("Place Descent Timeout")
 
                 # 3. [Release] 놓기
