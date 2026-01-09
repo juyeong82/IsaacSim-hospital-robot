@@ -283,7 +283,7 @@ class HospitalOrchestrator(Node):
         #     final_robot_yaw = table_align_yaw + bias_rad
         # else:
         #     final_robot_yaw = table_align_yaw - bias_rad
-
+        final_robot_yaw = table_align_yaw
         # ---------------------------------------------------------
         # 3. 최종 Pose 생성
         # ---------------------------------------------------------
