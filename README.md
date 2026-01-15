@@ -1,4 +1,4 @@
-# 🏥 Isaac Sim Hospital Lab Robot (MoMa)
+<img width="1849" height="548" alt="image" src="https://github.com/user-attachments/assets/466b9d91-80e4-49a0-af8f-6a3d257ecbca" /># 🏥 Isaac Sim Hospital Lab Robot (MoMa)
 
 <div align="center">
     
@@ -128,6 +128,9 @@ cmd.angular.z = -Kp × heading_error  # 실시간 보정
 ## 🏗️ 시스템 아키텍처
 
 ### 전체 구조도
+
+<img width="1849" height="548" alt="image" src="https://github.com/user-attachments/assets/1a795114-3e5c-4b3a-ae1a-3db8694e1461" />
+
 
 ```mermaid
 flowchart LR
