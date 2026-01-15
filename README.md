@@ -212,11 +212,11 @@ hospital_robot_project/
 │       ├── config/extension.toml
 │       └── rokey_lab_robot/
 │           ├── lab_robot_extension2.py  # Entry Point
-│           └── lab_robot_main2.py       # 🔥 ROS2 Bridge
+│           └── lab_robot_main2.py       # ROS2 Bridge
 │
 └── ros2_ws/                             # ROS 2 Workspace
     └── src/
-        ├── carter_navigation/           # 🚗 Nav2 Package
+        ├── carter_navigation/           # Nav2 Package
         │   ├── launch/carter_navigation.launch.py
         │   ├── maps/carter_hospital_navigation.{png,yaml}
         │   └── params/carter_navigation_params.yaml
@@ -230,7 +230,7 @@ hospital_robot_project/
         │       ├── MarkerArray.msg 
         │       └── MarkerInfo.msg   
         │
-        └── my_pkg/                      # 🤖 Main Package
+        └── my_pkg/                      # Main Package
             ├── launch/
             │   ├── marker_docking.launch.py       # 도킹 시스템
             │   └── system_startup.launch.py       # 전체 시스템
