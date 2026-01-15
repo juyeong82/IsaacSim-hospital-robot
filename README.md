@@ -1,4 +1,4 @@
-<img width="1849" height="548" alt="image" src="https://github.com/user-attachments/assets/466b9d91-80e4-49a0-af8f-6a3d257ecbca" /># 🏥 Isaac Sim Hospital Lab Robot (MoMa)
+# 🏥 Isaac Sim Hospital Lab Robot (MoMa)
 
 <div align="center">
     
