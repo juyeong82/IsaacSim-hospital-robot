@@ -1,7 +1,7 @@
 # 🏥 Isaac Sim Hospital Lab Robot (MoMa)
-**ROS 2 + Nav2 + RMPFlow + Vision-Based Precision Control**
 
 <div align="center">
+**ROS 2 + Nav2 + RMPFlow + Vision-Based Precision Control**
 
 **병원 환경에서 검체를 자율 운송하는 지능형 모바일 매니퓰레이터 시스템**
 
