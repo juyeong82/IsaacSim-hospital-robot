@@ -131,34 +131,6 @@ cmd.angular.z = -Kp × heading_error  # 실시간 보정
 
 <img width="1849" height="548" alt="image" src="https://github.com/user-attachments/assets/1a795114-3e5c-4b3a-ae1a-3db8694e1461" />
 
-```
-┌─────────────────────────────────────────┐
-│        UI (PyQt5) - 작업 지시 & 모니터링   │
-└──────────────┬──────────────────────────┘
-               │ RunDelivery.action
-               ↓
-┌─────────────────────────────────────────┐
-│  Main Controller (State Machine)        │
-│  - 7단계 작업 오케스트레이션              │
-│  - 원자적 태스크 관리                    │
-└──┬─────────┬──────────┬─────────┬───────┘
-   │         │          │         │
-   ↓         ↓          ↓         ↓
-┌──────┐ ┌───────┐ ┌────────┐ ┌────────┐
-│ Nav2 │ │Docking│ │  Arm   │ │ Vision │
-│Stack │ │AprilTag│ │RMPFlow│ │ ArUco  │
-└──┬───┘ └───┬───┘ └───┬────┘ └───┬────┘
-   └──────────┴─────────┴──────────┘
-                  │
-                  ↓
-┌─────────────────────────────────────────┐
-│     Isaac Sim Simulation Environment    │
-│  - Nova Carter Base + UR10 Arm          │
-│  - RGB 카메라 × 3 (Front/Left/Right)    │
-│  - RMPFlow Controller (이중 제어 모드)   │
-└─────────────────────────────────────────┘
-```
-
 ### ROS 2 통신 구조
 
 **Action 서버/클라이언트**:
