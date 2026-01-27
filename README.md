@@ -19,6 +19,15 @@ Nova Carter + UR10 로봇팔을 결합한 자율 주행·정밀 도킹·비전 �
 
 ---
 
+## 🎬 데모 영상
+
+[![Youtube Demo Video](https://img.youtube.com/vi/aYQfh5_NoIQ/sddefault.jpg)](https://youtu.be/aYQfh5_NoIQ)
+
+
+> 📺 **전체 배송 프로세스** | 픽업지 주행 → 정밀 도킹 → 물체 파지 → 하역지 배송 → 홈 복귀
+
+---
+
 ## 📖 프로젝트 개요
 
 ### 배경 및 목적
@@ -48,15 +57,6 @@ Nova Carter + UR10 로봇팔을 결합한 자율 주행·정밀 도킹·비전 �
 - ✅ **데드락 자동 복구**: 3-Phase 탈출 알고리즘
 - ✅ **리소스 최적화**: 멀티 카메라 동적 스위칭으로 CPU 부하 70% 감소
 - ✅ **원자적 태스크 관리**: 단계별 디버깅 및 재시도 가능
-
----
-
-## 🎬 데모 영상
-
-[![Youtube Demo Video](https://img.youtube.com/vi/-uH3Q27BCIo/sddefault.jpg)](https://youtu.be/-uH3Q27BCIo)
-
-
-> 📺 **전체 배송 프로세스** | 픽업지 주행 → 정밀 도킹 → 물체 파지 → 하역지 배송 → 홈 복귀
 
 ---
 
