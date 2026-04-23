@@ -11,7 +11,6 @@ Nova Carter + UR10 로봇팔을 결합한 자율 주행·정밀 도킹·비전 �
 [![ROS2 Humble](https://img.shields.io/badge/ROS2-Humble-blue?logo=ros&logoColor=white)](https://docs.ros.org/en/humble/)
 [![Isaac Sim](https://img.shields.io/badge/NVIDIA-Isaac_Sim_4.2+-green?logo=nvidia&logoColor=white)](https://developer.nvidia.com/isaac-sim)
 [![Python](https://img.shields.io/badge/Python-3.10-yellow?logo=python&logoColor=white)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-Apache_2.0-orange)](LICENSE)
 
 [🎬 데모 영상](#-데모-영상) • [⚡ 핵심 기능](#-핵심-기능) • [🚀 빠른 시작](#-설치-가이드)
 
@@ -458,10 +457,6 @@ ros2 topic hz /camera/left/image_raw
 - **통합 모니터링 UI**: PyQt5 기반 멀티스레드 실시간 인터페이스
 
 > **Note**: Phase 1에서 팀원 2명이 건강 문제로 불참하여 실질적인 개발은 2명이 진행했으며, Phase 2부터는 프로젝트 범위 확장을 위해 개인 프로젝트로 전환했습니다.
-
-## 📝 License
-
-This project is licensed under the **Apache 2.0 License**. See [LICENSE](LICENSE) file for details.
 
 ---
 
